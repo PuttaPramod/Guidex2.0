@@ -1,0 +1,459 @@
+<div class="roadmap-page">
+
+  <!-- ================================================= -->
+  <!-- SHOW ONLY WHEN NO CAREER IS SELECTED -->
+  <!-- ================================================= -->
+
+  @if (!selectedRoadmap) {
+
+    <!-- HERO -->
+
+    <section class="roadmap-hero container">
+
+      <div class="hero-copy">
+
+        <span class="gx-eyebrow">
+          CAREER ROADMAPS
+        </span>
+
+        <h1>
+          Build your
+          <span class="gx-gradient-text">
+            path forward.
+          </span>
+        </h1>
+
+        <p>
+          Follow structured learning paths to understand the
+          skills, stages and opportunities connected with
+          different careers.
+        </p>
+
+      </div>
+
+      <div class="hero-visual">
+
+        <div class="hero-orbit">
+
+          <div class="hero-icon">
+            🗺️
+          </div>
+
+          <span class="orbit-dot dot-one"></span>
+          <span class="orbit-dot dot-two"></span>
+          <span class="orbit-dot dot-three"></span>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- CAREER SELECTOR -->
+
+    <section class="roadmap-selector container">
+
+      <div class="selector-header">
+
+        <span class="section-eyebrow">
+          CHOOSE A PATH
+        </span>
+
+        <h2>
+          Explore career roadmaps
+        </h2>
+
+        <p>
+          Select a career to view its recommended learning journey.
+        </p>
+
+      </div>
+
+
+      <div class="roadmap-grid">
+
+        @for (roadmap of roadmaps; track roadmap.id) {
+
+          <button
+            type="button"
+            class="roadmap-card"
+            (click)="selectRoadmap(roadmap.id)"
+          >
+
+            <div class="roadmap-card-icon">
+              {{ roadmap.icon }}
+            </div>
+
+            <div class="roadmap-card-content">
+
+              <h3>
+                {{ roadmap.title }}
+              </h3>
+
+              <span>
+                {{ roadmap.category }}
+              </span>
+
+            </div>
+
+            <div class="roadmap-card-arrow">
+              →
+            </div>
+
+          </button>
+
+        }
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- ================================================= -->
+  <!-- SELECTED CAREER ROADMAP -->
+  <!-- ================================================= -->
+
+  @if (selectedRoadmap) {
+
+    <section class="selected-roadmap container">
+
+      <div class="selected-roadmap-layout">
+
+        <main class="roadmap-main">
+
+          <!-- SELECTED CAREER HEADER -->
+
+          <div class="roadmap-detail-hero gx-card">
+
+            <div class="detail-icon">
+              {{ selectedRoadmap.icon }}
+            </div>
+
+            <div class="detail-content">
+
+              <span class="detail-category">
+                {{ selectedRoadmap.category }}
+              </span>
+
+              <h2>
+                {{ selectedRoadmap.title }}
+              </h2>
+
+              <p>
+                {{ selectedRoadmap.description }}
+              </p>
+
+              <div class="detail-meta">
+
+                <span>
+                  ⏱ {{ selectedRoadmap.duration }}
+                </span>
+
+                <span>
+                  📚 {{ selectedRoadmap.level }}
+                </span>
+
+                <span>
+                  🧩 {{ totalSteps }} Steps
+                </span>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- STEP BY STEP -->
+
+          <section class="roadmap-section gx-card">
+
+            <div class="section-heading">
+
+              <div class="heading-icon">
+                🧭
+              </div>
+
+              <div>
+
+                <span>
+                  LEARNING JOURNEY
+                </span>
+
+                <h2>
+                  Step-by-step roadmap
+                </h2>
+
+              </div>
+
+            </div>
+
+
+            <div class="timeline">
+
+              @for (
+                step of selectedRoadmap.steps;
+                track step.title;
+                let i = $index
+              ) {
+
+                <article class="timeline-item">
+
+                  <div class="timeline-marker">
+
+                    <span>
+                      {{ i + 1 }}
+                    </span>
+
+                  </div>
+
+                  <div class="timeline-content">
+
+                    <div class="timeline-top">
+
+                      <div>
+
+                        <span class="step-label">
+                          STEP {{ i + 1 }}
+                        </span>
+
+                        <h3>
+                          {{ step.title }}
+                        </h3>
+
+                      </div>
+
+                      <span class="step-duration">
+                        {{ step.duration }}
+                      </span>
+
+                    </div>
+
+                    <p>
+                      {{ step.description }}
+                    </p>
+
+                    <div class="step-skills">
+
+                      @for (
+                        skill of step.skills;
+                        track skill
+                      ) {
+
+                        <span>
+                          {{ skill }}
+                        </span>
+
+                      }
+
+                    </div>
+
+                  </div>
+
+                </article>
+
+              }
+
+            </div>
+
+          </section>
+
+
+          <!-- SKILLS -->
+
+          <section class="roadmap-section gx-card">
+
+            <div class="section-heading">
+
+              <div class="heading-icon">
+                ⚡
+              </div>
+
+              <div>
+
+                <span>
+                  SKILL SET
+                </span>
+
+                <h2>
+                  Skills to develop
+                </h2>
+
+              </div>
+
+            </div>
+
+
+            <div class="skills-grid">
+
+              @for (
+                skill of selectedRoadmap.skills;
+                track skill
+              ) {
+
+                <div class="skill-item">
+
+                  <span class="skill-check">
+                    ✓
+                  </span>
+
+                  <span>
+                    {{ skill }}
+                  </span>
+
+                </div>
+
+              }
+
+            </div>
+
+          </section>
+
+        </main>
+
+
+        <!-- SIDEBAR -->
+
+        <aside class="roadmap-sidebar">
+
+          <div class="sidebar-card gx-card">
+
+            <div class="sidebar-icon">
+              🚀
+            </div>
+
+            <span class="sidebar-eyebrow">
+              ROADMAP SUMMARY
+            </span>
+
+            <h2>
+              Your learning path
+            </h2>
+
+            <p>
+              Use this roadmap as a guide and adjust the pace
+              according to your learning goals.
+            </p>
+
+            <div class="summary-stats">
+
+              <div class="summary-stat">
+                <strong>
+                  {{ totalSteps }}
+                </strong>
+
+                <span>
+                  Steps
+                </span>
+              </div>
+
+              <div class="summary-stat">
+                <strong>
+                  {{ totalSkills }}
+                </strong>
+
+                <span>
+                  Skills
+                </span>
+              </div>
+
+              <div class="summary-stat">
+                <strong>
+                  {{ selectedRoadmap.duration }}
+                </strong>
+
+                <span>
+                  Duration
+                </span>
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <!-- CAREER OPTIONS -->
+
+          <div class="sidebar-card gx-card">
+
+            <div class="sidebar-icon">
+              💼
+            </div>
+
+            <span class="sidebar-eyebrow">
+              CAREER OPTIONS
+            </span>
+
+            <h2>
+              Where it can lead
+            </h2>
+
+            <div class="career-options">
+
+              @for (
+                career of selectedRoadmap.careers;
+                track career
+              ) {
+
+                <div class="career-option">
+
+                  <span>
+                    {{ career }}
+                  </span>
+
+                  <span>
+                    →
+                  </span>
+
+                </div>
+
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- COURSES -->
+
+          <div class="sidebar-card gx-card">
+
+            <div class="sidebar-icon">
+              📚
+            </div>
+
+            <span class="sidebar-eyebrow">
+              NEXT STEP
+            </span>
+
+            <h2>
+              Keep learning
+            </h2>
+
+            <p>
+              Explore courses and educational opportunities
+              related to your selected career.
+            </p>
+
+            <a
+              routerLink="/courses"
+              class="gx-btn-primary"
+            >
+              Explore courses
+              <span>→</span>
+            </a>
+
+          </div>
+
+        </aside>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

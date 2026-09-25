@@ -1,0 +1,2122 @@
+<main class="dashboard-page">
+
+  <!-- =====================================================
+       DASHBOARD HERO
+  ====================================================== -->
+
+  <section class="dashboard-hero container">
+
+    <div class="hero-content">
+
+      <span class="gx-eyebrow">
+        ✨ YOUR GUIDEX DASHBOARD
+      </span>
+
+      <h1>
+        Plan your
+        <span class="gx-gradient-text">
+          future with confidence.
+        </span>
+      </h1>
+
+      <p>
+        Explore careers, courses, colleges and exams,
+        then build a clear path toward your goals.
+      </p>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STATS
+  ====================================================== -->
+
+  <section class="stats-section container">
+
+    <div
+      class="stat-card gx-card"
+      *ngFor="let stat of stats; trackBy: trackStat"
+    >
+
+      <div class="stat-icon">
+        {{ stat.icon }}
+      </div>
+
+      <div class="stat-info">
+
+        <strong>
+          {{ stat.value }}
+        </strong>
+
+        <span>
+          {{ stat.label }}
+        </span>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       DASHBOARD ACTIVITY NAVIGATION
+       SAVED + RECENTLY VIEWED
+  ====================================================== -->
+
+  <section class="dashboard-nav-section container">
+
+    <div class="dashboard-nav gx-glass">
+
+      <div class="dashboard-nav-heading">
+
+        <span class="section-kicker">
+          YOUR ACTIVITY
+        </span>
+
+        <h2>
+          Access your saved & recent items
+        </h2>
+
+      </div>
+
+
+      <!-- =================================================
+           SAVED ITEMS
+      ================================================== -->
+
+      <div class="dashboard-activity-category">
+
+        <div class="activity-category-heading">
+
+          <div class="activity-category-icon">
+            💾
+          </div>
+
+          <div>
+
+            <span class="activity-category-label">
+              SAVED
+            </span>
+
+            <h3>
+              Your saved items
+            </h3>
+
+            <p>
+              Quickly access careers, courses, exams and roadmaps you saved.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <nav
+          class="dashboard-nav-links"
+          aria-label="Saved activity navigation"
+        >
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'saved-careers'"
+            (click)="showActivity('saved-careers')"
+          >
+            <span>💼</span>
+            Saved Careers
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'saved-courses'"
+            (click)="showActivity('saved-courses')"
+          >
+            <span>📚</span>
+            Saved Courses
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'saved-exams'"
+            (click)="showActivity('saved-exams')"
+          >
+            <span>📝</span>
+            Saved Exams
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'saved-roadmaps'"
+            (click)="showActivity('saved-roadmaps')"
+          >
+            <span>🗺️</span>
+            Saved Roadmaps
+          </button>
+
+        </nav>
+
+      </div>
+
+
+      <!-- =================================================
+           RECENTLY VIEWED
+      ================================================== -->
+
+      <div class="dashboard-activity-category">
+
+        <div class="activity-category-heading">
+
+          <div class="activity-category-icon">
+            🕘
+          </div>
+
+          <div>
+
+            <span class="activity-category-label">
+              RECENTLY VIEWED
+            </span>
+
+            <h3>
+              Your recent activity
+            </h3>
+
+            <p>
+              Return quickly to careers, courses, exams, colleges and roadmaps you've explored.
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <nav
+          class="dashboard-nav-links"
+          aria-label="Recent activity navigation"
+        >
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'recent-careers'"
+            (click)="showActivity('recent-careers')"
+          >
+            <span>💼</span>
+            Recent Careers
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'recent-courses'"
+            (click)="showActivity('recent-courses')"
+          >
+            <span>📚</span>
+            Recent Courses
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'recent-exams'"
+            (click)="showActivity('recent-exams')"
+          >
+            <span>📝</span>
+            Recent Exams
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'recent-colleges'"
+            (click)="showActivity('recent-colleges')"
+          >
+            <span>🏫</span>
+            Recent Colleges
+          </button>
+
+
+          <button
+            type="button"
+            class="dashboard-nav-btn"
+            [class.active]="selectedActivity() === 'recent-roadmaps'"
+            (click)="showActivity('recent-roadmaps')"
+          >
+            <span>🗺️</span>
+            Recent Roadmaps
+          </button>
+
+        </nav>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       ACTIVITY POPUP / MODAL
+  ====================================================== -->
+
+  <div
+    class="activity-modal-backdrop"
+    *ngIf="selectedActivity()"
+    (click)="closeActivity()"
+  >
+
+    <div
+      class="activity-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-label="Guidex activity"
+      (click)="$event.stopPropagation()"
+    >
+
+      <!-- =================================================
+           MODAL HEADER
+      ================================================== -->
+
+      <div class="activity-modal-header">
+
+        <div class="activity-modal-title">
+
+          <span class="section-kicker">
+            YOUR ACTIVITY
+          </span>
+
+          <h2>
+            Activity Details
+          </h2>
+
+          <p>
+            View and manage your saved and recently viewed items.
+          </p>
+
+        </div>
+
+
+        <button
+          type="button"
+          class="activity-modal-close"
+          aria-label="Close activity window"
+          title="Close"
+          (click)="closeActivity()"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- =================================================
+           MODAL BODY
+      ================================================== -->
+
+      <div class="activity-modal-body">
+
+
+        <!-- =================================================
+             SAVED CAREERS
+        ================================================== -->
+
+        <section
+          class="saved-section activity-content-section"
+          *ngIf="selectedActivity() === 'saved-careers'"
+        >
+
+          <div
+            class="section-heading"
+            *ngIf="savedCareers().length > 0"
+          >
+
+            <div>
+
+              <span class="section-kicker">
+                YOUR SAVED CAREERS
+              </span>
+
+              <h2>
+                Careers you're interested in
+              </h2>
+
+              <p>
+                Keep track of career paths you want to explore.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              (click)="clearSavedCareers()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="saved-careers-grid"
+            *ngIf="savedCareers().length > 0"
+          >
+
+            <article
+              class="saved-career-card gx-card"
+              *ngFor="
+                let career of savedCareers();
+                trackBy: trackSavedCareer
+              "
+            >
+
+              <div class="saved-career-top">
+
+                <div class="saved-career-icon">
+                  {{ career.icon }}
+                </div>
+
+                <button
+                  type="button"
+                  class="remove-saved-btn"
+                  title="Remove saved career"
+                  aria-label="Remove saved career"
+                  (click)="removeSavedCareer(career.id)"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <span class="saved-career-category">
+                {{ career.category }}
+              </span>
+
+              <h3>
+                {{ career.title }}
+              </h3>
+
+              <p>
+                {{ career.description }}
+              </p>
+
+              <a
+                [routerLink]="['/career-detail', career.id]"
+                class="saved-career-link"
+                (click)="closeActivity()"
+              >
+                Explore Career
+                <span>→</span>
+              </a>
+
+            </article>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="savedCareers().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              💼
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                YOUR SAVED CAREERS
+              </span>
+
+              <h2>
+                No saved careers yet
+              </h2>
+
+              <p>
+                Save careers you're interested in and they will
+                appear here for quick access.
+              </p>
+
+              <a
+                routerLink="/careers"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Careers
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SAVED COURSES
+        ================================================== -->
+
+        <section
+          class="saved-courses-section activity-content-section"
+          *ngIf="selectedActivity() === 'saved-courses'"
+        >
+
+          <div
+            class="section-heading"
+            *ngIf="savedCourses().length > 0"
+          >
+
+            <div>
+
+              <span class="section-kicker">
+                YOUR SAVED COURSES
+              </span>
+
+              <h2>
+                Courses you've saved
+              </h2>
+
+              <p>
+                Keep your favorite learning paths ready for later.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              (click)="clearSavedCourses()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="saved-courses-grid"
+            *ngIf="savedCourses().length > 0"
+          >
+
+            <article
+              class="saved-course-card gx-card"
+              *ngFor="
+                let course of savedCourses();
+                trackBy: trackSavedCourse
+              "
+            >
+
+              <div class="saved-course-top">
+
+                <div class="saved-course-icon">
+                  {{ course.icon }}
+                </div>
+
+                <button
+                  type="button"
+                  class="remove-saved-course-btn"
+                  title="Remove saved course"
+                  aria-label="Remove saved course"
+                  (click)="removeSavedCourse(course.id)"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <span class="saved-course-category">
+                {{ course.category }}
+              </span>
+
+              <h3>
+                {{ course.title }}
+              </h3>
+
+              <p>
+                {{ course.description }}
+              </p>
+
+              <a
+                [routerLink]="['/course-detail', course.id]"
+                class="saved-course-view-btn"
+                (click)="closeActivity()"
+              >
+                View Course
+                <span>→</span>
+              </a>
+
+            </article>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="savedCourses().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              📚
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                YOUR SAVED COURSES
+              </span>
+
+              <h2>
+                No saved courses yet
+              </h2>
+
+              <p>
+                Save courses you want to explore later and
+                quickly return to them from your dashboard.
+              </p>
+
+              <a
+                routerLink="/courses"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Courses
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SAVED EXAMS
+        ================================================== -->
+
+        <section
+          class="saved-exams-section activity-content-section"
+          *ngIf="selectedActivity() === 'saved-exams'"
+        >
+
+          <div
+            class="section-heading"
+            *ngIf="savedExams().length > 0"
+          >
+
+            <div>
+
+              <span class="section-kicker">
+                YOUR SAVED EXAMS
+              </span>
+
+              <h2>
+                Exams you're preparing for
+              </h2>
+
+              <p>
+                Keep important examinations close while planning your path.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              (click)="clearSavedExams()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="saved-exams-grid"
+            *ngIf="savedExams().length > 0"
+          >
+
+            <article
+              class="saved-exam-card gx-card"
+              *ngFor="
+                let exam of savedExams();
+                trackBy: trackSavedExam
+              "
+            >
+
+              <div class="saved-exam-top">
+
+                <div class="saved-exam-icon">
+                  {{ exam.icon }}
+                </div>
+
+                <button
+                  type="button"
+                  class="remove-saved-exam-btn"
+                  title="Remove saved exam"
+                  aria-label="Remove saved exam"
+                  (click)="removeSavedExam(exam.id)"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <span class="saved-exam-category">
+                {{ exam.category }}
+              </span>
+
+              <h3>
+                {{ exam.title }}
+              </h3>
+
+              <p>
+                {{ exam.description }}
+              </p>
+
+              <a
+                [routerLink]="['/exam-detail', exam.id]"
+                class="saved-exam-view-btn"
+                (click)="closeActivity()"
+              >
+                View Exam
+                <span>→</span>
+              </a>
+
+            </article>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="savedExams().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              📝
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                YOUR SAVED EXAMS
+              </span>
+
+              <h2>
+                No saved exams yet
+              </h2>
+
+              <p>
+                Save important exams so you can quickly return
+                to their details while planning your future.
+              </p>
+
+              <a
+                routerLink="/exams"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Exams
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             SAVED ROADMAPS
+        ================================================== -->
+
+        <section
+          class="saved-roadmaps-section activity-content-section"
+          *ngIf="selectedActivity() === 'saved-roadmaps'"
+        >
+
+          <div
+            class="section-heading"
+            *ngIf="savedRoadmaps().length > 0"
+          >
+
+            <div>
+
+              <span class="section-kicker">
+                YOUR SAVED ROADMAPS
+              </span>
+
+              <h2>
+                Career roadmaps you're following
+              </h2>
+
+              <p>
+                Keep your selected career paths ready to continue.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              (click)="clearSavedRoadmaps()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="saved-roadmaps-grid"
+            *ngIf="savedRoadmaps().length > 0"
+          >
+
+            <article
+              class="saved-roadmap-card gx-card"
+              *ngFor="
+                let roadmap of savedRoadmaps();
+                trackBy: trackSavedRoadmap
+              "
+            >
+
+              <div class="saved-roadmap-top">
+
+                <div class="saved-roadmap-icon">
+                  {{ roadmap.icon || '🗺️' }}
+                </div>
+
+                <button
+                  type="button"
+                  class="remove-saved-roadmap-btn"
+                  title="Remove saved roadmap"
+                  aria-label="Remove saved roadmap"
+                  (click)="removeSavedRoadmap(roadmap.id)"
+                >
+                  ×
+                </button>
+
+              </div>
+
+              <span class="saved-roadmap-category">
+                CAREER ROADMAP
+              </span>
+
+              <h3>
+                {{ roadmap.title }}
+              </h3>
+
+              <p>
+                Continue exploring the skills, steps and learning path for this career.
+              </p>
+
+              <a
+                [routerLink]="['/roadmap']"
+                [queryParams]="{ career: roadmap.id }"
+                class="saved-roadmap-view-btn"
+                (click)="closeActivity()"
+              >
+                Open Roadmap
+                <span>→</span>
+              </a>
+
+            </article>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="savedRoadmaps().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              🗺️
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                YOUR SAVED ROADMAPS
+              </span>
+
+              <h2>
+                No saved roadmaps yet
+              </h2>
+
+              <p>
+                Save career roadmaps you want to follow and
+                continue your journey directly from here.
+              </p>
+
+              <a
+                routerLink="/roadmap"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Roadmaps
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENT CAREERS
+        ================================================== -->
+
+        <section
+          class="recent-section activity-content-section"
+          *ngIf="selectedActivity() === 'recent-careers'"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                RECENT CAREERS
+              </span>
+
+              <h2>
+                Recently viewed careers
+              </h2>
+
+              <p>
+                Quickly return to career paths you've recently explored.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              *ngIf="recentCareers().length > 0"
+              (click)="clearRecentCareers()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="recent-grid"
+            *ngIf="recentCareers().length > 0"
+          >
+
+            <a
+              class="recent-card gx-card"
+              *ngFor="
+                let career of recentCareers();
+                trackBy: trackRecentCareer
+              "
+              [routerLink]="['/career-detail', career.id]"
+              (click)="closeActivity()"
+            >
+
+              <div class="recent-icon">
+                {{ career.icon }}
+              </div>
+
+              <div class="recent-content">
+
+                <span>
+                  {{ career.category }}
+                </span>
+
+                <h4>
+                  {{ career.title }}
+                </h4>
+
+              </div>
+
+              <span class="recent-arrow">
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="recentCareers().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              💼
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                RECENT CAREERS
+              </span>
+
+              <h2>
+                No recent careers
+              </h2>
+
+              <p>
+                Explore careers and the ones you view will appear here.
+              </p>
+
+              <a
+                routerLink="/careers"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Careers
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENT COURSES
+        ================================================== -->
+
+        <section
+          class="recent-section activity-content-section"
+          *ngIf="selectedActivity() === 'recent-courses'"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                RECENT COURSES
+              </span>
+
+              <h2>
+                Recently viewed courses
+              </h2>
+
+              <p>
+                Quickly return to courses you've recently explored.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              *ngIf="recentCourses().length > 0"
+              (click)="clearRecentCourses()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="recent-grid"
+            *ngIf="recentCourses().length > 0"
+          >
+
+            <a
+              class="recent-card gx-card"
+              *ngFor="
+                let course of recentCourses();
+                trackBy: trackRecentCourse
+              "
+              [routerLink]="['/course-detail', course.id]"
+              (click)="closeActivity()"
+            >
+
+              <div class="recent-icon">
+                {{ course.icon }}
+              </div>
+
+              <div class="recent-content">
+
+                <span>
+                  {{ course.category }}
+                </span>
+
+                <h4>
+                  {{ course.title }}
+                </h4>
+
+              </div>
+
+              <span class="recent-arrow">
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="recentCourses().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              📚
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                RECENT COURSES
+              </span>
+
+              <h2>
+                No recent courses
+              </h2>
+
+              <p>
+                Explore courses and the ones you view will appear here.
+              </p>
+
+              <a
+                routerLink="/courses"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Courses
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENT EXAMS
+        ================================================== -->
+
+        <section
+          class="recent-section activity-content-section"
+          *ngIf="selectedActivity() === 'recent-exams'"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                RECENT EXAMS
+              </span>
+
+              <h2>
+                Recently viewed exams
+              </h2>
+
+              <p>
+                Quickly return to examinations you've recently explored.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              *ngIf="recentExams().length > 0"
+              (click)="clearRecentExams()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="recent-grid"
+            *ngIf="recentExams().length > 0"
+          >
+
+            <a
+              class="recent-card gx-card"
+              *ngFor="
+                let exam of recentExams();
+                trackBy: trackRecentExam
+              "
+              [routerLink]="['/exam-detail', exam.id]"
+              (click)="closeActivity()"
+            >
+
+              <div class="recent-icon">
+                {{ exam.icon }}
+              </div>
+
+              <div class="recent-content">
+
+                <span>
+                  {{ exam.category }}
+                </span>
+
+                <h4>
+                  {{ exam.title }}
+                </h4>
+
+              </div>
+
+              <span class="recent-arrow">
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="recentExams().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              📝
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                RECENT EXAMS
+              </span>
+
+              <h2>
+                No recent exams
+              </h2>
+
+              <p>
+                Explore exams and the ones you view will appear here.
+              </p>
+
+              <a
+                routerLink="/exams"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Exams
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENT COLLEGES
+        ================================================== -->
+
+        <section
+          class="recent-section activity-content-section"
+          *ngIf="selectedActivity() === 'recent-colleges'"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                RECENT COLLEGES
+              </span>
+
+              <h2>
+                Recently viewed colleges
+              </h2>
+
+              <p>
+                Quickly return to colleges you've recently explored.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              *ngIf="recentColleges().length > 0"
+              (click)="clearRecentColleges()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="recent-grid"
+            *ngIf="recentColleges().length > 0"
+          >
+
+            <a
+              class="recent-card gx-card"
+              *ngFor="
+                let college of recentColleges();
+                trackBy: trackRecentCollege
+              "
+              [routerLink]="['/college-detail', college.id]"
+              (click)="closeActivity()"
+            >
+
+              <div class="recent-icon">
+                {{ college.icon }}
+              </div>
+
+              <div class="recent-content">
+
+                <span>
+                  {{ college.city }}, {{ college.state }}
+                </span>
+
+                <h4>
+                  {{ college.name }}
+                </h4>
+
+              </div>
+
+              <span class="recent-arrow">
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="recentColleges().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              🏫
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                RECENT COLLEGES
+              </span>
+
+              <h2>
+                No recent colleges
+              </h2>
+
+              <p>
+                Explore colleges and the ones you view will appear here.
+              </p>
+
+              <a
+                routerLink="/colleges"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Colleges
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+
+        <!-- =================================================
+             RECENT ROADMAPS
+        ================================================== -->
+
+        <section
+          class="recent-section activity-content-section"
+          *ngIf="selectedActivity() === 'recent-roadmaps'"
+        >
+
+          <div class="section-heading">
+
+            <div>
+
+              <span class="section-kicker">
+                RECENT ROADMAPS
+              </span>
+
+              <h2>
+                Recently viewed roadmaps
+              </h2>
+
+              <p>
+                Quickly return to career roadmaps you've recently explored.
+              </p>
+
+            </div>
+
+            <button
+              type="button"
+              class="section-clear-btn"
+              *ngIf="recentRoadmaps().length > 0"
+              (click)="clearRecentRoadmaps()"
+            >
+              Clear All
+            </button>
+
+          </div>
+
+
+          <div
+            class="recent-grid"
+            *ngIf="recentRoadmaps().length > 0"
+          >
+
+            <a
+              class="recent-card gx-card"
+              *ngFor="
+                let roadmap of recentRoadmaps();
+                trackBy: trackRecentRoadmap
+              "
+              [routerLink]="['/roadmap']"
+              [queryParams]="{ career: roadmap.id }"
+              (click)="closeActivity()"
+            >
+
+              <div class="recent-icon">
+                {{ roadmap.icon || '🧭' }}
+              </div>
+
+              <div class="recent-content">
+
+                <span>
+                  CAREER ROADMAP
+                </span>
+
+                <h4>
+                  {{ roadmap.title }}
+                </h4>
+
+              </div>
+
+              <span class="recent-arrow">
+                →
+              </span>
+
+            </a>
+
+          </div>
+
+
+          <div
+            class="dashboard-empty-state gx-card"
+            *ngIf="recentRoadmaps().length === 0"
+          >
+
+            <div class="dashboard-empty-icon">
+              🗺️
+            </div>
+
+            <div class="dashboard-empty-content">
+
+              <span class="section-kicker">
+                RECENT ROADMAPS
+              </span>
+
+              <h2>
+                No recent roadmaps
+              </h2>
+
+              <p>
+                Explore roadmaps and the ones you view will appear here.
+              </p>
+
+              <a
+                routerLink="/roadmap"
+                class="gx-btn-primary"
+                (click)="closeActivity()"
+              >
+                Explore Roadmaps
+                <span>→</span>
+              </a>
+
+            </div>
+
+          </div>
+
+        </section>
+
+      </div>
+
+    </div>
+
+  </div>
+
+
+  <!-- =====================================================
+       QUIZ HISTORY
+  ====================================================== -->
+
+  <section
+    class="quiz-history-section container"
+    *ngIf="quizHistory().length > 0"
+  >
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="section-kicker">
+          SMART CAREER QUIZ
+        </span>
+
+        <h2>
+          Your Quiz Results
+        </h2>
+
+        <p>
+          Select a quiz attempt to see its top 3 career matches.
+        </p>
+
+      </div>
+
+      <button
+        type="button"
+        class="section-clear-btn"
+        (click)="clearQuizHistory()"
+      >
+        Clear All
+      </button>
+
+    </div>
+
+
+    <div class="quiz-history-grid">
+
+      <article
+        class="quiz-history-card gx-card"
+        *ngFor="
+          let result of quizHistory();
+          let i = index;
+          trackBy: trackQuizResult
+        "
+        (click)="openQuizResult(result)"
+        tabindex="0"
+        role="button"
+        (keydown.enter)="openQuizResult(result)"
+        (keydown.space)="openQuizResult(result)"
+      >
+
+        <div class="quiz-history-header">
+
+          <div class="quiz-history-title">
+
+            <div class="quiz-history-icon">
+              🎯
+            </div>
+
+            <div>
+
+              <span>
+                QUIZ ATTEMPT {{ i + 1 }}
+              </span>
+
+              <h3>
+                Career Quiz
+              </h3>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="quiz-delete-btn"
+            title="Delete quiz result"
+            aria-label="Delete quiz result"
+            (click)="
+              $event.stopPropagation();
+              removeQuizResult(result.id)
+            "
+          >
+            ×
+          </button>
+
+        </div>
+
+
+        <div class="quiz-history-date">
+
+          <span>
+            Completed
+          </span>
+
+          <strong>
+            {{ result.completedAt | date:'dd MMM yyyy, hh:mm a' }}
+          </strong>
+
+        </div>
+
+
+        <div class="quiz-preview">
+
+          <div
+            class="quiz-preview-item"
+            *ngFor="
+              let match of result.matches.slice(0, 3);
+              let rank = index
+            "
+          >
+
+            <span class="quiz-preview-rank">
+
+              <ng-container [ngSwitch]="rank">
+
+                <span *ngSwitchCase="0">
+                  🥇
+                </span>
+
+                <span *ngSwitchCase="1">
+                  🥈
+                </span>
+
+                <span *ngSwitchCase="2">
+                  🥉
+                </span>
+
+              </ng-container>
+
+            </span>
+
+            <span class="quiz-preview-icon">
+              {{ match.icon }}
+            </span>
+
+            <span class="quiz-preview-title">
+              {{ match.title }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <div class="quiz-history-footer">
+
+          <span>
+            View this quiz result
+          </span>
+
+          <span class="quiz-history-arrow">
+            →
+          </span>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SELECTED QUIZ RESULT
+  ====================================================== -->
+
+  <section
+    id="selected-quiz-result"
+    class="selected-quiz-section container"
+    *ngIf="selectedQuizResult() as selectedQuiz"
+  >
+
+    <div class="selected-quiz-topbar">
+
+      <button
+        type="button"
+        class="back-quiz-btn"
+        (click)="closeQuizResult()"
+      >
+
+        <span>
+          ←
+        </span>
+
+        Back to Quiz Results
+
+      </button>
+
+    </div>
+
+
+    <div class="selected-quiz-header gx-glass">
+
+      <div class="selected-quiz-heading">
+
+        <span class="gx-eyebrow">
+          🎯 SMART CAREER QUIZ
+        </span>
+
+        <h2>
+          Your Career Matches
+        </h2>
+
+        <p>
+          These are the top 3 career matches from this
+          quiz attempt.
+        </p>
+
+      </div>
+
+
+      <div class="selected-quiz-date">
+
+        <span>
+          Completed
+        </span>
+
+        <strong>
+          {{ selectedQuiz.completedAt | date:'dd MMM yyyy, hh:mm a' }}
+        </strong>
+
+      </div>
+
+    </div>
+
+
+    <div class="selected-quiz-results">
+
+      <article
+        class="selected-result-card gx-card"
+        *ngFor="
+          let match of selectedQuiz.matches.slice(0, 3);
+          let i = index;
+          trackBy: trackQuizMatch
+        "
+        [class.selected-first]="i === 0"
+      >
+
+        <div class="selected-result-rank">
+
+          <ng-container [ngSwitch]="i">
+
+            <span *ngSwitchCase="0">
+              🥇
+            </span>
+
+            <span *ngSwitchCase="1">
+              🥈
+            </span>
+
+            <span *ngSwitchCase="2">
+              🥉
+            </span>
+
+          </ng-container>
+
+          <small>
+            #{{ i + 1 }}
+          </small>
+
+        </div>
+
+
+        <div class="selected-result-icon">
+          {{ match.icon }}
+        </div>
+
+
+        <div class="selected-result-content">
+
+          <span class="selected-result-category">
+            {{ match.category }}
+          </span>
+
+          <h3>
+            {{ match.title }}
+          </h3>
+
+          <p>
+            {{ match.description }}
+          </p>
+
+        </div>
+
+
+        <div class="selected-result-score">
+
+          <span>
+            Match Score
+          </span>
+
+          <strong>
+            {{ match.score }} pts
+          </strong>
+
+        </div>
+
+
+        <a
+          [routerLink]="[
+            '/career-detail',
+            match.id
+          ]"
+          class="selected-result-btn"
+          (click)="$event.stopPropagation()"
+        >
+
+          <span>
+            Explore Career
+          </span>
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+      </article>
+
+    </div>
+
+
+    <div class="selected-quiz-actions">
+
+      <a
+        routerLink="/quiz"
+        class="gx-btn-primary"
+      >
+        Retake Smart Quiz
+        <span>↻</span>
+      </a>
+
+
+      <button
+        type="button"
+        class="delete-selected-quiz-btn"
+        (click)="removeQuizResult(selectedQuiz.id)"
+      >
+        Delete This Result
+      </button>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       QUICK ACTIONS
+  ====================================================== -->
+
+  <section class="quick-section container">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="section-kicker">
+          QUICK ACTIONS
+        </span>
+
+        <h2>
+          What would you like to do?
+        </h2>
+
+        <p>
+          Jump directly into the areas that can help
+          you plan your next step.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="quick-grid">
+
+      <a
+        class="quick-card gx-card"
+        *ngFor="
+          let action of quickActions;
+          trackBy: trackAction
+        "
+        [routerLink]="action.route"
+      >
+
+        <div class="quick-icon">
+          {{ action.icon }}
+        </div>
+
+        <div class="quick-content">
+
+          <h3>
+            {{ action.title }}
+          </h3>
+
+          <p>
+            {{ action.description }}
+          </p>
+
+        </div>
+
+        <span class="quick-arrow">
+          →
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       EXPLORER
+  ====================================================== -->
+
+  <section class="explorer-section container">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="section-kicker">
+          EXPLORE GUIDEX
+        </span>
+
+        <h2>
+          Build your path step by step
+        </h2>
+
+        <p>
+          Explore the resources available across Guidex.
+        </p>
+
+      </div>
+
+    </div>
+
+
+    <div class="explorer-grid">
+
+      <article
+        class="explorer-card gx-card"
+        *ngFor="
+          let item of exploreItems;
+          trackBy: trackExplore
+        "
+      >
+
+        <div class="explorer-top">
+
+          <div class="explorer-icon">
+            {{ item.icon }}
+          </div>
+
+          <span class="explorer-category">
+            {{ item.category }}
+          </span>
+
+        </div>
+
+
+        <h3>
+          {{ item.title }}
+        </h3>
+
+
+        <p>
+          {{ item.description }}
+        </p>
+
+
+        <a
+          [routerLink]="item.route"
+          class="explorer-link"
+        >
+
+          {{ item.button }}
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FEATURED CAREERS
+  ====================================================== -->
+
+  <section class="featured-section container">
+
+    <div class="section-heading">
+
+      <div>
+
+        <span class="section-kicker">
+          FEATURED CAREERS
+        </span>
+
+        <h2>
+          Explore popular career paths
+        </h2>
+
+        <p>
+          Start exploring careers and understand where
+          each path can take you.
+        </p>
+
+      </div>
+
+
+      <a
+        routerLink="/careers"
+        class="section-view-link"
+      >
+
+        View All Careers
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+    </div>
+
+
+    <div class="featured-grid">
+
+      <article
+        class="featured-card gx-card"
+        *ngFor="
+          let career of featuredCareers;
+          trackBy: trackCareer
+        "
+      >
+
+        <div class="featured-icon">
+          {{ career.icon }}
+        </div>
+
+
+        <span class="featured-category">
+          {{ career.category }}
+        </span>
+
+
+        <h3>
+          {{ career.title }}
+        </h3>
+
+
+        <p>
+          {{ career.description }}
+        </p>
+
+
+        <a
+          [routerLink]="career.route"
+          class="featured-link"
+        >
+
+          Explore
+
+          <span>
+            →
+          </span>
+
+        </a>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       BOTTOM QUIZ CTA
+  ====================================================== -->
+
+  <section class="quiz-cta container">
+
+    <div class="quiz-cta-card gx-glass">
+
+      <div class="quiz-cta-content">
+
+        <span class="quiz-cta-icon">
+          ✨
+        </span>
+
+        <div>
+
+          <span class="section-kicker">
+            NOT SURE WHERE TO START?
+          </span>
+
+          <h2>
+            Discover careers that match you.
+          </h2>
+
+          <p>
+            Take the Smart Career Quiz and explore
+            career paths based on your interests,
+            strengths and preferences.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <a
+        routerLink="/quiz"
+        class="gx-btn-primary"
+      >
+
+        Take Smart Quiz
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+</main>

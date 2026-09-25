@@ -1,0 +1,482 @@
+<div class="colleges-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <section class="colleges-header">
+    <div class="container">
+
+      <div class="header-content">
+
+        <div class="header-copy">
+
+          <span class="gx-eyebrow">
+            <span>🎓</span>
+            COLLEGE DIRECTORY
+          </span>
+
+          <h1>
+            Find the right
+            <span class="gx-gradient-text">college</span>
+          </h1>
+
+          <p>
+            Explore colleges and universities across
+            Andhra Pradesh, Telangana, Tamil Nadu and Karnataka.
+          </p>
+
+        </div>
+
+        <div class="header-stat">
+
+          <div class="stat-number">
+            {{ colleges.length }}+
+          </div>
+
+          <div class="stat-label">
+            Institutions
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       FILTERS
+       ===================================================== -->
+
+  <section class="filters-section">
+    <div class="container">
+
+      <div class="filters-card gx-glass">
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+          <span class="search-icon">⌕</span>
+
+          <input
+            type="text"
+            class="search-input"
+            [(ngModel)]="searchTerm"
+            placeholder="Search college, city, course..."
+          />
+
+          @if (searchTerm) {
+
+            <button
+              type="button"
+              class="clear-search"
+              (click)="searchTerm = ''"
+              aria-label="Clear search"
+            >
+              ×
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- LOCATION FILTER -->
+
+        <div class="filter-group">
+
+          <div class="filter-label">
+            Location
+          </div>
+
+          <div class="filter-options">
+
+            @for (state of states; track state) {
+
+              <button
+                type="button"
+                class="filter-chip"
+                [class.active]="selectedState === state"
+                (click)="selectState(state)"
+              >
+                {{ state }}
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- TYPE FILTER -->
+
+        <div class="filter-group">
+
+          <div class="filter-label">
+            Institution Type
+          </div>
+
+          <div class="filter-options">
+
+            @for (type of types; track type) {
+
+              <button
+                type="button"
+                class="filter-chip"
+                [class.active]="selectedType === type"
+                (click)="selectType(type)"
+              >
+                {{ type }}
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- FILTER FOOTER -->
+
+        <div class="filter-footer">
+
+          <div class="result-info">
+
+            <span class="result-dot"></span>
+
+            Showing
+
+            <strong>
+              {{ filteredColleges.length }}
+            </strong>
+
+            colleges
+
+            @if (selectedState !== 'All') {
+
+              <span class="filter-summary">
+                • {{ selectedState }}
+              </span>
+
+            }
+
+            @if (selectedType !== 'All') {
+
+              <span class="filter-summary">
+                • {{ selectedType }}
+              </span>
+
+            }
+
+          </div>
+
+
+          @if (
+            selectedState !== 'All' ||
+            selectedType !== 'All' ||
+            searchTerm
+          ) {
+
+            <button
+              type="button"
+              class="reset-button"
+              (click)="resetFilters()"
+            >
+              Reset filters
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- =====================================================
+       COLLEGE RESULTS
+       ===================================================== -->
+
+  <section class="colleges-section">
+
+    <div class="container">
+
+
+      <!-- RESULTS -->
+
+      @if (filteredColleges.length > 0) {
+
+        <div class="results-header">
+
+          <div>
+
+            <h2>
+              Explore colleges
+            </h2>
+
+            <p>
+              Browse institutions matching your preferences.
+            </p>
+
+          </div>
+
+          <div class="results-count">
+            {{ filteredColleges.length }}
+            results
+          </div>
+
+        </div>
+
+
+        <!-- COLLEGE GRID -->
+
+        <div class="college-grid">
+
+          @for (
+            college of filteredColleges;
+            track college.id
+          ) {
+
+            <article class="college-card gx-card">
+
+
+              <!-- CARD TOP -->
+
+              <div class="college-card-top">
+
+                <div class="college-icon">
+                  {{ college.icon }}
+                </div>
+
+                <span class="college-type">
+                  {{ college.type }}
+                </span>
+
+              </div>
+
+
+              <!-- COLLEGE NAME -->
+
+              <div class="college-content">
+
+                <h3>
+                  {{ college.name }}
+                </h3>
+
+                <p class="college-short-name">
+                  {{ college.shortName }}
+                </p>
+
+
+                <!-- LOCATION -->
+
+                <div class="college-location">
+
+                  <span class="location-icon">
+                    📍
+                  </span>
+
+                  <span>
+                    {{ college.city }},
+                    {{ college.state }}
+                  </span>
+
+                </div>
+
+
+                <!-- DESCRIPTION -->
+
+                <p class="college-description">
+                  {{ college.description }}
+                </p>
+
+
+                <!-- DETAILS -->
+
+                <div class="college-meta">
+
+                  <div class="meta-item">
+
+                    <span class="meta-icon">
+                      📅
+                    </span>
+
+                    <div>
+                      <span class="meta-label">
+                        Established
+                      </span>
+
+                      <strong>
+                        {{ college.established }}
+                      </strong>
+                    </div>
+
+                  </div>
+
+                </div>
+
+
+                <!-- COURSES -->
+
+                <div class="college-section">
+
+                  <span class="section-label">
+                    Popular programs
+                  </span>
+
+                  <div class="tag-list">
+
+                    @for (
+                      course of college.courses;
+                      track course
+                    ) {
+
+                      <span class="course-tag">
+                        {{ course }}
+                      </span>
+
+                    }
+
+                  </div>
+
+                </div>
+
+
+                <!-- HIGHLIGHTS -->
+
+                <div class="college-section">
+
+                  <span class="section-label">
+                    Highlights
+                  </span>
+
+                  <div class="tag-list">
+
+                    @for (
+                      highlight of college.highlights;
+                      track highlight
+                    ) {
+
+                      <span class="highlight-tag">
+                        {{ highlight }}
+                      </span>
+
+                    }
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- ACTION -->
+
+              <div class="college-card-footer">
+
+                <a
+                  class="college-action"
+                  [routerLink]="[
+                    '/college-detail',
+                    college.id
+                  ]"
+                >
+
+                  Explore college
+
+                  <span>
+                    →
+                  </span>
+
+                </a>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- =================================================
+           NO RESULTS
+           ================================================= -->
+
+      @if (filteredColleges.length === 0) {
+
+        <div class="empty-state gx-card">
+
+          <div class="empty-icon">
+            🔍
+          </div>
+
+          <h2>
+            No colleges found
+          </h2>
+
+          <p>
+            We couldn't find any colleges matching your
+            current search and filters.
+          </p>
+
+          <button
+            type="button"
+            class="gx-btn-primary"
+            (click)="resetFilters()"
+          >
+            Reset filters
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       BOTTOM INFO
+       ===================================================== -->
+
+  <section class="directory-info">
+
+    <div class="container">
+
+      <div class="info-card gx-glass">
+
+        <div class="info-icon">
+          🎓
+        </div>
+
+        <div class="info-content">
+
+          <h3>
+            Find your next academic destination
+          </h3>
+
+          <p>
+            Compare colleges by location, institution type,
+            programs and areas of study to discover options
+            that match your academic goals.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

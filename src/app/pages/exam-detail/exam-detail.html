@@ -1,0 +1,660 @@
+<div class="exam-detail-page">
+
+  @if (exam(); as item) {
+
+    <!-- =====================================================
+         HEADER
+         ===================================================== -->
+
+    <section class="detail-header">
+
+      <div class="container">
+
+        <a
+          routerLink="/exams"
+          class="back-link">
+
+          <span>←</span>
+          Back to exams
+
+        </a>
+
+
+        <div class="hero-card gx-glass">
+
+          <div class="hero-main">
+
+            <div class="exam-icon">
+              {{ item.icon }}
+            </div>
+
+
+            <div class="hero-content">
+
+              <div class="hero-tags">
+
+                <span class="gx-eyebrow">
+                  {{ item.category }}
+                </span>
+
+                <span class="level-tag">
+                  {{ item.level }}
+                </span>
+
+              </div>
+
+
+              <h1>
+                {{ item.shortName }}
+              </h1>
+
+
+              <p class="full-name">
+                {{ item.name }}
+              </p>
+
+
+              <p class="hero-description">
+                {{ item.description }}
+              </p>
+
+            </div>
+
+          </div>
+
+
+          <div class="hero-body">
+
+            <div class="hero-info">
+
+              <span>Conducting Body</span>
+
+              <strong>
+                {{ item.conductingBody }}
+              </strong>
+
+            </div>
+
+
+            <div class="hero-info">
+
+              <span>Exam Mode</span>
+
+              <strong>
+                {{ item.mode }}
+              </strong>
+
+            </div>
+
+
+            <div class="hero-info">
+
+              <span>Eligibility</span>
+
+              <strong>
+                {{ item.eligibility }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         QUICK INFO
+         ===================================================== -->
+
+    <section class="quick-section">
+
+      <div class="container">
+
+        <div class="quick-grid">
+
+
+          <div class="quick-card gx-card">
+
+            <div class="quick-icon">
+              🎯
+            </div>
+
+            <div>
+              <span>Category</span>
+              <strong>{{ item.category }}</strong>
+            </div>
+
+          </div>
+
+
+          <div class="quick-card gx-card">
+
+            <div class="quick-icon">
+              🌐
+            </div>
+
+            <div>
+              <span>Level</span>
+              <strong>{{ item.level }}</strong>
+            </div>
+
+          </div>
+
+
+          <div class="quick-card gx-card">
+
+            <div class="quick-icon">
+              📝
+            </div>
+
+            <div>
+              <span>Mode</span>
+              <strong>{{ item.mode }}</strong>
+            </div>
+
+          </div>
+
+
+          <div class="quick-card gx-card">
+
+            <div class="quick-icon">
+              🎓
+            </div>
+
+            <div>
+              <span>Programs</span>
+              <strong>{{ item.popularFor.length }}+</strong>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+
+    <section class="detail-content">
+
+      <div class="container">
+
+        <div class="content-grid">
+
+
+          <!-- =================================================
+               LEFT COLUMN
+               ================================================= -->
+
+          <main class="main-column">
+
+
+            <!-- PURPOSE -->
+
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  🎯
+                </div>
+
+                <div>
+
+                  <span>
+                    OVERVIEW
+                  </span>
+
+                  <h2>
+                    What is {{ item.shortName }}?
+                  </h2>
+
+                </div>
+
+              </div>
+
+
+              <p class="purpose-text">
+                {{ item.purpose }}
+              </p>
+
+            </section>
+
+
+            <!-- SUBJECTS -->
+
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  📚
+                </div>
+
+                <div>
+
+                  <span>
+                    SYLLABUS
+                  </span>
+
+                  <h2>
+                    Subjects & Areas
+                  </h2>
+
+                </div>
+
+              </div>
+
+
+              <div class="subject-grid">
+
+                @for (subject of item.subjects; track subject) {
+
+                  <div class="subject-item">
+
+                    <span class="subject-number">
+                      {{ $index + 1 }}
+                    </span>
+
+                    <span>
+                      {{ subject }}
+                    </span>
+
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- EXAM PATTERN -->
+
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  📝
+                </div>
+
+                <div>
+
+                  <span>
+                    EXAM STRUCTURE
+                  </span>
+
+                  <h2>
+                    Exam Pattern
+                  </h2>
+
+                </div>
+
+              </div>
+
+
+              <div class="pattern-list">
+
+                @for (
+                  pattern of item.examPattern;
+                  track pattern
+                ) {
+
+                  <div class="pattern-item">
+
+                    <span class="check-icon">
+                      ✓
+                    </span>
+
+                    <span>
+                      {{ pattern }}
+                    </span>
+
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- PREPARATION -->
+
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+
+                <div class="section-icon">
+                  🚀
+                </div>
+
+                <div>
+
+                  <span>
+                    PREPARATION
+                  </span>
+
+                  <h2>
+                    Preparation Tips
+                  </h2>
+
+                </div>
+
+              </div>
+
+
+              <div class="tips-list">
+
+                @for (
+                  tip of item.preparationTips;
+                  track tip
+                ) {
+
+                  <div class="tip-item">
+
+                    <span class="tip-number">
+                      {{ $index + 1 }}
+                    </span>
+
+                    <p>
+                      {{ tip }}
+                    </p>
+
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+          </main>
+
+
+          <!-- =================================================
+               RIGHT COLUMN
+               ================================================= -->
+
+          <aside class="side-column">
+
+
+            <!-- ELIGIBILITY -->
+
+            <section class="side-card gx-card">
+
+              <div class="side-heading">
+
+                <span class="side-icon">
+                  🎓
+                </span>
+
+                <div>
+
+                  <span>
+                    ELIGIBILITY
+                  </span>
+
+                  <h3>
+                    Who can apply?
+                  </h3>
+
+                </div>
+
+              </div>
+
+
+              <p class="eligibility-text">
+                {{ item.eligibility }}
+              </p>
+
+            </section>
+
+
+            <!-- POPULAR FOR -->
+
+            <section class="side-card gx-card">
+
+              <div class="side-heading">
+
+                <span class="side-icon">
+                  🏆
+                </span>
+
+                <div>
+
+                  <span>
+                    PROGRAMS
+                  </span>
+
+                  <h3>
+                    Popular For
+                  </h3>
+
+                </div>
+
+              </div>
+
+
+              <div class="tag-list">
+
+                @for (
+                  program of item.popularFor;
+                  track program
+                ) {
+
+                  <span class="program-tag">
+                    {{ program }}
+                  </span>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- IMPORTANT POINTS -->
+
+            <section class="side-card gx-card">
+
+              <div class="side-heading">
+
+                <span class="side-icon">
+                  💡
+                </span>
+
+                <div>
+
+                  <span>
+                    IMPORTANT
+                  </span>
+
+                  <h3>
+                    Before you apply
+                  </h3>
+
+                </div>
+
+              </div>
+
+
+              <div class="important-list">
+
+                @for (
+                  point of item.importantPoints;
+                  track point
+                ) {
+
+                  <div class="important-item">
+
+                    <span>
+                      →
+                    </span>
+
+                    <p>
+                      {{ point }}
+                    </p>
+
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- SUITABLE FOR -->
+
+            <section class="side-card gx-card">
+
+              <div class="side-heading">
+
+                <span class="side-icon">
+                  👤
+                </span>
+
+                <div>
+
+                  <span>
+                    GUIDANCE
+                  </span>
+
+                  <h3>
+                    Suitable for
+                  </h3>
+
+                </div>
+
+              </div>
+
+
+              <div class="suitable-list">
+
+                @for (
+                  person of item.suitableFor;
+                  track person
+                ) {
+
+                  <div class="suitable-item">
+
+                    <span class="suitable-dot"></span>
+
+                    {{ person }}
+
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+          </aside>
+
+        </div>
+
+
+        <!-- =================================================
+             BOTTOM CTA
+             ================================================= -->
+
+        <section class="bottom-cta gx-glass">
+
+          <div class="cta-icon">
+            📚
+          </div>
+
+
+          <div class="cta-content">
+
+            <span>
+              KEEP EXPLORING
+            </span>
+
+            <h2>
+              Explore more entrance exams
+            </h2>
+
+            <p>
+              Compare different examinations and find the
+              entrance routes relevant to your education goals.
+            </p>
+
+          </div>
+
+
+          <a
+            routerLink="/exams"
+            class="gx-btn-primary">
+
+            Browse exams
+            <span>→</span>
+
+          </a>
+
+        </section>
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- =======================================================
+       NOT FOUND
+       ======================================================= -->
+
+  @else {
+
+    <section class="not-found">
+
+      <div class="container">
+
+        <div class="not-found-card gx-glass">
+
+          <div class="not-found-icon">
+            📝
+          </div>
+
+          <span class="gx-eyebrow">
+            EXAM NOT FOUND
+          </span>
+
+          <h1>
+            Exam details aren't available
+          </h1>
+
+          <p>
+            We couldn't find this examination in the current
+            Guidex exam directory.
+          </p>
+
+          <a
+            routerLink="/exams"
+            class="gx-btn-primary">
+
+            ← Back to exams
+
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

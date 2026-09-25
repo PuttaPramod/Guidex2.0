@@ -1,0 +1,96 @@
+/* =========================================================
+   GUIDEX 2.0 — APP SHELL
+   ========================================================= */
+
+/* Angular app host */
+:host {
+  display: block;
+
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  background: transparent;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   PAGE CONTENT
+   ========================================================= */
+
+.page-content {
+  display: block;
+
+  width: 100%;
+  min-height: 100vh;
+
+  margin: 0;
+
+  /* Space for fixed navbar */
+  padding-top: 88px;
+
+  background: transparent;
+
+  border: 0 !important;
+  outline: 0 !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   ROUTER OUTLET AREA
+   ========================================================= */
+
+router-outlet {
+  display: contents;
+}
+
+
+/* =========================================================
+   REMOVE APP-LEVEL PSEUDO ELEMENTS
+   ========================================================= */
+
+:host::before,
+:host::after,
+.page-content::before,
+.page-content::after {
+  content: none !important;
+
+  display: none !important;
+}
+
+
+/* =========================================================
+   SAFETY — NO UNWANTED FULL-WIDTH LINE
+   ========================================================= */
+
+:host,
+.page-content {
+  border-top: none !important;
+  border-bottom: none !important;
+
+  box-shadow: none !important;
+}
+
+
+/* =========================================================
+   RESPONSIVE
+   ========================================================= */
+
+@media (max-width: 768px) {
+
+  :host,
+  .page-content {
+    width: 100%;
+    min-height: 100vh;
+  }
+
+}

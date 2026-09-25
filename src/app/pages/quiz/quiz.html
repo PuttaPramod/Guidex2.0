@@ -1,0 +1,472 @@
+<div class="quiz-page">
+
+  <!-- =====================================================
+       INTRO
+       ===================================================== -->
+
+  @if (!quizStarted() && !quizCompleted()) {
+
+    <section class="quiz-intro">
+
+      <div class="container">
+
+        <div class="intro-layout">
+
+          <div class="intro-content">
+
+            <span class="gx-eyebrow">
+              <span class="intro-dot"></span>
+              SMART CAREER QUIZ
+            </span>
+
+            <h1>
+              Discover a career
+              <span class="gx-gradient-text">
+                that fits you.
+              </span>
+            </h1>
+
+            <p>
+              Answer a few simple questions about your interests,
+              strengths and preferred working style. Guidex will
+              calculate career matches based on your answers.
+            </p>
+
+            <div class="intro-actions">
+
+              <button
+                type="button"
+                class="gx-btn-primary start-button"
+                (click)="startQuiz()"
+              >
+                Start Smart Quiz
+                <span>→</span>
+              </button>
+
+            </div>
+
+
+            <div class="quiz-features">
+
+              <div class="feature-item">
+
+                <span class="feature-icon">
+                  📝
+                </span>
+
+                <div>
+                  <strong>10</strong>
+                  <span>Questions</span>
+                </div>
+
+              </div>
+
+
+              <div class="feature-item">
+
+                <span class="feature-icon">
+                  ⏱
+                </span>
+
+                <div>
+                  <strong>5 min</strong>
+                  <span>Approx. time</span>
+                </div>
+
+              </div>
+
+
+              <div class="feature-item">
+
+                <span class="feature-icon">
+                  🎯
+                </span>
+
+                <div>
+                  <strong>16</strong>
+                  <span>Career paths</span>
+                </div>
+
+              </div>
+
+            </div>
+
+          </div>
+
+
+          <div class="intro-visual">
+
+            <div class="quiz-orbit">
+
+              <div class="orbit-ring ring-one"></div>
+
+              <div class="orbit-ring ring-two"></div>
+
+              <div class="quiz-center">
+                ✦
+              </div>
+
+              <div class="orbit-card card-one">
+                💻
+                <span>Technology</span>
+              </div>
+
+              <div class="orbit-card card-two">
+                🎨
+                <span>Design</span>
+              </div>
+
+              <div class="orbit-card card-three">
+                🩺
+                <span>Healthcare</span>
+              </div>
+
+              <div class="orbit-card card-four">
+                📊
+                <span>Business</span>
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- =====================================================
+       QUIZ
+       ===================================================== -->
+
+  @if (quizStarted() && !quizCompleted()) {
+
+    <section class="quiz-section">
+
+      <div class="container quiz-container">
+
+        <!-- Progress -->
+
+        <div class="quiz-topbar">
+
+          <div class="quiz-progress-info">
+
+            <span>
+              QUESTION {{ currentQuestion() + 1 }}
+              OF {{ questions.length }}
+            </span>
+
+            <strong>
+              {{ progress() | number:'1.0-0' }}%
+            </strong>
+
+          </div>
+
+
+          <div class="progress-track">
+
+            <div
+              class="progress-fill"
+              [style.width.%]="progress()"
+            ></div>
+
+          </div>
+
+        </div>
+
+
+        <!-- Question Card -->
+
+        <div class="question-card gx-card">
+
+          <div class="question-header">
+
+            <div class="question-icon">
+              {{ currentQuestionData().icon }}
+            </div>
+
+            <span class="question-number">
+              Q{{ currentQuestionData().id }}
+            </span>
+
+          </div>
+
+
+          <div class="question-content">
+
+            <h1>
+              {{ currentQuestionData().question }}
+            </h1>
+
+            <p>
+              {{ currentQuestionData().subtitle }}
+            </p>
+
+          </div>
+
+
+          <!-- Options -->
+
+          <div class="answer-list">
+
+            @for (
+              option of currentQuestionData().options;
+              track option.text;
+              let i = $index
+            ) {
+
+              <button
+                type="button"
+                class="answer-option"
+                [class.selected]="isAnswerSelected(i)"
+                (click)="selectAnswer(i)"
+              >
+
+                <span class="answer-letter">
+                  {{ ['A', 'B', 'C', 'D'][i] }}
+                </span>
+
+                <span class="answer-text">
+                  {{ option.text }}
+                </span>
+
+                <span class="answer-check">
+
+                  @if (isAnswerSelected(i)) {
+                    ✓
+                  } @else {
+                    →
+                  }
+
+                </span>
+
+              </button>
+
+            }
+
+          </div>
+
+
+          <!-- Navigation -->
+
+          <div class="question-navigation">
+
+            <button
+              type="button"
+              class="nav-button previous-button"
+              [disabled]="currentQuestion() === 0"
+              (click)="previousQuestion()"
+            >
+              <span>←</span>
+              Previous
+            </button>
+
+
+            <span class="answered-indicator">
+
+              @if (selectedAnswer() !== null) {
+                Answer selected
+              } @else {
+                Select an answer
+              }
+
+            </span>
+
+
+            <button
+              type="button"
+              class="nav-button next-button"
+              [disabled]="selectedAnswer() === null"
+              (click)="nextQuestion()"
+            >
+
+              @if (currentQuestion() === questions.length - 1) {
+                Finish Quiz
+              } @else {
+                Next
+              }
+
+              <span>→</span>
+
+            </button>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+
+  <!-- =====================================================
+       RESULTS
+       ===================================================== -->
+
+  @if (quizCompleted()) {
+
+    <section class="results-section">
+
+      <div class="container">
+
+        <!-- Results Header -->
+
+        <div class="results-header">
+
+          <span class="gx-eyebrow">
+            QUIZ COMPLETE
+          </span>
+
+          <h1>
+            Your career
+            <span class="gx-gradient-text">
+              possibilities.
+            </span>
+          </h1>
+
+          <p>
+            Based on your answers, these career paths match
+            the interests and working styles you selected.
+          </p>
+
+        </div>
+
+
+        <!-- Results -->
+
+        <div class="results-grid">
+
+          @for (
+            career of results();
+            track trackCareer($index, career);
+            let i = $index
+          ) {
+
+            <article
+              class="result-card gx-card"
+              [class.top-result]="i === 0"
+            >
+
+              @if (i === 0) {
+
+                <div class="top-match">
+                  TOP MATCH
+                </div>
+
+              }
+
+
+              <div class="result-card-top">
+
+                <div class="result-icon">
+                  {{ career.icon }}
+                </div>
+
+                <span class="result-category">
+                  {{ career.category }}
+                </span>
+
+              </div>
+
+
+              <div class="result-content">
+
+                <h2>
+                  {{ career.title }}
+                </h2>
+
+                <p>
+                  {{ career.description }}
+                </p>
+
+              </div>
+
+
+              <div class="match-score">
+
+                <div class="score-label">
+                  <span>Career match</span>
+
+                  <strong>
+                    {{ career.score }} pts
+                  </strong>
+                </div>
+
+                <div class="score-track">
+
+                  <div
+                    class="score-fill"
+                    [style.width.%]="
+                      career.score > 20
+                        ? 100
+                        : career.score * 5
+                    "
+                  ></div>
+
+                </div>
+
+              </div>
+
+
+              <div class="result-actions">
+
+                <a
+                  class="result-career-button"
+                  [routerLink]="[
+                    '/career-detail',
+                    career.id
+                  ]"
+                >
+                  Explore career
+                  <span>→</span>
+                </a>
+
+
+                <a
+                  class="result-roadmap-button"
+                  [routerLink]="['/roadmap']"
+                  [queryParams]="{
+                    career: career.roadmapId
+                  }"
+                >
+                  Roadmap
+                  <span>↗</span>
+                </a>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+
+        <!-- Bottom Actions -->
+
+        <div class="results-footer">
+
+          <button
+            type="button"
+            class="restart-button"
+            (click)="restartQuiz()"
+          >
+            ↻
+            Take Quiz Again
+          </button>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

@@ -1,0 +1,535 @@
+<main class="courses-page">
+
+  <!-- ===================================================== -->
+  <!-- HERO -->
+  <!-- ===================================================== -->
+
+  <section class="courses-hero container">
+
+    <div class="hero-content">
+
+      <span class="gx-eyebrow">
+        📚 EXPLORE COURSES
+      </span>
+
+      <h1>
+        Find the right
+        <span class="gx-gradient-text">
+          course for your future.
+        </span>
+      </h1>
+
+      <p>
+        Explore degree programs, understand what you will learn,
+        discover career opportunities and choose a path that
+        matches your goals.
+      </p>
+
+    </div>
+
+    <div class="hero-count">
+
+      <strong>
+        {{ filteredCourses().length }}
+      </strong>
+
+      <span>
+        courses available
+      </span>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================== -->
+  <!-- SEARCH + CATEGORY FILTER -->
+  <!-- ===================================================== -->
+
+  <section class="courses-controls container">
+
+    <div class="courses-controls-inner">
+
+      <!-- SEARCH -->
+
+      <div class="search-box">
+
+        <span class="search-icon">
+          🔍
+        </span>
+
+        <input
+          type="text"
+          class="form-control"
+          placeholder="Search courses, skills or careers..."
+          [ngModel]="searchQuery()"
+          (ngModelChange)="searchQuery.set($event)"
+        />
+
+        <button
+          *ngIf="searchQuery()"
+          type="button"
+          class="clear-search-btn"
+          (click)="clearSearch()"
+          title="Clear search"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- CATEGORIES -->
+
+      <div class="category-filter">
+
+        <button
+          type="button"
+          class="category-btn"
+          *ngFor="let category of categories"
+          [class.active]="selectedCategory() === category"
+          (click)="selectCategory(category)"
+        >
+          {{ category }}
+        </button>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================== -->
+  <!-- SECTION HEADING -->
+  <!-- ===================================================== -->
+
+  <section class="courses-heading container">
+
+    <div>
+
+      <span class="section-label">
+        AVAILABLE COURSES
+      </span>
+
+      <h2>
+        Find a course that
+        <span class="gx-gradient-text">
+          fits you.
+        </span>
+      </h2>
+
+    </div>
+
+    <div class="course-count">
+
+      {{ filteredCourses().length }}
+      {{ filteredCourses().length === 1 ? 'course' : 'courses' }}
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================== -->
+  <!-- COURSE SECTION -->
+  <!-- ===================================================== -->
+
+  <section class="courses-section container">
+
+
+    <!-- =================================================== -->
+    <!-- NO RESULTS -->
+    <!-- =================================================== -->
+
+    <div
+      class="empty-state gx-card"
+      *ngIf="filteredCourses().length === 0"
+    >
+
+      <div class="empty-icon">
+        🔎
+      </div>
+
+      <h3>
+        No courses found
+      </h3>
+
+      <p>
+        Try another search term or choose a different category.
+      </p>
+
+      <button
+        type="button"
+        class="gx-btn-primary"
+        (click)="resetFilters()"
+      >
+        Reset Filters
+      </button>
+
+    </div>
+
+
+    <!-- =================================================== -->
+    <!-- COURSE GRID -->
+    <!-- =================================================== -->
+
+    <div
+      class="courses-grid"
+      *ngIf="filteredCourses().length > 0"
+    >
+
+
+      <!-- ================================================= -->
+      <!-- COURSE CARD -->
+      <!-- ================================================= -->
+
+      <article
+        class="course-card gx-card"
+        *ngFor="
+          let course of filteredCourses();
+          trackBy: trackByCourse
+        "
+      >
+
+
+        <!-- CARD TOP -->
+
+        <div class="course-card-top">
+
+          <div class="course-icon">
+            {{ course.icon }}
+          </div>
+
+          <span class="course-category">
+            {{ course.category }}
+          </span>
+
+        </div>
+
+
+        <!-- TITLE -->
+
+        <h3>
+          {{ course.title }}
+        </h3>
+
+
+        <!-- DESCRIPTION -->
+
+        <p class="course-description">
+          {{ course.description }}
+        </p>
+
+
+        <!-- ================================================= -->
+        <!-- COURSE META -->
+        <!-- ================================================= -->
+
+        <div class="course-meta">
+
+
+          <!-- DURATION -->
+
+          <div class="meta-item">
+
+            <span class="meta-icon">
+              ⏱
+            </span>
+
+            <div>
+
+              <span>
+                Duration
+              </span>
+
+              <strong>
+                {{ course.duration }}
+              </strong>
+
+            </div>
+
+          </div>
+
+
+          <!-- ELIGIBILITY -->
+
+          <div class="meta-item">
+
+            <span class="meta-icon">
+              🎓
+            </span>
+
+            <div>
+
+              <span>
+                Eligibility
+              </span>
+
+              <strong>
+                {{ course.eligibility }}
+              </strong>
+
+            </div>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- SKILLS -->
+        <!-- ================================================= -->
+
+        <div class="course-skills">
+
+          <span class="skills-label">
+            KEY SKILLS
+          </span>
+
+          <div class="skills-list">
+
+            <span
+              class="skill-tag"
+              *ngFor="let skill of course.skills"
+            >
+              {{ skill }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- CAREER OPTIONS -->
+        <!-- ================================================= -->
+
+        <div class="course-careers">
+
+          <span class="careers-label">
+            CAREER OPTIONS
+          </span>
+
+          <div class="career-list">
+
+            <span
+              *ngFor="let career of course.careers"
+              class="career-item"
+            >
+              {{ career }}
+            </span>
+
+          </div>
+
+        </div>
+
+
+        <!-- ================================================= -->
+        <!-- ACTIONS -->
+        <!-- ================================================= -->
+
+        <div class="course-actions">
+
+
+          <!-- VIEW DETAILS -->
+
+          <a
+            [routerLink]="[
+              '/course-detail',
+              course.id
+            ]"
+            class="course-details-btn"
+          >
+
+            <span>
+              View Details
+            </span>
+
+            <span>
+              →
+            </span>
+
+          </a>
+
+
+          <!-- ================================================= -->
+          <!-- SAVE -->
+          <!-- ================================================= -->
+
+          <button
+            type="button"
+            class="course-save-btn"
+            [class.saved]="isCourseSaved(course.id) && isLoggedIn()"
+            [class.login-required]="!isLoggedIn()"
+            (click)="
+              isLoggedIn()
+                ? toggleSavedCourse(course, $event)
+                : loginRequiredDialog.showModal()
+            "
+          >
+
+            <span>
+              {{
+                isLoggedIn()
+                  ? (isCourseSaved(course.id) ? '♥' : '♡')
+                  : '🔒'
+              }}
+            </span>
+
+            {{
+              isLoggedIn()
+                ? (isCourseSaved(course.id) ? 'Saved' : 'Save')
+                : 'Login to Save'
+            }}
+
+          </button>
+
+        </div>
+
+      </article>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================== -->
+  <!-- BOTTOM CTA -->
+  <!-- ===================================================== -->
+
+  <section class="courses-cta container">
+
+    <div class="courses-cta-card gx-glass">
+
+
+      <!-- ICON -->
+
+      <div class="cta-icon">
+        ✨
+      </div>
+
+
+      <!-- CONTENT -->
+
+      <div class="cta-content">
+
+        <span class="section-kicker">
+          STILL EXPLORING?
+        </span>
+
+        <h2>
+          Not sure which career path fits you?
+        </h2>
+
+        <p>
+          Take the Smart Career Quiz and discover
+          career paths based on your interests,
+          strengths and preferences.
+        </p>
+
+      </div>
+
+
+      <!-- CTA BUTTON -->
+
+      <a
+        routerLink="/quiz"
+        class="gx-btn-primary"
+      >
+
+        Take Smart Quiz
+
+        <span>
+          →
+        </span>
+
+      </a>
+
+    </div>
+
+  </section>
+
+
+  <!-- ===================================================== -->
+  <!-- LOGIN REQUIRED DIALOG -->
+  <!-- ===================================================== -->
+
+  <dialog
+    #loginRequiredDialog
+    class="login-required-dialog"
+  >
+
+    <div class="login-dialog-content">
+
+      <!-- CLOSE -->
+
+      <button
+        type="button"
+        class="login-dialog-close"
+        aria-label="Close"
+        (click)="loginRequiredDialog.close()"
+      >
+        ×
+      </button>
+
+
+      <!-- ICON -->
+
+      <div class="login-dialog-icon">
+        🔐
+      </div>
+
+
+      <!-- LABEL -->
+
+      <span class="gx-eyebrow">
+        LOGIN REQUIRED
+      </span>
+
+
+      <!-- TITLE -->
+
+      <h2>
+        Login to save this course
+      </h2>
+
+
+      <!-- DESCRIPTION -->
+
+      <p>
+        Create an account or sign in to save courses
+        and access them later from your dashboard.
+      </p>
+
+
+      <!-- ACTIONS -->
+
+      <div class="login-dialog-actions">
+
+        <button
+          type="button"
+          class="gx-btn-glass"
+          (click)="loginRequiredDialog.close()"
+        >
+          Cancel
+        </button>
+
+        <a
+          routerLink="/login"
+          class="gx-btn-primary"
+          (click)="loginRequiredDialog.close()"
+        >
+          Login
+          <span>
+            →
+          </span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+</main>

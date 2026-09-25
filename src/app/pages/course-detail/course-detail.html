@@ -1,0 +1,877 @@
+<div class="course-detail-page">
+
+  <div class="container">
+
+    <!-- ===================================================
+         BACK
+         =================================================== -->
+
+    <button
+      type="button"
+      class="back-link"
+      (click)="goBackToCourses()"
+    >
+      <span>←</span>
+      Back to Courses
+    </button>
+
+
+    <!-- ===================================================
+         HERO
+         =================================================== -->
+
+    <section class="course-hero gx-glass">
+
+      <div class="course-hero-main">
+
+        <div class="course-hero-icon">
+          {{ currentCourse().icon }}
+        </div>
+
+        <div class="course-hero-content">
+
+          <span class="gx-eyebrow">
+            {{ currentCourse().category }}
+          </span>
+
+          <h1>
+            {{ currentCourse().title }}
+          </h1>
+
+          <p>
+            {{ currentCourse().description }}
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <div class="course-hero-side">
+
+        <span>COURSE DURATION</span>
+
+        <strong>
+          {{ currentCourse().duration }}
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         QUICK INFO
+         =================================================== -->
+
+    <section class="quick-info">
+
+      <div class="quick-card gx-card">
+
+        <span class="quick-icon">⏱</span>
+
+        <div>
+          <small>DURATION</small>
+          <strong>
+            {{ currentCourse().duration }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="quick-card gx-card">
+
+        <span class="quick-icon">🎓</span>
+
+        <div>
+          <small>ELIGIBILITY</small>
+          <strong>
+            {{ currentCourse().eligibility }}
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="quick-card gx-card">
+
+        <span class="quick-icon">📚</span>
+
+        <div>
+          <small>SUBJECTS</small>
+          <strong>
+            {{ currentCourse().subjects.length }}
+            core subjects
+          </strong>
+        </div>
+
+      </div>
+
+
+      <div class="quick-card gx-card">
+
+        <span class="quick-icon">💼</span>
+
+        <div>
+          <small>CAREERS</small>
+          <strong>
+            {{ currentCourse().careers.length }}
+            pathways
+          </strong>
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SKILLS
+         =================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            SKILLS
+          </span>
+
+          <h2>
+            What you'll learn
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="skills-grid">
+
+        @for (
+          skill of currentCourse().skills;
+          track skill
+        ) {
+
+          <div class="skill-card gx-card">
+
+            <div class="skill-icon">
+              ✓
+            </div>
+
+            <span>
+              {{ skill }}
+            </span>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         SUBJECTS + ENTRANCE EXAMS
+         =================================================== -->
+
+    <section class="detail-section">
+
+      <div class="two-column-grid">
+
+
+        <!-- SUBJECTS -->
+
+        <div class="info-panel gx-card">
+
+          <div class="panel-heading">
+
+            <div class="panel-icon">
+              📚
+            </div>
+
+            <div>
+
+              <span>
+                CURRICULUM
+              </span>
+
+              <h2>
+                Core subjects
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-list">
+
+            @for (
+              subject of currentCourse().subjects;
+              track subject
+            ) {
+
+              <div class="info-item">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span>
+                  {{ subject }}
+                </span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- ENTRANCE EXAMS -->
+
+        <div class="info-panel gx-card">
+
+          <div class="panel-heading">
+
+            <div class="panel-icon">
+              📝
+            </div>
+
+            <div>
+
+              <span>
+                ADMISSION
+              </span>
+
+              <h2>
+                Entrance exams
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-list">
+
+            @for (
+              exam of currentCourse().entranceExams;
+              track exam
+            ) {
+
+              <div class="info-item">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span>
+                  {{ exam }}
+                </span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CAREERS
+         =================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            CAREER OPPORTUNITIES
+          </span>
+
+          <h2>
+            Where this course can take you
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="career-grid">
+
+        @for (
+          career of currentCourse().careers;
+          track career;
+          let i = $index
+        ) {
+
+          <div class="career-card gx-card">
+
+            <div class="career-number">
+              {{ i + 1 }}
+            </div>
+
+            <div>
+
+              <strong>
+                {{ career }}
+              </strong>
+
+              <span>
+                Career pathway
+              </span>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         ROADMAP
+         =================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            COURSE ROADMAP
+          </span>
+
+          <h2>
+            Your path forward
+          </h2>
+
+        </div>
+
+        <span class="result-count">
+          {{ currentCourse().roadmap.length }}
+          steps
+        </span>
+
+      </div>
+
+
+      <div class="roadmap-grid">
+
+        @for (
+          step of currentCourse().roadmap;
+          track step.title;
+          let i = $index
+        ) {
+
+          <div class="roadmap-card gx-card">
+
+            <div class="roadmap-number">
+              {{ i + 1 }}
+            </div>
+
+            <div class="roadmap-content">
+
+              <span class="roadmap-label">
+                STEP {{ i + 1 }}
+              </span>
+
+              <h3>
+                {{ step.title }}
+              </h3>
+
+              <p>
+                {{ step.description }}
+              </p>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         RELATED COURSES
+         =================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            EXPLORE MORE
+          </span>
+
+          <h2>
+            Related courses
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="related-grid">
+
+        @for (
+          related of currentCourse().relatedCourses;
+          track related
+        ) {
+
+          @if (related === 'Computer Science Engineering') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/computer-science-engineering"
+            >
+
+              <span class="related-icon">💻</span>
+
+              <div class="related-content">
+                <strong>
+                  Computer Science Engineering
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'Information Technology') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/information-technology"
+            >
+
+              <span class="related-icon">🌐</span>
+
+              <div class="related-content">
+                <strong>
+                  Information Technology
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'BCA') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/bca"
+            >
+
+              <span class="related-icon">🖥️</span>
+
+              <div class="related-content">
+                <strong>BCA</strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.Sc. Computer Science') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/bsc-computer-science"
+            >
+
+              <span class="related-icon">🧑‍💻</span>
+
+              <div class="related-content">
+                <strong>
+                  B.Sc. Computer Science
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'MCA') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/mca"
+            >
+
+              <span class="related-icon">⌨️</span>
+
+              <div class="related-content">
+                <strong>MCA</strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'MBBS') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/mbbs"
+            >
+
+              <span class="related-icon">🩺</span>
+
+              <div class="related-content">
+                <strong>MBBS</strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.Sc. Nursing') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/bsc-nursing"
+            >
+
+              <span class="related-icon">🏥</span>
+
+              <div class="related-content">
+                <strong>
+                  B.Sc. Nursing
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.Pharm') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/b-pharm"
+            >
+
+              <span class="related-icon">💊</span>
+
+              <div class="related-content">
+                <strong>
+                  Bachelor of Pharmacy
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.Com') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/bcom"
+            >
+
+              <span class="related-icon">📊</span>
+
+              <div class="related-content">
+                <strong>
+                  Bachelor of Commerce
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'BBA') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/bba"
+            >
+
+              <span class="related-icon">💼</span>
+
+              <div class="related-content">
+                <strong>
+                  Bachelor of Business Administration
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'MBA') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/mba"
+            >
+
+              <span class="related-icon">📈</span>
+
+              <div class="related-content">
+                <strong>
+                  Master of Business Administration
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.A. English') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/ba-english"
+            >
+
+              <span class="related-icon">📚</span>
+
+              <div class="related-content">
+                <strong>
+                  B.A. English
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.A. Psychology') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/ba-psychology"
+            >
+
+              <span class="related-icon">🧠</span>
+
+              <div class="related-content">
+                <strong>
+                  B.A. Psychology
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          @if (related === 'B.Des') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/course-detail/b-des"
+            >
+
+              <span class="related-icon">🎨</span>
+
+              <div class="related-content">
+                <strong>
+                  Bachelor of Design
+                </strong>
+                <small>
+                  Explore course
+                </small>
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- ===================================================
+         CTA
+         =================================================== -->
+
+    <section class="detail-section">
+
+      <div class="course-cta">
+
+        <div class="cta-content">
+
+          <span class="gx-eyebrow">
+            GUIDEX
+          </span>
+
+          <h2>
+            Still exploring your options?
+          </h2>
+
+          <p>
+            Compare different courses or take the Smart Quiz
+            to discover pathways that match your interests.
+          </p>
+
+        </div>
+
+
+        <div class="cta-actions">
+
+          <a
+            routerLink="/courses"
+            class="gx-btn-glass"
+          >
+            Explore Courses
+          </a>
+
+          <a
+            routerLink="/quiz"
+            class="gx-btn-primary"
+          >
+            Take Smart Quiz
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>

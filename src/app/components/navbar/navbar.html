@@ -1,0 +1,382 @@
+<nav class="gx-navbar">
+
+  <div class="gx-navbar-inner">
+
+    <!-- =================================================
+         BRAND
+    ================================================== -->
+
+    <a
+      routerLink="/"
+      class="gx-brand"
+      (click)="closeMobileMenu()"
+    >
+
+      <span class="gx-brand-icon">
+        G
+      </span>
+
+      <span class="gx-brand-name">
+        Guidex
+      </span>
+
+    </a>
+
+
+    <!-- =================================================
+         DESKTOP NAVIGATION
+    ================================================== -->
+
+    <div class="gx-nav-links">
+
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="gx-nav-link"
+      >
+        Home
+      </a>
+
+      <a
+        routerLink="/streams"
+        routerLinkActive="active"
+        class="gx-nav-link"
+      >
+        Streams
+      </a>
+
+      <a
+        routerLink="/careers"
+        routerLinkActive="active"
+        class="gx-nav-link"
+      >
+        Careers
+      </a>
+
+      <a
+        routerLink="/courses"
+        routerLinkActive="active"
+        class="gx-nav-link"
+      >
+        Courses
+      </a>
+
+      <a
+        routerLink="/colleges"
+        routerLinkActive="active"
+        class="gx-nav-link"
+      >
+        Colleges
+      </a>
+
+      <a
+        routerLink="/exams"
+        routerLinkActive="active"
+        class="gx-nav-link"
+      >
+        Exams
+      </a>
+
+    </div>
+
+
+    <!-- =================================================
+         DESKTOP ACTIONS
+    ================================================== -->
+
+    <div class="gx-nav-actions">
+
+      <!-- SMART QUIZ - LOGGED IN ONLY -->
+
+      <a
+        *ngIf="isLoggedIn()"
+        routerLink="/quiz"
+        routerLinkActive="active-action"
+        class="gx-quiz-button"
+      >
+
+        <span class="quiz-star">
+          ✦
+        </span>
+
+        Smart Quiz
+
+      </a>
+
+
+      <!-- DASHBOARD - LOGGED IN ONLY -->
+
+      <a
+        *ngIf="isLoggedIn()"
+        routerLink="/dashboard"
+        routerLinkActive="active-dashboard"
+        class="gx-dashboard-button"
+      >
+        Dashboard
+      </a>
+
+
+      <!-- =================================================
+           LOGGED-IN USER
+      ================================================== -->
+
+      <ng-container *ngIf="isLoggedIn(); else loggedOutDesktop">
+
+        <div class="gx-user-menu">
+
+          <div class="gx-user-info">
+
+            <span class="gx-user-avatar">
+              {{ userInitial }}
+            </span>
+
+            <div class="gx-user-details">
+
+              <span class="gx-user-name">
+                {{ userDisplayName }}
+              </span>
+
+              <span class="gx-user-status">
+                Signed in
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="gx-logout-button"
+            (click)="logout()"
+          >
+            <span>↪</span>
+            Logout
+          </button>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- =================================================
+           LOGGED-OUT USER
+      ================================================== -->
+
+      <ng-template #loggedOutDesktop>
+
+        <a
+          routerLink="/login"
+          routerLinkActive="active-login"
+          class="gx-login-button"
+        >
+          Sign in
+        </a>
+
+      </ng-template>
+
+    </div>
+
+
+    <!-- =================================================
+         MOBILE MENU BUTTON
+    ================================================== -->
+
+    <button
+      type="button"
+      class="gx-mobile-toggle"
+      [class.open]="mobileMenuOpen()"
+      [attr.aria-expanded]="mobileMenuOpen()"
+      aria-label="Toggle navigation menu"
+      (click)="toggleMobileMenu()"
+    >
+
+      <span></span>
+      <span></span>
+      <span></span>
+
+    </button>
+
+  </div>
+
+
+  <!-- =====================================================
+       MOBILE MENU
+  ===================================================== -->
+
+  <div
+    class="gx-mobile-menu"
+    [class.open]="mobileMenuOpen()"
+  >
+
+    <div class="gx-mobile-links">
+
+      <a
+        routerLink="/"
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="gx-mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        <span>⌂</span>
+        Home
+      </a>
+
+
+      <a
+        routerLink="/streams"
+        routerLinkActive="active"
+        class="gx-mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        <span>◈</span>
+        Streams
+      </a>
+
+
+      <a
+        routerLink="/careers"
+        routerLinkActive="active"
+        class="gx-mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        <span>💼</span>
+        Careers
+      </a>
+
+
+      <a
+        routerLink="/courses"
+        routerLinkActive="active"
+        class="gx-mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        <span>📚</span>
+        Courses
+      </a>
+
+
+      <a
+        routerLink="/colleges"
+        routerLinkActive="active"
+        class="gx-mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        <span>🎓</span>
+        Colleges
+      </a>
+
+
+      <a
+        routerLink="/exams"
+        routerLinkActive="active"
+        class="gx-mobile-link"
+        (click)="closeMobileMenu()"
+      >
+        <span>📝</span>
+        Exams
+      </a>
+
+    </div>
+
+
+    <!-- =================================================
+         MOBILE ACTIONS
+    ================================================== -->
+
+    <div class="gx-mobile-actions">
+
+      <!-- SMART QUIZ - LOGGED IN ONLY -->
+
+      <a
+        *ngIf="isLoggedIn()"
+        routerLink="/quiz"
+        class="gx-mobile-quiz"
+        (click)="closeMobileMenu()"
+      >
+        <span>✦</span>
+        Smart Quiz
+        <span>→</span>
+      </a>
+
+
+      <!-- DASHBOARD - LOGGED IN ONLY -->
+
+      <a
+        *ngIf="isLoggedIn()"
+        routerLink="/dashboard"
+        class="gx-mobile-dashboard"
+        (click)="closeMobileMenu()"
+      >
+        Dashboard
+        <span>→</span>
+      </a>
+
+
+      <!-- =================================================
+           MOBILE LOGGED-IN USER
+      ================================================== -->
+
+      <ng-container *ngIf="isLoggedIn(); else loggedOutMobile">
+
+        <div class="gx-mobile-user">
+
+          <div class="gx-mobile-user-info">
+
+            <span class="gx-mobile-user-avatar">
+              {{ userInitial }}
+            </span>
+
+            <div>
+
+              <strong>
+                {{ userDisplayName }}
+              </strong>
+
+              <span>
+                Signed in
+              </span>
+
+            </div>
+
+          </div>
+
+
+          <button
+            type="button"
+            class="gx-mobile-logout"
+            (click)="logout()"
+          >
+            <span>↪</span>
+            Logout
+          </button>
+
+        </div>
+
+      </ng-container>
+
+
+      <!-- =================================================
+           MOBILE LOGGED-OUT USER
+      ================================================== -->
+
+      <ng-template #loggedOutMobile>
+
+        <a
+          routerLink="/login"
+          class="gx-mobile-login"
+          (click)="closeMobileMenu()"
+        >
+          <span>👤</span>
+          Sign in
+          <span>→</span>
+        </a>
+
+      </ng-template>
+
+    </div>
+
+  </div>
+
+</nav>

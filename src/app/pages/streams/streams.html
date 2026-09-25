@@ -1,0 +1,332 @@
+<div class="streams-page">
+
+  <!-- =====================================================
+       PAGE HEADER
+       ===================================================== -->
+
+  <section class="streams-header">
+
+    <div class="container">
+
+      <div class="header-content">
+
+        <div class="header-copy">
+
+          <span class="gx-eyebrow">
+            <span class="header-dot"></span>
+            EDUCATION PATHS
+          </span>
+
+          <h1>
+            Explore your
+            <span class="gx-gradient-text">stream.</span>
+          </h1>
+
+          <p>
+            Discover education streams, subjects and career
+            opportunities to find the path that fits you.
+          </p>
+
+        </div>
+
+        <div class="header-stat">
+
+          <strong>
+            {{ filteredStreams().length }}
+          </strong>
+
+          <span>
+            pathways available
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SEARCH + FILTER
+       ===================================================== -->
+
+  <section class="stream-tools">
+
+    <div class="container">
+
+      <div class="tools-card">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            🔍
+          </span>
+
+          <input
+            type="text"
+            placeholder="Search streams, subjects or careers..."
+            [ngModel]="searchQuery()"
+            (ngModelChange)="searchQuery.set($event)"
+          />
+
+          @if (searchQuery()) {
+
+            <button
+              type="button"
+              class="clear-search"
+              aria-label="Clear search"
+              (click)="clearSearch()"
+            >
+              ×
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- Categories -->
+
+        <div class="category-filter">
+
+          @for (
+            category of categories;
+            track category
+          ) {
+
+            <button
+              type="button"
+              class="category-button"
+              [class.active]="selectedCategory() === category"
+              (click)="selectCategory(category)"
+            >
+              {{ category }}
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       STREAM LIST
+       ===================================================== -->
+
+  <section class="streams-content">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            PATHWAYS
+          </span>
+
+          <h2>
+            Find a path that
+            <span class="gx-gradient-text">
+              fits you.
+            </span>
+          </h2>
+
+        </div>
+
+        <span class="result-count">
+          {{ filteredStreams().length }}
+          {{ filteredStreams().length === 1 ? 'result' : 'results' }}
+        </span>
+
+      </div>
+
+
+      <!-- =================================================
+           STREAM GRID
+           ================================================= -->
+
+      @if (filteredStreams().length > 0) {
+
+        <div class="stream-grid">
+
+          @for (
+            stream of filteredStreams();
+            track trackByStream($index, stream)
+          ) {
+
+            <article class="stream-card">
+
+              <!-- Card top -->
+
+              <div class="stream-card-top">
+
+                <div class="stream-icon">
+                  {{ stream.icon }}
+                </div>
+
+                <span class="stream-category">
+                  {{ stream.category }}
+                </span>
+
+              </div>
+
+
+              <!-- Content -->
+
+              <div class="stream-content">
+
+                <h3>
+                  {{ stream.name }}
+                </h3>
+
+                <p>
+                  {{ stream.description }}
+                </p>
+
+              </div>
+
+
+              <!-- Subjects -->
+
+              <div class="subject-list">
+
+                @for (
+                  subject of stream.subjects.slice(0, 3);
+                  track subject
+                ) {
+
+                  <span>
+                    {{ subject }}
+                  </span>
+
+                }
+
+              </div>
+
+
+              <!-- Careers -->
+
+              <div class="career-preview">
+
+                <span class="career-label">
+                  CAREERS
+                </span>
+
+                <span class="career-text">
+                  {{ stream.careers.slice(0, 2).join(' · ') }}
+                </span>
+
+              </div>
+
+
+              <!-- Action -->
+
+              <a
+  class="stream-action"
+  [routerLink]="['/streams', stream.id]"
+>
+  Explore pathway <span>→</span>
+</a>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- =================================================
+           EMPTY SEARCH RESULT
+           ================================================= -->
+
+      @if (filteredStreams().length === 0) {
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            🔎
+          </div>
+
+          <h3>
+            No pathways found
+          </h3>
+
+          <p>
+            Try another stream, subject or career.
+          </p>
+
+          <button
+            type="button"
+            class="reset-button"
+            (click)="clearSearch(); selectCategory('All')"
+          >
+            Clear filters
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       GUIDEX TIP
+       ===================================================== -->
+
+  <section class="stream-tip">
+
+    <div class="container">
+
+      <div class="tip-card">
+
+        <div class="tip-icon">
+          ✦
+        </div>
+
+        <div class="tip-content">
+
+          <span>
+            GUIDEX TIP
+          </span>
+
+          <h3>
+            Not sure which stream is right for you?
+          </h3>
+
+          <p>
+            Take the Smart Quiz and discover pathways
+            based on your interests and preferences.
+          </p>
+
+        </div>
+
+        <a
+          routerLink="/quiz"
+          class="tip-button"
+        >
+          Take Smart Quiz
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

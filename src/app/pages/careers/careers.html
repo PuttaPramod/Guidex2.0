@@ -1,0 +1,407 @@
+<div class="careers-page">
+
+  <!-- =====================================================
+       HEADER
+       ===================================================== -->
+
+  <section class="careers-header">
+
+    <div class="container">
+
+      <div class="header-content">
+
+        <div class="header-copy">
+
+          <span class="gx-eyebrow">
+            <span class="header-dot"></span>
+            CAREER EXPLORER
+          </span>
+
+          <h1>
+            Discover your
+            <span class="gx-gradient-text">career.</span>
+          </h1>
+
+          <p>
+            Explore careers, required skills, education pathways
+            and industries to understand where your interests can take you.
+          </p>
+
+        </div>
+
+
+        <div class="header-stat">
+
+          <strong>
+            {{ filteredCareers().length }}
+          </strong>
+
+          <span>
+            careers available
+          </span>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       SEARCH + FILTER
+       ===================================================== -->
+
+  <section class="career-tools">
+
+    <div class="container">
+
+      <div class="tools-card">
+
+        <!-- Search -->
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            🔍
+          </span>
+
+          <input
+            type="text"
+            placeholder="Search careers, skills or industries..."
+            [ngModel]="searchQuery()"
+            (ngModelChange)="searchQuery.set($event)"
+          />
+
+          @if (searchQuery()) {
+
+            <button
+              type="button"
+              class="clear-search"
+              aria-label="Clear search"
+              (click)="clearSearch()"
+            >
+              ×
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- Categories -->
+
+        <div class="category-filter">
+
+          @for (
+            category of categories;
+            track category
+          ) {
+
+            <button
+              type="button"
+              class="category-button"
+              [class.active]="selectedCategory() === category"
+              (click)="selectCategory(category)"
+            >
+              {{ category }}
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CAREER CONTENT
+       ===================================================== -->
+
+  <section class="careers-content">
+
+    <div class="container">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            CAREER PATHS
+          </span>
+
+          <h2>
+            Find a career that
+            <span class="gx-gradient-text">
+              fits you.
+            </span>
+          </h2>
+
+        </div>
+
+
+        <span class="result-count">
+
+          {{ filteredCareers().length }}
+
+          {{
+            filteredCareers().length === 1
+              ? 'career'
+              : 'careers'
+          }}
+
+        </span>
+
+      </div>
+
+
+      <!-- =================================================
+           CAREER GRID
+           ================================================= -->
+
+      @if (filteredCareers().length > 0) {
+
+        <div class="career-grid">
+
+          @for (
+            career of filteredCareers();
+            track trackByCareer($index, career)
+          ) {
+
+            <article class="career-card">
+
+              <!-- Top -->
+
+              <div class="career-card-top">
+
+                <div class="career-icon">
+                  {{ career.icon }}
+                </div>
+
+                <span class="career-category">
+                  {{ career.category }}
+                </span>
+
+              </div>
+
+
+              <!-- Content -->
+
+              <div class="career-card-content">
+
+                <h3>
+                  {{ career.title }}
+                </h3>
+
+                <p>
+                  {{ career.description }}
+                </p>
+
+              </div>
+
+
+              <!-- Skills -->
+
+              <div class="career-meta">
+
+                <span class="meta-label">
+                  SKILLS
+                </span>
+
+                <div class="meta-tags">
+
+                  @for (
+                    skill of career.skills.slice(0, 3);
+                    track skill
+                  ) {
+
+                    <span>
+                      {{ skill }}
+                    </span>
+
+                  }
+
+                </div>
+
+              </div>
+
+
+              <!-- Industries -->
+
+              <div class="industry-preview">
+
+                <span class="meta-label">
+                  INDUSTRIES
+                </span>
+
+                <span class="industry-text">
+                  {{ career.industries.slice(0, 2).join(' · ') }}
+                </span>
+
+              </div>
+
+
+              <!-- Education -->
+
+              <div class="education-preview">
+
+                <span class="meta-label">
+                  EDUCATION
+                </span>
+
+                <span class="education-text">
+                  {{ career.education[0] }}
+                </span>
+
+              </div>
+
+
+              <!-- =================================================
+                   ACTIONS
+                   ================================================= -->
+
+              <div class="career-actions">
+
+                <!-- Explore Career -->
+
+                <a
+                  class="career-action"
+                  [routerLink]="['/career-detail', career.id]"
+                >
+
+                  <span>
+                    Explore career
+                  </span>
+
+                  <span class="action-arrow">
+                    →
+                  </span>
+
+                </a>
+
+
+                <!-- Roadmap -->
+
+                @if (career.roadmapId) {
+
+                  <a
+                    class="career-roadmap-action"
+                    [routerLink]="['/roadmap']"
+                    [queryParams]="{
+                      career: career.roadmapId
+                    }"
+                  >
+
+                    <span>
+                      Roadmap
+                    </span>
+
+                    <span>
+                      ↗
+                    </span>
+
+                  </a>
+
+                }
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- =================================================
+           EMPTY STATE
+           ================================================= -->
+
+      @if (filteredCareers().length === 0) {
+
+        <div class="empty-state">
+
+          <div class="empty-icon">
+            🔎
+          </div>
+
+          <h3>
+            No careers found
+          </h3>
+
+          <p>
+            Try another career, skill or category.
+          </p>
+
+          <button
+            type="button"
+            class="reset-button"
+            (click)="resetFilters()"
+          >
+            Clear filters
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       CAREER TIP
+       ===================================================== -->
+
+  <section class="career-tip">
+
+    <div class="container">
+
+      <div class="tip-card">
+
+        <div class="tip-icon">
+          ✦
+        </div>
+
+
+        <div class="tip-content">
+
+          <span>
+            GUIDEX TIP
+          </span>
+
+          <h3>
+            Not sure which career fits you?
+          </h3>
+
+          <p>
+            Take the Smart Quiz and explore pathways based on
+            your interests and preferences.
+          </p>
+
+        </div>
+
+
+        <a
+          routerLink="/quiz"
+          class="tip-button"
+        >
+          Take Smart Quiz
+          <span>→</span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

@@ -1,0 +1,362 @@
+<div class="stream-detail-page">
+
+  @if (currentStream(); as stream) {
+
+    <!-- Hero -->
+    <section class="detail-hero">
+      <div class="container">
+
+        <a routerLink="/streams" class="back-link">
+          <span>←</span>
+          Back to Streams
+        </a>
+
+        <div class="hero-card">
+
+          <div class="hero-main">
+
+            <div class="stream-icon-large">
+              {{ stream.icon }}
+            </div>
+
+            <span class="gx-eyebrow">
+              {{ stream.category }}
+            </span>
+
+            <h1>
+              {{ stream.name }}
+            </h1>
+
+            <p class="hero-tagline">
+              {{ stream.tagline }}
+            </p>
+
+            <p class="hero-description">
+              {{ stream.description }}
+            </p>
+
+          </div>
+
+          <div class="hero-side">
+
+            <div class="hero-stat">
+              <strong>{{ stream.subjects.length }}</strong>
+              <span>Core subjects</span>
+            </div>
+
+            <div class="hero-stat">
+              <strong>{{ stream.careers.length }}</strong>
+              <span>Career paths</span>
+            </div>
+
+            <div class="hero-stat">
+              <strong>{{ stream.courses.length }}</strong>
+              <span>Course options</span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Subjects -->
+    <section class="detail-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <span class="section-label">LEARN</span>
+            <h2>
+              Core <span class="gx-gradient-text">subjects.</span>
+            </h2>
+            <p>
+              Understand the subjects that form the foundation of this pathway.
+            </p>
+          </div>
+        </div>
+
+        <div class="subject-grid">
+
+          @for (subject of stream.subjects; track subject.name) {
+
+            <article class="subject-card">
+
+              <div class="item-icon">
+                {{ subject.icon }}
+              </div>
+
+              <div>
+                <h3>{{ subject.name }}</h3>
+                <p>{{ subject.description }}</p>
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Careers -->
+    <section class="detail-section careers-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <span class="section-label">CAREER PATHS</span>
+            <h2>
+              Where can this path <span class="gx-gradient-text">take you?</span>
+            </h2>
+            <p>
+              Explore some of the career directions available through this stream.
+            </p>
+          </div>
+        </div>
+
+        <div class="career-grid">
+
+          @for (career of stream.careers; track career.name) {
+
+            <article class="career-card">
+
+              <div class="career-icon">
+                {{ career.icon }}
+              </div>
+
+              <div class="career-info">
+                <h3>{{ career.name }}</h3>
+                <p>{{ career.description }}</p>
+              </div>
+
+              <span class="career-arrow">↗</span>
+
+            </article>
+
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Courses + Exams -->
+    <section class="detail-section">
+      <div class="container">
+
+        <div class="two-column-layout">
+
+          <!-- Courses -->
+          <div class="info-panel">
+
+            <div class="panel-heading">
+              <div class="panel-icon">🎓</div>
+
+              <div>
+                <span class="section-label">EDUCATION</span>
+                <h2>Course options</h2>
+              </div>
+            </div>
+
+            <div class="tag-list">
+
+              @for (course of stream.courses; track course) {
+                <span class="info-tag">
+                  {{ course }}
+                </span>
+              }
+
+            </div>
+
+          </div>
+
+
+          <!-- Exams -->
+          <div class="info-panel">
+
+            <div class="panel-heading">
+              <div class="panel-icon">📝</div>
+
+              <div>
+                <span class="section-label">ENTRANCE</span>
+                <h2>Important exams</h2>
+              </div>
+            </div>
+
+            <div class="exam-list">
+
+              @for (exam of stream.exams; track exam; let i = $index) {
+
+                <div class="exam-item">
+
+                  <span class="exam-number">
+                    {{ i + 1 }}
+                  </span>
+
+                  <span>
+                    {{ exam }}
+                  </span>
+
+                </div>
+
+              }
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Skills -->
+    <section class="detail-section skills-section">
+      <div class="container">
+
+        <div class="skills-layout">
+
+          <div class="skills-copy">
+
+            <span class="section-label">SKILLS</span>
+
+            <h2>
+              Skills that <span class="gx-gradient-text">matter.</span>
+            </h2>
+
+            <p>
+              Along with academic knowledge, developing these skills can help
+              you progress through your education and career.
+            </p>
+
+          </div>
+
+          <div class="skills-list">
+
+            @for (skill of stream.skills; track skill) {
+
+              <div class="skill-item">
+
+                <span class="skill-check">✓</span>
+
+                <span>{{ skill }}</span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Roadmap -->
+    <section class="detail-section roadmap-section">
+      <div class="container">
+
+        <div class="section-heading">
+          <div>
+            <span class="section-label">YOUR JOURNEY</span>
+
+            <h2>
+              A simple <span class="gx-gradient-text">roadmap.</span>
+            </h2>
+
+            <p>
+              Follow these steps to move from choosing a stream to building
+              your career.
+            </p>
+          </div>
+        </div>
+
+
+        <div class="roadmap">
+
+          @for (step of stream.roadmap; track step.step) {
+
+            <div class="roadmap-item">
+
+              <div class="roadmap-number">
+                {{ step.step }}
+              </div>
+
+              <div class="roadmap-line"></div>
+
+              <div class="roadmap-content">
+
+                <span>STEP {{ step.step }}</span>
+
+                <h3>
+                  {{ step.title }}
+                </h3>
+
+                <p>
+                  {{ step.description }}
+                </p>
+
+              </div>
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- Bottom CTA -->
+    <section class="detail-cta">
+      <div class="container">
+
+        <div class="cta-card">
+
+          <div class="cta-content">
+
+            <span class="section-label">
+              READY TO EXPLORE?
+            </span>
+
+            <h2>
+              Find the path that fits <span class="gx-gradient-text">you.</span>
+            </h2>
+
+            <p>
+              Take the Guidex Smart Quiz and explore education pathways
+              based on your interests and preferences.
+            </p>
+
+          </div>
+
+          <div class="cta-actions">
+
+            <a routerLink="/quiz" class="gx-btn-primary">
+              Take Smart Quiz
+              <span>→</span>
+            </a>
+
+            <a routerLink="/streams" class="gx-btn-glass">
+              Explore Streams
+            </a>
+
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+  }
+
+</div>

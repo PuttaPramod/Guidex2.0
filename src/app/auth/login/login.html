@@ -1,0 +1,327 @@
+<main class="auth-page">
+
+  <section class="auth-shell">
+
+    <!-- Left: Branding -->
+    <div class="auth-brand">
+
+      <div class="brand-content">
+
+        <a
+          routerLink="/"
+          class="brand-logo"
+        >
+          <span class="brand-mark">G</span>
+          <span>Guidex</span>
+        </a>
+
+        <span class="gx-eyebrow">
+          WELCOME BACK
+        </span>
+
+        <h1>
+          Continue your
+          <span class="gx-gradient-text">
+            journey.
+          </span>
+        </h1>
+
+        <p>
+          Sign in to continue exploring careers, courses, colleges,
+          exams and personalized learning paths with Guidex.
+        </p>
+
+        <div class="brand-highlights">
+
+          <div class="highlight-item">
+
+            <span class="highlight-icon">
+              🎯
+            </span>
+
+            <div>
+              <strong>
+                Personalized guidance
+              </strong>
+
+              <span>
+                Explore paths built around your goals.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="highlight-item">
+
+            <span class="highlight-icon">
+              📚
+            </span>
+
+            <div>
+              <strong>
+                Save your progress
+              </strong>
+
+              <span>
+                Keep your courses, careers and roadmaps together.
+              </span>
+            </div>
+
+          </div>
+
+
+          <div class="highlight-item">
+
+            <span class="highlight-icon">
+              🚀
+            </span>
+
+            <div>
+              <strong>
+                Plan your future
+              </strong>
+
+              <span>
+                Turn your interests into your next step.
+              </span>
+            </div>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+
+    <!-- Right: Login -->
+    <div class="auth-card gx-glass">
+
+      <div class="auth-header">
+
+        <div class="auth-icon">
+          👋
+        </div>
+
+        <div>
+
+          <span class="auth-kicker">
+            ACCOUNT LOGIN
+          </span>
+
+          <h2>
+            Welcome back
+          </h2>
+
+          <p>
+            Sign in to your Guidex account.
+          </p>
+
+        </div>
+
+      </div>
+
+
+      <!-- Error -->
+      <div
+        class="auth-alert auth-alert-error"
+        *ngIf="errorMessage()"
+      >
+
+        <span class="alert-icon">
+          !
+        </span>
+
+        <span>
+          {{ errorMessage() }}
+        </span>
+
+        <button
+          type="button"
+          class="alert-close"
+          (click)="clearError()"
+          aria-label="Close error"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- Success -->
+      <div
+        class="auth-alert auth-alert-success"
+        *ngIf="successMessage()"
+      >
+
+        <span class="alert-icon">
+          ✓
+        </span>
+
+        <span>
+          {{ successMessage() }}
+        </span>
+
+        <button
+          type="button"
+          class="alert-close"
+          (click)="clearSuccess()"
+          aria-label="Close success message"
+        >
+          ×
+        </button>
+
+      </div>
+
+
+      <!-- Email / Password Login -->
+      <form
+        class="auth-form"
+        (ngSubmit)="login()"
+        #loginForm="ngForm"
+      >
+
+        <!-- Email -->
+        <div class="form-field">
+
+          <label for="login-email">
+            Email address
+          </label>
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              ✉
+            </span>
+
+            <input
+              id="login-email"
+              type="email"
+              name="email"
+              class="form-control"
+              placeholder="you@example.com"
+              autocomplete="email"
+              [(ngModel)]="email"
+              (input)="clearError()"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- Password -->
+        <div class="form-field">
+
+          <div class="field-heading">
+
+            <label for="login-password">
+              Password
+            </label>
+
+            <a
+              routerLink="/forgot-password"
+              class="forgot-link"
+            >
+              Forgot password?
+            </a>
+
+          </div>
+
+          <div class="input-wrapper">
+
+            <span class="input-icon">
+              🔒
+            </span>
+
+            <input
+              id="login-password"
+              type="password"
+              name="password"
+              class="form-control"
+              placeholder="Enter your password"
+              autocomplete="current-password"
+              [(ngModel)]="password"
+              (input)="clearError()"
+              required
+            />
+
+          </div>
+
+        </div>
+
+
+        <!-- Login Button -->
+        <button
+          type="submit"
+          class="auth-submit gx-btn-primary"
+          [disabled]="isLoading() || isGoogleLoading()"
+        >
+
+          <span
+            class="loading-spinner"
+            *ngIf="isLoading()"
+          ></span>
+
+          <span>
+            {{ isLoading() ? 'Signing in...' : 'Sign in' }}
+          </span>
+
+          <span
+            class="submit-arrow"
+            *ngIf="!isLoading()"
+          >
+            →
+          </span>
+
+        </button>
+
+      </form>
+
+
+      <!-- Divider -->
+      <div class="auth-divider">
+        <span>
+          or continue with
+        </span>
+      </div>
+
+
+      <!-- Google Login -->
+      <div class="google-login-wrapper">
+
+        <div
+          id="google-login-button"
+          class="google-login-button"
+        ></div>
+
+        <div
+          class="google-loading"
+          *ngIf="isGoogleLoading()"
+        >
+          <span class="loading-spinner"></span>
+          <span>Signing in with Google...</span>
+        </div>
+
+      </div>
+
+
+      <!-- Signup -->
+      <p class="auth-footer">
+
+        Don't have an account?
+
+        <a routerLink="/signup">
+          Create an account
+        </a>
+
+      </p>
+
+    </div>
+
+  </section>
+
+</main>

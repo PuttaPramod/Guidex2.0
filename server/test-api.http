@@ -1,0 +1,30 @@
+### Signup
+POST http://localhost:5000/api/auth/signup
+Content-Type: application/json
+
+{
+  "name": "Pramod Kumar",
+  "email": "pramod.test@example.com",
+  "password": "Test@123456"
+}
+
+
+
+### Login
+POST http://localhost:5000/api/auth/login
+Content-Type: application/json
+
+{
+  "email": "pramod.test@example.com",
+  "password": "Test@123456"
+}
+
+
+
+### Current User
+GET http://localhost:5000/api/auth/me
+
+
+
+### Logout
+POST http://localhost:5000/api/auth/logout

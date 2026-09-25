@@ -1,1 +1,493 @@
-/* You can add global styles to this file, and also import other style files */
+/* =========================================================
+   GUIDEX 2.0 — GLOBAL STYLES
+   ========================================================= */
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
+
+
+/* =========================================================
+   DESIGN TOKENS
+   ========================================================= */
+
+:root {
+  --gx-bg: #f6f7fb;
+  --gx-surface: rgba(255, 255, 255, 0.72);
+  --gx-white: #ffffff;
+
+  --gx-primary: #635bff;
+  --gx-primary-dark: #5047e5;
+  --gx-blue: #4f8cff;
+
+  --gx-text: #151722;
+  --gx-text-secondary: #5f6473;
+  --gx-text-muted: #858b9a;
+
+  --gx-border: rgba(20, 25, 40, 0.07);
+  --gx-glass-border: rgba(255, 255, 255, 0.72);
+
+  --gx-radius-sm: 12px;
+  --gx-radius-md: 16px;
+  --gx-radius-lg: 20px;
+  --gx-radius-xl: 28px;
+
+  --gx-shadow-sm:
+    0 8px 25px rgba(35, 45, 80, 0.055);
+
+  --gx-shadow:
+    0 18px 45px rgba(35, 45, 80, 0.075);
+
+  --gx-transition: 220ms ease;
+}
+
+
+/* =========================================================
+   RESET
+   ========================================================= */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+html {
+  margin: 0;
+  padding: 0;
+
+  scroll-behavior: smooth;
+
+  border: 0;
+  outline: 0;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+
+  min-height: 100vh;
+
+  font-family:
+    'Inter',
+    system-ui,
+    -apple-system,
+    BlinkMacSystemFont,
+    'Segoe UI',
+    sans-serif;
+
+  color: var(--gx-text);
+
+  /*
+   * Continuous background.
+   * No section boundary / horizontal line.
+   */
+  background:
+    radial-gradient(
+      circle at 8% 12%,
+      rgba(111, 101, 255, 0.10),
+      transparent 30%
+    ),
+    radial-gradient(
+      circle at 92% 18%,
+      rgba(82, 145, 255, 0.09),
+      transparent 30%
+    ),
+    linear-gradient(
+      180deg,
+      #f8f9fd 0%,
+      #f6f7fb 50%,
+      #f7f8fc 100%
+    );
+
+  overflow-x: hidden;
+
+  border: 0;
+  outline: 0;
+}
+
+
+/* =========================================================
+   ANGULAR ROOT
+   ========================================================= */
+
+app-root {
+  display: block;
+
+  min-height: 100vh;
+
+  margin: 0;
+  padding: 0;
+
+  border: 0;
+  outline: 0;
+}
+
+
+/* =========================================================
+   FIXED NAVBAR SPACE
+   ========================================================= */
+
+.page-content {
+  min-height: 100vh;
+
+  /*
+   * Navbar is fixed.
+   * This gives the page enough room underneath it.
+   */
+  padding-top: 88px;
+
+  margin: 0;
+
+  border: 0;
+  outline: 0;
+}
+
+
+/* =========================================================
+   GLOBAL CONTAINER
+   ========================================================= */
+
+.container {
+  width: min(
+    1320px,
+    calc(100% - 48px)
+  );
+
+  max-width: 1320px;
+
+  margin-left: auto;
+  margin-right: auto;
+
+  padding-left: 0;
+  padding-right: 0;
+}
+
+
+/* =========================================================
+   GLOBAL GLASS
+   ========================================================= */
+
+.gx-glass {
+  background:
+    rgba(255, 255, 255, 0.68);
+
+  border:
+    1px solid var(--gx-glass-border);
+
+  backdrop-filter: blur(22px);
+  -webkit-backdrop-filter: blur(22px);
+
+  box-shadow: var(--gx-shadow);
+}
+
+
+/* =========================================================
+   GLOBAL CARD
+   ========================================================= */
+
+.gx-card {
+  background:
+    rgba(255, 255, 255, 0.68);
+
+  border:
+    1px solid rgba(255, 255, 255, 0.78);
+
+  border-radius: var(--gx-radius-lg);
+
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+
+  box-shadow: var(--gx-shadow-sm);
+
+  transition:
+    transform var(--gx-transition),
+    box-shadow var(--gx-transition),
+    border-color var(--gx-transition);
+}
+
+.gx-card:hover {
+  transform: translateY(-3px);
+
+  border-color:
+    rgba(99, 91, 255, 0.14);
+
+  box-shadow:
+    0 18px 42px rgba(35, 45, 80, 0.09);
+}
+
+
+/* =========================================================
+   EYEBROW
+   ========================================================= */
+
+.gx-eyebrow {
+  display: inline-flex;
+
+  align-items: center;
+
+  gap: 8px;
+
+  padding:
+    7px 11px;
+
+  border-radius: 999px;
+
+  color: var(--gx-primary);
+
+  background:
+    rgba(99, 91, 255, 0.07);
+
+  border:
+    1px solid rgba(99, 91, 255, 0.12);
+
+  font-size: 11px;
+
+  line-height: 1;
+
+  font-weight: 700;
+
+  letter-spacing: 0.055em;
+}
+
+
+/* =========================================================
+   GRADIENT TEXT
+   ========================================================= */
+
+.gx-gradient-text {
+  background:
+    linear-gradient(
+      100deg,
+      #635bff 0%,
+      #4f8cff 100%
+    );
+
+  -webkit-background-clip: text;
+  background-clip: text;
+
+  -webkit-text-fill-color: transparent;
+}
+
+
+/* =========================================================
+   PRIMARY BUTTON
+   ========================================================= */
+
+.gx-btn-primary {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding:
+    0 18px;
+
+  border: 0;
+
+  border-radius: 12px;
+
+  color: white;
+
+  background:
+    linear-gradient(
+      135deg,
+      var(--gx-primary),
+      var(--gx-primary-dark)
+    );
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  box-shadow:
+    0 10px 24px rgba(99, 91, 255, 0.22);
+
+  cursor: pointer;
+
+  transition:
+    transform var(--gx-transition),
+    box-shadow var(--gx-transition);
+}
+
+.gx-btn-primary:hover {
+  color: white;
+
+  transform: translateY(-2px);
+
+  box-shadow:
+    0 14px 30px rgba(99, 91, 255, 0.28);
+}
+
+
+/* =========================================================
+   GLASS BUTTON
+   ========================================================= */
+
+.gx-btn-glass {
+  display: inline-flex;
+
+  align-items: center;
+  justify-content: center;
+
+  gap: 8px;
+
+  min-height: 44px;
+
+  padding:
+    0 18px;
+
+  border:
+    1px solid rgba(30, 35, 55, 0.08);
+
+  border-radius: 12px;
+
+  color: var(--gx-text);
+
+  background:
+    rgba(255, 255, 255, 0.64);
+
+  backdrop-filter: blur(15px);
+  -webkit-backdrop-filter: blur(15px);
+
+  font-size: 14px;
+
+  font-weight: 600;
+
+  text-decoration: none;
+
+  transition:
+    transform var(--gx-transition),
+    background var(--gx-transition),
+    border-color var(--gx-transition);
+}
+
+.gx-btn-glass:hover {
+  color: var(--gx-text);
+
+  background: white;
+
+  border-color:
+    rgba(99, 91, 255, 0.12);
+
+  transform: translateY(-2px);
+}
+
+
+/* =========================================================
+   BOOTSTRAP COMPATIBILITY
+   ========================================================= */
+
+.btn {
+  border-radius: 12px;
+
+  font-weight: 600;
+}
+
+.form-control,
+.form-select {
+  min-height: 44px;
+
+  border-radius: 12px;
+
+  border-color:
+    rgba(25, 30, 45, 0.08);
+
+  background:
+    rgba(255, 255, 255, 0.72);
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color:
+    rgba(99, 91, 255, 0.4);
+
+  box-shadow:
+    0 0 0 4px rgba(99, 91, 255, 0.08);
+}
+
+
+/* =========================================================
+   REMOVE ACCIDENTAL GLOBAL LINES
+   ========================================================= */
+
+html,
+body,
+app-root,
+.page-content {
+  border-top: none !important;
+  border-left: none !important;
+  outline: none !important;
+}
+
+
+/* =========================================================
+   SCROLLBAR
+   ========================================================= */
+
+::-webkit-scrollbar {
+  width: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+::-webkit-scrollbar-thumb {
+  background:
+    rgba(120, 126, 145, 0.35);
+
+  border-radius: 999px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background:
+    rgba(100, 106, 125, 0.50);
+}
+
+
+/* =========================================================
+   SELECTION
+   ========================================================= */
+
+::selection {
+  color: white;
+
+  background:
+    var(--gx-primary);
+}
+
+
+/* =========================================================
+   RESPONSIVE CONTAINER
+   ========================================================= */
+
+@media (max-width: 1399px) {
+
+  .container {
+    width:
+      min(
+        1240px,
+        calc(100% - 44px)
+      );
+  }
+
+}
+
+
+@media (max-width: 767px) {
+
+  .container {
+    width:
+      calc(100% - 28px);
+  }
+
+  .page-content {
+    padding-top: 76px;
+  }
+
+}

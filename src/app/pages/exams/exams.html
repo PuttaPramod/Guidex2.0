@@ -1,0 +1,589 @@
+<div class="exams-page">
+
+  <!-- =====================================================
+       HEADER
+  ====================================================== -->
+
+  <section class="exams-header">
+
+    <div class="container">
+
+      <div class="header-content">
+
+        <div class="header-copy">
+
+          <span class="gx-eyebrow">
+            📝 EXAM DIRECTORY
+          </span>
+
+          <h1>
+            Find the right
+            <span class="gx-gradient-text">
+              entrance exam
+            </span>
+          </h1>
+
+          <p>
+            Explore major entrance and competitive examinations
+            across engineering, medicine, management, law,
+            science and other fields.
+          </p>
+
+        </div>
+
+
+        <div class="header-stat gx-glass">
+
+          <span class="stat-icon">
+            📝
+          </span>
+
+          <div>
+
+            <strong>
+              {{ exams.length }}+
+            </strong>
+
+            <span>
+              Exams listed
+            </span>
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       FILTERS
+  ====================================================== -->
+
+  <section class="filters-section">
+
+    <div class="container">
+
+      <div class="filters-card gx-glass">
+
+        <!-- SEARCH -->
+
+        <div class="search-box">
+
+          <span class="search-icon">
+            🔍
+          </span>
+
+          <input
+            type="text"
+            class="search-input"
+            [(ngModel)]="searchTerm"
+            placeholder="Search exams, categories or conducting bodies..."
+          />
+
+          @if (searchTerm) {
+
+            <button
+              type="button"
+              class="clear-search"
+              (click)="searchTerm = ''"
+              title="Clear search"
+              aria-label="Clear search"
+            >
+              ×
+            </button>
+
+          }
+
+        </div>
+
+
+        <!-- CATEGORY FILTER -->
+
+        <div class="filter-group">
+
+          <div class="filter-label">
+            Category
+          </div>
+
+
+          <div class="filter-options">
+
+            @for (category of categories; track category) {
+
+              <button
+                type="button"
+                class="filter-chip"
+                [class.active]="selectedCategory === category"
+                (click)="selectCategory(category)"
+              >
+
+                {{ category }}
+
+              </button>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- FILTER FOOTER -->
+
+        <div class="filter-footer">
+
+          <div class="result-info">
+
+            <span class="result-dot"></span>
+
+            <strong>
+              {{ filteredExams.length }}
+            </strong>
+
+            exams found
+
+          </div>
+
+
+          @if (
+            searchTerm ||
+            selectedCategory !== 'All'
+          ) {
+
+            <button
+              type="button"
+              class="reset-button"
+              (click)="resetFilters()"
+            >
+              Reset filters
+            </button>
+
+          }
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       RESULTS
+  ====================================================== -->
+
+  <section class="exams-section">
+
+    <div class="container">
+
+      <!-- RESULTS HEADER -->
+
+      <div class="results-header">
+
+        <div>
+
+          <span class="results-eyebrow">
+            EXPLORE
+          </span>
+
+          <h2>
+            Entrance examinations
+          </h2>
+
+        </div>
+
+
+        <span class="results-count">
+          {{ filteredExams.length }} results
+        </span>
+
+      </div>
+
+
+      <!-- =================================================
+           EXAM GRID
+      ================================================== -->
+
+      @if (filteredExams.length > 0) {
+
+        <div class="exam-grid">
+
+          @for (exam of filteredExams; track exam.id) {
+
+            <article class="exam-card gx-card">
+
+              <!-- CARD TOP -->
+
+              <div class="exam-card-top">
+
+                <div class="exam-icon">
+                  {{ exam.icon }}
+                </div>
+
+
+                <span class="exam-category">
+                  {{ exam.category }}
+                </span>
+
+              </div>
+
+
+              <!-- CARD CONTENT -->
+
+              <div class="exam-content">
+
+                <h3>
+                  {{ exam.shortName }}
+                </h3>
+
+
+                <p class="exam-name">
+                  {{ exam.name }}
+                </p>
+
+
+                <p class="exam-description">
+                  {{ exam.description }}
+                </p>
+
+
+                <!-- EXAM META -->
+
+                <div class="exam-meta">
+
+                  <div class="meta-item">
+
+                    <span>
+                      🏛️
+                    </span>
+
+                    <span>
+                      {{ exam.conductingBody }}
+                    </span>
+
+                  </div>
+
+
+                  <div class="meta-item">
+
+                    <span>
+                      🌐
+                    </span>
+
+                    <span>
+                      {{ exam.level }}
+                    </span>
+
+                  </div>
+
+
+                  <div class="meta-item">
+
+                    <span>
+                      💻
+                    </span>
+
+                    <span>
+                      {{ exam.mode }}
+                    </span>
+
+                  </div>
+
+                </div>
+
+
+                <!-- POPULAR FOR -->
+
+                <div class="popular-section">
+
+                  <span class="popular-label">
+                    Popular for
+                  </span>
+
+
+                  <div class="popular-tags">
+
+                    @for (
+                      item of exam.popularFor;
+                      track item
+                    ) {
+
+                      <span class="popular-tag">
+                        {{ item }}
+                      </span>
+
+                    }
+
+                  </div>
+
+                </div>
+
+              </div>
+
+
+              <!-- =================================================
+                   CARD ACTIONS
+              ================================================== -->
+
+              <div class="exam-card-footer">
+
+                <!-- EXPLORE -->
+
+                <a
+                  class="exam-action"
+                  [routerLink]="[
+                    '/exam-detail',
+                    exam.id
+                  ]"
+                >
+                  <span>
+                    Explore exam
+                  </span>
+
+                  <span>
+                    →
+                  </span>
+                </a>
+
+
+                <!-- SAVE -->
+
+                <button
+                  type="button"
+                  class="exam-save-action"
+                  [class.saved]="
+                    isExamSaved(exam.id) && isLoggedIn()
+                  "
+                  [class.login-required]="!isLoggedIn()"
+                  [attr.aria-pressed]="
+                    isLoggedIn()
+                      ? isExamSaved(exam.id)
+                      : false
+                  "
+                  [title]="
+                    isLoggedIn()
+                      ? (
+                          isExamSaved(exam.id)
+                            ? 'Remove from saved exams'
+                            : 'Save exam'
+                        )
+                      : 'Login to save exam'
+                  "
+                  (click)="
+                    isLoggedIn()
+                      ? toggleSavedExam(exam, $event)
+                      : loginRequiredDialog.showModal()
+                  "
+                >
+
+                  <span class="exam-save-icon">
+                    {{
+                      isLoggedIn()
+                        ? (
+                            isExamSaved(exam.id)
+                              ? '♥'
+                              : '♡'
+                          )
+                        : '🔒'
+                    }}
+                  </span>
+
+                  <span>
+                    {{
+                      isLoggedIn()
+                        ? (
+                            isExamSaved(exam.id)
+                              ? 'Saved'
+                              : 'Save'
+                          )
+                        : 'Login to Save'
+                    }}
+                  </span>
+
+                </button>
+
+              </div>
+
+            </article>
+
+          }
+
+        </div>
+
+      }
+
+
+      <!-- =================================================
+           EMPTY SEARCH RESULT
+      ================================================== -->
+
+      @if (filteredExams.length === 0) {
+
+        <div class="empty-state gx-glass">
+
+          <div class="empty-icon">
+            🔎
+          </div>
+
+
+          <h3>
+            No exams found
+          </h3>
+
+
+          <p>
+            Try another search term or reset the category filter.
+          </p>
+
+
+          <button
+            type="button"
+            class="gx-btn-primary"
+            (click)="resetFilters()"
+          >
+
+            Reset filters
+
+          </button>
+
+        </div>
+
+      }
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       INFORMATION
+  ====================================================== -->
+
+  <section class="exam-info-section">
+
+    <div class="container">
+
+      <div class="info-card gx-glass">
+
+        <div class="info-icon">
+          💡
+        </div>
+
+
+        <div>
+
+          <span class="info-label">
+            GUIDEX TIP
+          </span>
+
+
+          <h3>
+            Always check the official notification
+          </h3>
+
+
+          <p>
+            Eligibility, dates, syllabus, examination mode and
+            admission rules can change. Check the official
+            examination authority for the latest notification
+            before applying.
+          </p>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =====================================================
+       LOGIN REQUIRED DIALOG
+  ====================================================== -->
+
+  <dialog
+    #loginRequiredDialog
+    class="login-required-dialog"
+  >
+
+    <div class="login-dialog-content">
+
+      <!-- CLOSE -->
+
+      <button
+        type="button"
+        class="login-dialog-close"
+        aria-label="Close"
+        (click)="loginRequiredDialog.close()"
+      >
+        ×
+      </button>
+
+
+      <!-- ICON -->
+
+      <div class="login-dialog-icon">
+        🔐
+      </div>
+
+
+      <!-- LABEL -->
+
+      <span class="gx-eyebrow">
+        LOGIN REQUIRED
+      </span>
+
+
+      <!-- TITLE -->
+
+      <h2>
+        Login to save this exam
+      </h2>
+
+
+      <!-- DESCRIPTION -->
+
+      <p>
+        Create an account or sign in to save exams
+        and access them later from your dashboard.
+      </p>
+
+
+      <!-- ACTIONS -->
+
+      <div class="login-dialog-actions">
+
+        <button
+          type="button"
+          class="gx-btn-glass"
+          (click)="loginRequiredDialog.close()"
+        >
+          Cancel
+        </button>
+
+
+        <a
+          routerLink="/login"
+          class="gx-btn-primary"
+          (click)="loginRequiredDialog.close()"
+        >
+          Login
+
+          <span>
+            →
+          </span>
+        </a>
+
+      </div>
+
+    </div>
+
+  </dialog>
+
+</div>

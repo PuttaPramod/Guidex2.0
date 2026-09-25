@@ -1,0 +1,369 @@
+<div class="college-detail-page">
+
+  @if (college(); as item) {
+
+    <!-- =====================================================
+         TOP BAR
+         ===================================================== -->
+    <section class="detail-header">
+      <div class="container">
+
+        <a routerLink="/colleges" class="back-link">
+          <span>←</span>
+          Back to colleges
+        </a>
+
+        <div class="hero-card gx-glass">
+
+          <div class="hero-main">
+
+            <div class="college-icon">
+              {{ item.icon }}
+            </div>
+
+            <div class="hero-content">
+
+              <div class="hero-tags">
+                <span class="gx-eyebrow">
+                  {{ item.type }}
+                </span>
+
+                <span class="state-tag">
+                  {{ item.state }}
+                </span>
+              </div>
+
+              <h1>{{ item.name }}</h1>
+
+              <p class="short-name">
+                {{ item.shortName }}
+              </p>
+
+              <p class="hero-description">
+                {{ item.description }}
+              </p>
+
+            </div>
+
+          </div>
+
+          <div class="hero-location">
+            <div class="location-icon">📍</div>
+
+            <div>
+              <span>Location</span>
+              <strong>{{ item.city }}, {{ item.state }}</strong>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         QUICK INFORMATION
+         ===================================================== -->
+    <section class="quick-section">
+      <div class="container">
+
+        <div class="quick-grid">
+
+          <div class="quick-card gx-card">
+            <span class="quick-icon">🏛️</span>
+
+            <div>
+              <span class="quick-label">Institution Type</span>
+              <strong>{{ item.type }}</strong>
+            </div>
+          </div>
+
+          <div class="quick-card gx-card">
+            <span class="quick-icon">📅</span>
+
+            <div>
+              <span class="quick-label">Established</span>
+              <strong>{{ item.established }}</strong>
+            </div>
+          </div>
+
+          <div class="quick-card gx-card">
+            <span class="quick-icon">📍</span>
+
+            <div>
+              <span class="quick-label">City</span>
+              <strong>{{ item.city }}</strong>
+            </div>
+          </div>
+
+          <div class="quick-card gx-card">
+            <span class="quick-icon">🎓</span>
+
+            <div>
+              <span class="quick-label">Programs</span>
+              <strong>{{ item.programs.length }}+</strong>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- =====================================================
+         MAIN CONTENT
+         ===================================================== -->
+    <section class="detail-content">
+      <div class="container">
+
+        <div class="content-grid">
+
+          <!-- LEFT COLUMN -->
+          <div class="main-column">
+
+            <!-- Programs -->
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+                <div class="section-icon">🎓</div>
+
+                <div>
+                  <span class="section-eyebrow">ACADEMICS</span>
+                  <h2>Popular Programs</h2>
+                </div>
+              </div>
+
+              <div class="program-grid">
+
+                @for (program of item.programs; track program) {
+
+                  <div class="program-item">
+                    <span class="program-dot"></span>
+                    <span>{{ program }}</span>
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- Courses -->
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+                <div class="section-icon">📚</div>
+
+                <div>
+                  <span class="section-eyebrow">COURSES</span>
+                  <h2>Courses Offered</h2>
+                </div>
+              </div>
+
+              <div class="tag-list">
+
+                @for (course of item.courses; track course) {
+
+                  <span class="course-tag">
+                    {{ course }}
+                  </span>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- Highlights -->
+            <section class="detail-card gx-card">
+
+              <div class="section-heading">
+                <div class="section-icon">⭐</div>
+
+                <div>
+                  <span class="section-eyebrow">WHY CONSIDER</span>
+                  <h2>Key Highlights</h2>
+                </div>
+              </div>
+
+              <div class="highlight-list">
+
+                @for (highlight of item.highlights; track highlight) {
+
+                  <div class="highlight-item">
+                    <span class="check-icon">✓</span>
+                    <span>{{ highlight }}</span>
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+          </div>
+
+
+          <!-- RIGHT COLUMN -->
+          <aside class="side-column">
+
+            <!-- Admission -->
+            <section class="side-card gx-card">
+
+              <div class="side-heading">
+                <span class="side-icon">📝</span>
+
+                <div>
+                  <span>ADMISSIONS</span>
+                  <h3>Entrance Exams</h3>
+                </div>
+              </div>
+
+              <div class="admission-list">
+
+                @for (exam of item.admission; track exam) {
+
+                  <div class="admission-item">
+                    <span>→</span>
+                    {{ exam }}
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- Facilities -->
+            <section class="side-card gx-card">
+
+              <div class="side-heading">
+                <span class="side-icon">🏢</span>
+
+                <div>
+                  <span>CAMPUS</span>
+                  <h3>Facilities</h3>
+                </div>
+              </div>
+
+              <div class="facility-list">
+
+                @for (facility of item.facilities; track facility) {
+
+                  <div class="facility-item">
+                    <span class="facility-dot"></span>
+                    {{ facility }}
+                  </div>
+
+                }
+
+              </div>
+
+            </section>
+
+
+            <!-- Location -->
+            <section class="location-card gx-card">
+
+              <div class="location-top">
+                <span class="location-large-icon">📍</span>
+
+                <div>
+                  <span>LOCATION</span>
+                  <h3>{{ item.city }}</h3>
+                </div>
+              </div>
+
+              <p>
+                {{ item.name }} is located in
+                <strong>{{ item.city }}</strong>,
+                {{ item.state }}.
+              </p>
+
+            </section>
+
+          </aside>
+
+        </div>
+
+
+        <!-- =================================================
+             BOTTOM CTA
+             ================================================= -->
+        <section class="bottom-cta gx-glass">
+
+          <div class="cta-icon">
+            🎓
+          </div>
+
+          <div class="cta-content">
+            <span class="cta-eyebrow">PLAN YOUR JOURNEY</span>
+
+            <h2>
+              Explore more colleges
+            </h2>
+
+            <p>
+              Compare institutions, discover courses and
+              explore different education options on Guidex.
+            </p>
+          </div>
+
+          <a routerLink="/colleges" class="gx-btn-primary">
+            Browse colleges
+            <span>→</span>
+          </a>
+
+        </section>
+
+      </div>
+    </section>
+
+  }
+
+  @else {
+
+    <!-- =====================================================
+         NOT FOUND
+         ===================================================== -->
+    <section class="not-found">
+
+      <div class="container">
+
+        <div class="not-found-card gx-glass">
+
+          <div class="not-found-icon">
+            🏫
+          </div>
+
+          <span class="gx-eyebrow">
+            COLLEGE NOT FOUND
+          </span>
+
+          <h1>
+            College details aren't available
+          </h1>
+
+          <p>
+            We couldn't find detailed information for this
+            college in the current Guidex directory.
+          </p>
+
+          <a routerLink="/colleges" class="gx-btn-primary">
+            ← Back to colleges
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  }
+
+</div>

@@ -1,0 +1,431 @@
+<div class="home-page">
+
+  <!-- ================= HERO ================= -->
+
+  <section class="hero">
+
+    <div class="hero-glow hero-glow-one"></div>
+    <div class="hero-glow hero-glow-two"></div>
+
+    <div class="container">
+
+      <div class="hero-content">
+
+        <div class="hero-text">
+
+          <div class="gx-eyebrow">
+            <span class="status-dot"></span>
+            EDUCATION & CAREER GUIDANCE
+          </div>
+
+          <h1>
+            Find the right
+            <span class="gx-gradient-text">
+              path for your future.
+            </span>
+          </h1>
+
+          <p>
+            Explore streams, careers, courses, colleges and
+            entrance exams — all in one place.
+          </p>
+
+          <div class="hero-actions">
+
+            <a
+              routerLink="/quiz"
+              class="gx-btn-primary">
+              Take Smart Quiz
+              <span>→</span>
+            </a>
+
+            <a
+              routerLink="/careers"
+              class="gx-btn-glass">
+              Explore Careers
+            </a>
+
+          </div>
+
+        </div>
+
+
+        <!-- Compact Hero Card -->
+
+        <div class="hero-card gx-glass">
+
+          <div class="hero-card-header">
+
+            <div>
+              <span>GUIDEX</span>
+              <h3>Plan your journey</h3>
+            </div>
+
+            <div class="hero-card-icon">
+              ✦
+            </div>
+
+          </div>
+
+          <div class="journey-list">
+
+            <div class="journey-item active">
+
+              <div class="journey-icon">
+                🧭
+              </div>
+
+              <div>
+                <strong>Discover</strong>
+                <small>Find your interests</small>
+              </div>
+
+              <span class="check">✓</span>
+
+            </div>
+
+            <div class="journey-item">
+
+              <div class="journey-icon">
+                💼
+              </div>
+
+              <div>
+                <strong>Explore</strong>
+                <small>Find suitable careers</small>
+              </div>
+
+            </div>
+
+            <div class="journey-item">
+
+              <div class="journey-icon">
+                🎓
+              </div>
+
+              <div>
+                <strong>Plan</strong>
+                <small>Choose courses & colleges</small>
+              </div>
+
+            </div>
+
+          </div>
+
+          <a routerLink="/roadmap" class="hero-card-link">
+            View your roadmap →
+          </a>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= QUICK ACTIONS ================= -->
+
+  <section class="quick-section">
+
+    <div class="container">
+
+      <div class="quick-grid">
+
+        @for (action of quickActions; track action.title) {
+
+          <a
+            [routerLink]="action.link"
+            class="quick-card">
+
+            <div class="quick-icon">
+              {{ action.icon }}
+            </div>
+
+            <div class="quick-content">
+
+              <h3>
+                {{ action.title }}
+              </h3>
+
+              <p>
+                {{ action.description }}
+              </p>
+
+            </div>
+
+            <span class="quick-arrow">
+              →
+            </span>
+
+          </a>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= STREAMS ================= -->
+
+  <section class="content-section">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <div>
+          <span class="gx-eyebrow">
+            EDUCATION PATHS
+          </span>
+
+          <h2>
+            Explore
+            <span class="gx-gradient-text">
+              streams
+            </span>
+          </h2>
+
+          <p>
+            Understand where each stream can take you.
+          </p>
+        </div>
+
+        <a
+          routerLink="/streams"
+          class="view-link">
+          View all →
+        </a>
+
+      </div>
+
+
+      <div class="stream-grid">
+
+        @for (stream of streams; track stream.name) {
+
+          <a
+            [routerLink]="stream.link"
+            class="stream-card gx-card">
+
+            <div class="stream-icon">
+              {{ stream.icon }}
+            </div>
+
+            <div class="stream-content">
+
+              <h3>
+                {{ stream.name }}
+              </h3>
+
+              <p>
+                {{ stream.description }}
+              </p>
+
+            </div>
+
+            <span class="card-arrow">
+              →
+            </span>
+
+          </a>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= CAREERS ================= -->
+
+  <section class="content-section careers-section">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <div>
+          <span class="gx-eyebrow">
+            CAREER EXPLORER
+          </span>
+
+          <h2>
+            Popular
+            <span class="gx-gradient-text">
+              careers
+            </span>
+          </h2>
+
+          <p>
+            Discover what different careers involve and how to reach them.
+          </p>
+        </div>
+
+        <a
+          routerLink="/careers"
+          class="view-link">
+          Explore all →
+        </a>
+
+      </div>
+
+
+      <div class="career-grid">
+
+        @for (career of careers; track career.title) {
+
+          <a
+            routerLink="/careers"
+            class="career-card gx-card">
+
+            <div class="career-top">
+
+              <div class="career-icon">
+                {{ career.icon }}
+              </div>
+
+              <span class="category">
+                {{ career.category }}
+              </span>
+
+            </div>
+
+            <h3>
+              {{ career.title }}
+            </h3>
+
+            <p>
+              {{ career.description }}
+            </p>
+
+            <span class="career-link">
+              Explore career →
+            </span>
+
+          </a>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= EXAMS ================= -->
+
+  <section class="content-section exams-section">
+
+    <div class="container">
+
+      <div class="section-header">
+
+        <div>
+          <span class="gx-eyebrow">
+            ENTRANCE EXAMS
+          </span>
+
+          <h2>
+            Know your
+            <span class="gx-gradient-text">
+              exams
+            </span>
+          </h2>
+
+          <p>
+            Explore important entrance exams and admission pathways.
+          </p>
+        </div>
+
+        <a
+          routerLink="/exams"
+          class="view-link">
+          View all →
+        </a>
+
+      </div>
+
+
+      <div class="exam-list gx-glass">
+
+        @for (exam of exams; track exam.name) {
+
+          <a
+            routerLink="/exams"
+            class="exam-row">
+
+            <div class="exam-icon">
+              📝
+            </div>
+
+            <div class="exam-name">
+              <strong>{{ exam.name }}</strong>
+              <span>{{ exam.description }}</span>
+            </div>
+
+            <span class="exam-category">
+              {{ exam.category }}
+            </span>
+
+            <span class="exam-arrow">
+              →
+            </span>
+
+          </a>
+
+        }
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- ================= QUIZ CTA ================= -->
+
+  <section class="quiz-cta-section">
+
+    <div class="container">
+
+      <div class="quiz-cta">
+
+        <div>
+
+          <span class="gx-eyebrow">
+            NOT SURE WHAT TO CHOOSE?
+          </span>
+
+          <h2>
+            Discover your path with the
+            <span>Smart Quiz.</span>
+          </h2>
+
+          <p>
+            Answer a few questions about your interests
+            and discover suitable education and career paths.
+          </p>
+
+        </div>
+
+        <a
+          routerLink="/quiz"
+          class="cta-button">
+          Start Quiz →
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+</div>

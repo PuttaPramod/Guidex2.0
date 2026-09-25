@@ -1,0 +1,1044 @@
+<div class="career-detail-page">
+
+  <div class="container">
+
+    <!-- =====================================================
+         BACK TO CAREERS
+         ===================================================== -->
+
+    <button
+      type="button"
+      class="back-link"
+      (click)="goBackToCareers()"
+    >
+      <span>←</span>
+      Back to Careers
+    </button>
+
+
+    <!-- =====================================================
+         HERO
+         ===================================================== -->
+
+    <section class="career-hero gx-glass">
+
+      <div class="career-hero-main">
+
+        <div class="career-hero-icon">
+          {{ currentCareer().icon }}
+        </div>
+
+        <div class="career-hero-content">
+
+          <span class="gx-eyebrow">
+            {{ currentCareer().category }}
+          </span>
+
+          <h1>
+            {{ currentCareer().title }}
+          </h1>
+
+          <p>
+            {{ currentCareer().description }}
+          </p>
+
+          <!-- SAVE CAREER -->
+
+          <button
+            type="button"
+            class="save-career-btn"
+            [class.saved]="isSaved() && isLoggedIn()"
+            [class.login-required]="!isLoggedIn()"
+            (click)="isLoggedIn() ? toggleSave() : loginRequiredDialog.showModal()"
+          >
+            <span class="save-icon">
+              {{ isLoggedIn() ? (isSaved() ? '♥' : '♡') : '🔒' }}
+            </span>
+
+            <span>
+              {{ isLoggedIn() ? (isSaved() ? 'Saved' : 'Save Career') : 'Login to Save' }}
+            </span>
+          </button>
+
+        </div>
+
+      </div>
+
+      <div class="career-hero-side">
+
+        <span>
+          CAREER PATH
+        </span>
+
+        <strong>
+          {{ currentCareer().title }}
+        </strong>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         LOGIN REQUIRED DIALOG
+         ===================================================== -->
+
+    <dialog
+      #loginRequiredDialog
+      class="login-required-dialog"
+    >
+
+      <div class="login-dialog-content">
+
+        <button
+          type="button"
+          class="login-dialog-close"
+          aria-label="Close"
+          (click)="loginRequiredDialog.close()"
+        >
+          ×
+        </button>
+
+        <div class="login-dialog-icon">
+          🔐
+        </div>
+
+        <span class="gx-eyebrow">
+          LOGIN REQUIRED
+        </span>
+
+        <h2>
+          Login to save this career
+        </h2>
+
+        <p>
+          Create an account or sign in to save careers
+          and access them later from your dashboard.
+        </p>
+
+        <div class="login-dialog-actions">
+
+          <button
+            type="button"
+            class="gx-btn-glass"
+            (click)="loginRequiredDialog.close()"
+          >
+            Cancel
+          </button>
+
+          <a
+            routerLink="/login"
+            class="gx-btn-primary"
+            (click)="loginRequiredDialog.close()"
+          >
+            Login
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </dialog>
+
+
+    <!-- =====================================================
+         SKILLS
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            CORE SKILLS
+          </span>
+
+          <h2>
+            Skills you'll need
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="skills-grid">
+
+        @for (
+          skill of currentCareer().skills;
+          track skill
+        ) {
+
+          <div class="skill-card gx-card">
+
+            <div class="skill-icon">
+              ✓
+            </div>
+
+            <span>
+              {{ skill }}
+            </span>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         EDUCATION + ENTRANCE EXAMS
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="two-column-grid">
+
+        <!-- EDUCATION -->
+
+        <div class="info-panel gx-card">
+
+          <div class="panel-heading">
+
+            <div class="panel-icon">
+              🎓
+            </div>
+
+            <div>
+
+              <span>
+                EDUCATION
+              </span>
+
+              <h2>
+                Recommended education
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-list">
+
+            @for (
+              education of currentCareer().education;
+              track education
+            ) {
+
+              <div class="info-item">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span>
+                  {{ education }}
+                </span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+
+        <!-- ENTRANCE EXAMS -->
+
+        <div class="info-panel gx-card">
+
+          <div class="panel-heading">
+
+            <div class="panel-icon">
+              📝
+            </div>
+
+            <div>
+
+              <span>
+                ENTRANCE EXAMS
+              </span>
+
+              <h2>
+                Exams to consider
+              </h2>
+
+            </div>
+
+          </div>
+
+
+          <div class="info-list">
+
+            @for (
+              exam of currentCareer().entranceExams;
+              track exam
+            ) {
+
+              <div class="info-item">
+
+                <span class="check">
+                  ✓
+                </span>
+
+                <span>
+                  {{ exam }}
+                </span>
+
+              </div>
+
+            }
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RESPONSIBILITIES
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            WHAT YOU'LL DO
+          </span>
+
+          <h2>
+            Key responsibilities
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="responsibility-grid">
+
+        @for (
+          responsibility of currentCareer().responsibilities;
+          track responsibility;
+          let i = $index
+        ) {
+
+          <div class="responsibility-card gx-card">
+
+            <div class="responsibility-number">
+              {{ i + 1 }}
+            </div>
+
+            <p>
+              {{ responsibility }}
+            </p>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         INDUSTRIES
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="industry-panel gx-glass">
+
+        <div class="industry-heading">
+
+          <div>
+
+            <span class="section-label">
+              WORK ENVIRONMENT
+            </span>
+
+            <h2>
+              Industries you can work in
+            </h2>
+
+          </div>
+
+          <span class="industry-count">
+            {{ currentCareer().industries.length }}
+            industries
+          </span>
+
+        </div>
+
+
+        <div class="industry-list">
+
+          @for (
+            industry of currentCareer().industries;
+            track industry
+          ) {
+
+            <div class="industry-item">
+
+              <span class="industry-dot"></span>
+
+              {{ industry }}
+
+            </div>
+
+          }
+
+        </div>
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         CAREER ROADMAP
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            CAREER ROADMAP
+          </span>
+
+          <h2>
+            Your path forward
+          </h2>
+
+        </div>
+
+        <span class="result-count">
+          {{ currentCareer().roadmap.length }}
+          steps
+        </span>
+
+      </div>
+
+
+      <div class="roadmap-grid">
+
+        @for (
+          step of currentCareer().roadmap;
+          track step.title;
+          let i = $index
+        ) {
+
+          <div class="roadmap-card gx-card">
+
+            <div class="roadmap-number">
+              {{ i + 1 }}
+            </div>
+
+            <div class="roadmap-content">
+
+              <span class="roadmap-label">
+                STEP {{ i + 1 }}
+              </span>
+
+              <h3>
+                {{ step.title }}
+              </h3>
+
+              <p>
+                {{ step.description }}
+              </p>
+
+            </div>
+
+          </div>
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         RELATED CAREERS
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="section-heading">
+
+        <div>
+
+          <span class="section-label">
+            EXPLORE MORE
+          </span>
+
+          <h2>
+            Related careers
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="related-grid">
+
+        @for (
+          related of currentCareer().relatedCareers;
+          track related
+        ) {
+
+          <!-- SOFTWARE DEVELOPER -->
+
+          @if (related === 'Software Developer') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/software-developer"
+            >
+
+              <span class="related-icon">
+                💻
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Software Developer
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- WEB DEVELOPER -->
+
+          @if (related === 'Web Developer') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/web-developer"
+            >
+
+              <span class="related-icon">
+                🌐
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Web Developer
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- CLOUD ENGINEER -->
+
+          @if (related === 'Cloud Engineer') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/cloud-engineer"
+            >
+
+              <span class="related-icon">
+                ☁️
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Cloud Engineer
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- CYBERSECURITY -->
+
+          @if (related === 'Cybersecurity Analyst') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/cybersecurity-analyst"
+            >
+
+              <span class="related-icon">
+                🔐
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Cybersecurity Analyst
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- PHARMACIST -->
+
+          @if (related === 'Pharmacist') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/pharmacist"
+            >
+
+              <span class="related-icon">
+                💊
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Pharmacist
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- NURSE -->
+
+          @if (related === 'Nurse') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/nurse"
+            >
+
+              <span class="related-icon">
+                🏥
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Nurse
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- MEDICAL TECHNOLOGIST -->
+
+          @if (related === 'Medical Technologist') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/medical-technologist"
+            >
+
+              <span class="related-icon">
+                🧪
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Medical Technologist
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- FINANCIAL ANALYST -->
+
+          @if (related === 'Financial Analyst') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/financial-analyst"
+            >
+
+              <span class="related-icon">
+                📈
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Financial Analyst
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- BUSINESS ANALYST -->
+
+          @if (related === 'Business Analyst') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/business-analyst"
+            >
+
+              <span class="related-icon">
+                📊
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Business Analyst
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- FINANCE MANAGER -->
+
+          @if (related === 'Finance Manager') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/finance-manager"
+            >
+
+              <span class="related-icon">
+                💼
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Finance Manager
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- UI UX DESIGNER -->
+
+          @if (related === 'UI/UX Designer') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/ui-ux-designer"
+            >
+
+              <span class="related-icon">
+                🎨
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  UI/UX Designer
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- GRAPHIC DESIGNER -->
+
+          @if (related === 'Graphic Designer') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/graphic-designer"
+            >
+
+              <span
+                class="related-icon"
+              >
+                🖌️
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Graphic Designer
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- PRODUCT DESIGNER -->
+
+          @if (related === 'Product Designer') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/product-designer"
+            >
+
+              <span class="related-icon">
+                ✨
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Product Designer
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+
+          <!-- INVESTMENT ANALYST -->
+
+          @if (related === 'Investment Analyst') {
+
+            <a
+              class="related-card gx-card"
+              routerLink="/career-detail/investment-analyst"
+            >
+
+              <span class="related-icon">
+                💹
+              </span>
+
+              <div class="related-content">
+
+                <strong>
+                  Investment Analyst
+                </strong>
+
+                <small>
+                  Explore career
+                </small>
+
+              </div>
+
+              <span class="related-arrow">
+                →
+              </span>
+
+            </a>
+
+          }
+
+        }
+
+      </div>
+
+    </section>
+
+
+    <!-- =====================================================
+         FINAL CTA
+         ===================================================== -->
+
+    <section class="detail-section">
+
+      <div class="career-cta">
+
+        <div class="cta-content">
+
+          <span class="gx-eyebrow">
+            GUIDEX
+          </span>
+
+          <h2>
+            Still exploring your options?
+          </h2>
+
+          <p>
+            Compare different pathways or take the Smart Quiz
+            to discover careers that match your interests.
+          </p>
+
+        </div>
+
+
+        <div class="cta-actions">
+
+          <a
+            routerLink="/careers"
+            class="gx-btn-glass"
+          >
+            Explore Careers
+          </a>
+
+          <a
+            routerLink="/quiz"
+            class="gx-btn-primary"
+          >
+            Take Smart Quiz
+            <span>→</span>
+          </a>
+
+        </div>
+
+      </div>
+
+    </section>
+
+  </div>
+
+</div>
