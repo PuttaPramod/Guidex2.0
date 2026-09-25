@@ -1,12 +1,20 @@
 /* =========================================================
    GUIDEX 2.0 — CAREER DETAIL
-   Compact • Modern • Glassmorphism
+   Compact • Modern • Glassmorphism • Fully Responsive
+   ========================================================= */
+
+
+/* =========================================================
+   CAREER DETAIL PAGE
    ========================================================= */
 
 .career-detail-page {
   width: 100%;
   min-height: 100vh;
+
   padding: 10px 0 45px;
+
+  overflow-x: hidden;
 }
 
 
@@ -17,6 +25,7 @@
 .back-link {
   display: inline-flex;
   align-items: center;
+
   gap: 7px;
 
   margin: 0 0 12px;
@@ -30,6 +39,7 @@
   color: var(--gx-text-secondary);
 
   font-family: inherit;
+
   font-size: 11px;
   font-weight: 650;
 
@@ -42,6 +52,7 @@
 
 .back-link:hover {
   color: var(--gx-primary);
+
   transform: translateX(-3px);
 }
 
@@ -57,6 +68,7 @@
 
 .career-hero {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
@@ -67,11 +79,14 @@
   border-radius: 20px;
 
   margin-bottom: 22px;
+
+  min-width: 0;
 }
 
 
 .career-hero-main {
   display: flex;
+
   align-items: center;
 
   min-width: 0;
@@ -87,6 +102,7 @@
   flex: 0 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -110,6 +126,8 @@
 
 .career-hero-content {
   min-width: 0;
+
+  flex: 1 1 auto;
 }
 
 
@@ -119,11 +137,14 @@
   color: var(--gx-text);
 
   font-size: clamp(30px, 4vw, 46px);
+
   line-height: 1.04;
 
   letter-spacing: -0.04em;
 
   font-weight: 800;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -135,7 +156,10 @@
   color: var(--gx-text-secondary);
 
   font-size: 12px;
+
   line-height: 1.6;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -145,6 +169,7 @@
 
 .save-career-btn {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
@@ -153,16 +178,20 @@
   min-height: 40px;
 
   margin-top: 13px;
+
   padding: 0 15px;
 
   border: 1px solid rgba(99, 91, 255, 0.12);
+
   border-radius: 11px;
 
-  background: rgba(255, 255, 255, 0.68);
+  background:
+    rgba(255, 255, 255, 0.68);
 
   color: var(--gx-text);
 
   font-family: inherit;
+
   font-size: 11px;
   font-weight: 700;
 
@@ -179,13 +208,14 @@
     box-shadow 180ms ease;
 }
 
-
 .save-career-btn:hover {
   transform: translateY(-2px);
 
-  background: rgba(99, 91, 255, 0.06);
+  background:
+    rgba(99, 91, 255, 0.06);
 
-  border-color: rgba(99, 91, 255, 0.20);
+  border-color:
+    rgba(99, 91, 255, 0.20);
 
   color: var(--gx-primary);
 
@@ -195,7 +225,7 @@
 
 
 /* =========================================================
-   LOGGED OUT — LOGIN TO SAVE
+   LOGIN TO SAVE
    ========================================================= */
 
 .save-career-btn.login-required {
@@ -206,7 +236,8 @@
       rgba(255, 255, 255, 0.68)
     );
 
-  border-color: rgba(30, 35, 55, 0.08);
+  border-color:
+    rgba(30, 35, 55, 0.08);
 
   color: var(--gx-text-secondary);
 
@@ -223,7 +254,8 @@
       rgba(79, 140, 255, 0.045)
     );
 
-  border-color: rgba(99, 91, 255, 0.16);
+  border-color:
+    rgba(99, 91, 255, 0.16);
 
   color: var(--gx-primary);
 
@@ -245,7 +277,8 @@
       rgba(79, 140, 255, 0.07)
     );
 
-  border-color: rgba(99, 91, 255, 0.18);
+  border-color:
+    rgba(99, 91, 255, 0.18);
 
   color: var(--gx-primary);
 }
@@ -263,6 +296,7 @@
 
 .save-icon {
   display: inline-flex;
+
   align-items: center;
   justify-content: center;
 
@@ -270,6 +304,7 @@
   height: 18px;
 
   font-size: 18px;
+
   line-height: 1;
 
   transition:
@@ -283,7 +318,8 @@
 
 
 .save-career-btn.saved .save-icon {
-  animation: save-heart-pop 220ms ease;
+  animation:
+    save-heart-pop 220ms ease;
 }
 
 
@@ -312,9 +348,12 @@
   width: min(420px, calc(100vw - 32px));
 
   margin: auto;
+
   padding: 0;
 
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border:
+    1px solid rgba(255, 255, 255, 0.82);
+
   border-radius: 22px;
 
   background:
@@ -324,8 +363,11 @@
       rgba(248, 249, 253, 0.82)
     );
 
-  backdrop-filter: blur(28px);
-  -webkit-backdrop-filter: blur(28px);
+  backdrop-filter:
+    blur(28px);
+
+  -webkit-backdrop-filter:
+    blur(28px);
 
   box-shadow:
     0 30px 80px rgba(35, 45, 80, 0.18),
@@ -335,15 +377,20 @@
 
   overflow: visible;
 
-  animation: login-dialog-enter 220ms ease;
+  animation:
+    login-dialog-enter 220ms ease;
 }
 
 
 .login-required-dialog::backdrop {
-  background: rgba(20, 24, 38, 0.28);
+  background:
+    rgba(20, 24, 38, 0.28);
 
-  backdrop-filter: blur(5px);
-  -webkit-backdrop-filter: blur(5px);
+  backdrop-filter:
+    blur(5px);
+
+  -webkit-backdrop-filter:
+    blur(5px);
 }
 
 
@@ -351,7 +398,9 @@
   position: relative;
 
   display: flex;
+
   align-items: center;
+
   flex-direction: column;
 
   padding: 32px 30px 28px;
@@ -370,19 +419,24 @@
   height: 30px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   padding: 0;
 
-  border: 1px solid rgba(30, 35, 55, 0.07);
+  border:
+    1px solid rgba(30, 35, 55, 0.07);
+
   border-radius: 50%;
 
-  background: rgba(255, 255, 255, 0.58);
+  background:
+    rgba(255, 255, 255, 0.58);
 
   color: var(--gx-text-secondary);
 
   font-family: inherit;
+
   font-size: 19px;
   font-weight: 400;
 
@@ -399,9 +453,11 @@
 
 
 .login-dialog-close:hover {
-  background: rgba(99, 91, 255, 0.08);
+  background:
+    rgba(99, 91, 255, 0.08);
 
-  border-color: rgba(99, 91, 255, 0.13);
+  border-color:
+    rgba(99, 91, 255, 0.13);
 
   color: var(--gx-primary);
 
@@ -414,12 +470,15 @@
   height: 62px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   margin-bottom: 17px;
 
-  border: 1px solid rgba(99, 91, 255, 0.10);
+  border:
+    1px solid rgba(99, 91, 255, 0.10);
+
   border-radius: 18px;
 
   background:
@@ -447,6 +506,7 @@
   color: var(--gx-text);
 
   font-size: 22px;
+
   line-height: 1.2;
 
   letter-spacing: -0.025em;
@@ -463,12 +523,14 @@
   color: var(--gx-text-secondary);
 
   font-size: 11px;
+
   line-height: 1.6;
 }
 
 
 .login-dialog-actions {
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -503,12 +565,18 @@
 
   from {
     opacity: 0;
-    transform: translateY(10px) scale(0.97);
+
+    transform:
+      translateY(10px)
+      scale(0.97);
   }
 
   to {
     opacity: 1;
-    transform: translateY(0) scale(1);
+
+    transform:
+      translateY(0)
+      scale(1);
   }
 
 }
@@ -523,7 +591,8 @@
 
   padding-left: 22px;
 
-  border-left: 1px solid rgba(30, 35, 55, 0.07);
+  border-left:
+    1px solid rgba(30, 35, 55, 0.07);
 }
 
 
@@ -535,6 +604,7 @@
   color: var(--gx-text-muted);
 
   font-size: 8px;
+
   line-height: 1;
 
   font-weight: 800;
@@ -549,9 +619,12 @@
   color: var(--gx-primary);
 
   font-size: 12px;
+
   line-height: 1.4;
 
   font-weight: 700;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -561,17 +634,22 @@
 
 .detail-section {
   margin-top: 22px;
+
+  min-width: 0;
 }
 
 
 .section-heading {
   display: flex;
+
   align-items: flex-end;
   justify-content: space-between;
 
   gap: 20px;
 
   margin-bottom: 13px;
+
+  min-width: 0;
 }
 
 
@@ -583,6 +661,7 @@
   color: var(--gx-primary);
 
   font-size: 8px;
+
   line-height: 1;
 
   font-weight: 800;
@@ -597,11 +676,14 @@
   color: var(--gx-text);
 
   font-size: clamp(22px, 2.5vw, 31px);
+
   line-height: 1.1;
 
   letter-spacing: -0.035em;
 
   font-weight: 800;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -609,7 +691,10 @@
   color: var(--gx-text-muted);
 
   font-size: 10px;
+
   font-weight: 650;
+
+  white-space: nowrap;
 }
 
 
@@ -624,15 +709,19 @@
     repeat(4, minmax(0, 1fr));
 
   gap: 10px;
+
+  min-width: 0;
 }
 
 
 .skill-card {
   display: flex;
+
   align-items: center;
 
   gap: 10px;
 
+  min-width: 0;
   min-height: 62px;
 
   padding: 12px 14px;
@@ -648,25 +737,33 @@
   flex: 0 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 9px;
 
-  background: rgba(99, 91, 255, 0.08);
+  background:
+    rgba(99, 91, 255, 0.08);
 
   color: var(--gx-primary);
 
   font-size: 13px;
+
   font-weight: 800;
 }
 
 
 .skill-card > span {
+  min-width: 0;
+
   color: var(--gx-text);
 
   font-size: 11px;
+
   font-weight: 650;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -681,10 +778,14 @@
     repeat(2, minmax(0, 1fr));
 
   gap: 12px;
+
+  min-width: 0;
 }
 
 
 .info-panel {
+  min-width: 0;
+
   padding: 17px;
 
   border-radius: 17px;
@@ -693,11 +794,14 @@
 
 .panel-heading {
   display: flex;
+
   align-items: center;
 
   gap: 11px;
 
   margin-bottom: 15px;
+
+  min-width: 0;
 }
 
 
@@ -708,14 +812,21 @@
   flex: 0 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 11px;
 
-  background: rgba(99, 91, 255, 0.07);
+  background:
+    rgba(99, 91, 255, 0.07);
 
   font-size: 18px;
+}
+
+
+.panel-heading > div:last-child {
+  min-width: 0;
 }
 
 
@@ -746,11 +857,14 @@
   line-height: 1.25;
 
   font-weight: 750;
+
+  overflow-wrap: anywhere;
 }
 
 
 .info-list {
   display: flex;
+
   flex-direction: column;
 
   gap: 7px;
@@ -759,6 +873,7 @@
 
 .info-item {
   display: flex;
+
   align-items: center;
 
   gap: 9px;
@@ -769,12 +884,16 @@
 
   border-radius: 9px;
 
-  background: rgba(246, 247, 251, 0.65);
+  background:
+    rgba(246, 247, 251, 0.65);
 
   color: var(--gx-text-secondary);
 
   font-size: 10.5px;
+
   line-height: 1.35;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -785,16 +904,19 @@
   flex: 0 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 6px;
 
-  background: rgba(99, 91, 255, 0.08);
+  background:
+    rgba(99, 91, 255, 0.08);
 
   color: var(--gx-primary);
 
   font-size: 9px;
+
   font-weight: 800;
 }
 
@@ -810,15 +932,19 @@
     repeat(4, minmax(0, 1fr));
 
   gap: 10px;
+
+  min-width: 0;
 }
 
 
 .responsibility-card {
   display: flex;
+
   align-items: flex-start;
 
   gap: 10px;
 
+  min-width: 0;
   min-height: 85px;
 
   padding: 13px;
@@ -834,6 +960,7 @@
   flex: 0 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -855,12 +982,17 @@
 
 
 .responsibility-card p {
+  min-width: 0;
+
   margin: 4px 0 0;
 
   color: var(--gx-text-secondary);
 
   font-size: 10.5px;
+
   line-height: 1.5;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -869,6 +1001,8 @@
    ========================================================= */
 
 .industry-panel {
+  min-width: 0;
+
   padding: 18px;
 
   border-radius: 17px;
@@ -877,12 +1011,20 @@
 
 .industry-heading {
   display: flex;
+
   align-items: flex-end;
   justify-content: space-between;
 
   gap: 20px;
 
   margin-bottom: 13px;
+
+  min-width: 0;
+}
+
+
+.industry-heading > div {
+  min-width: 0;
 }
 
 
@@ -896,6 +1038,8 @@
   line-height: 1.2;
 
   font-weight: 750;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -905,6 +1049,8 @@
   font-size: 9px;
 
   font-weight: 650;
+
+  white-space: nowrap;
 }
 
 
@@ -914,29 +1060,39 @@
   flex-wrap: wrap;
 
   gap: 7px;
+
+  min-width: 0;
 }
 
 
 .industry-item {
   display: inline-flex;
+
   align-items: center;
 
   gap: 7px;
 
   min-height: 34px;
 
+  max-width: 100%;
+
   padding: 0 11px;
 
-  border: 1px solid rgba(30, 35, 55, 0.05);
+  border:
+    1px solid rgba(30, 35, 55, 0.05);
+
   border-radius: 9px;
 
-  background: rgba(255, 255, 255, 0.6);
+  background:
+    rgba(255, 255, 255, 0.6);
 
   color: var(--gx-text-secondary);
 
   font-size: 10px;
 
   font-weight: 600;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -944,9 +1100,12 @@
   width: 5px;
   height: 5px;
 
+  flex: 0 0 5px;
+
   border-radius: 50%;
 
-  background: var(--gx-primary);
+  background:
+    var(--gx-primary);
 }
 
 
@@ -961,6 +1120,8 @@
     repeat(5, minmax(0, 1fr));
 
   gap: 9px;
+
+  min-width: 0;
 }
 
 
@@ -968,7 +1129,6 @@
   position: relative;
 
   min-width: 0;
-
   min-height: 190px;
 
   padding: 15px;
@@ -1004,6 +1164,7 @@
   height: 31px;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
@@ -1061,6 +1222,8 @@
   line-height: 1.35;
 
   font-weight: 750;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1072,6 +1235,8 @@
   font-size: 9.5px;
 
   line-height: 1.55;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1086,11 +1251,14 @@
     repeat(3, minmax(0, 1fr));
 
   gap: 10px;
+
+  min-width: 0;
 }
 
 
 .related-card {
   display: flex;
+
   align-items: center;
 
   gap: 10px;
@@ -1119,12 +1287,14 @@
   flex: 0 0 auto;
 
   display: flex;
+
   align-items: center;
   justify-content: center;
 
   border-radius: 11px;
 
-  background: rgba(99, 91, 255, 0.07);
+  background:
+    rgba(99, 91, 255, 0.07);
 
   font-size: 19px;
 }
@@ -1133,7 +1303,7 @@
 .related-content {
   min-width: 0;
 
-  flex: 1;
+  flex: 1 1 auto;
 }
 
 
@@ -1151,6 +1321,7 @@
   font-weight: 700;
 
   white-space: nowrap;
+
   text-overflow: ellipsis;
 }
 
@@ -1169,11 +1340,14 @@
 
 
 .related-arrow {
+  flex: 0 0 auto;
+
   color: var(--gx-primary);
 
   font-size: 15px;
 
-  transition: transform 180ms ease;
+  transition:
+    transform 180ms ease;
 }
 
 
@@ -1188,14 +1362,19 @@
 
 .career-cta {
   display: flex;
+
   align-items: center;
   justify-content: space-between;
 
   gap: 25px;
 
+  min-width: 0;
+
   padding: 20px;
 
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border:
+    1px solid rgba(255, 255, 255, 0.82);
+
   border-radius: 18px;
 
   background:
@@ -1206,15 +1385,21 @@
     ),
     rgba(255, 255, 255, 0.68);
 
-  backdrop-filter: blur(20px);
-  -webkit-backdrop-filter: blur(20px);
+  backdrop-filter:
+    blur(20px);
 
-  box-shadow: var(--gx-shadow-sm);
+  -webkit-backdrop-filter:
+    blur(20px);
+
+  box-shadow:
+    var(--gx-shadow-sm);
 }
 
 
 .cta-content {
   min-width: 0;
+
+  flex: 1 1 auto;
 }
 
 
@@ -1230,6 +1415,8 @@
   letter-spacing: -0.025em;
 
   font-weight: 800;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1243,6 +1430,8 @@
   font-size: 10.5px;
 
   line-height: 1.5;
+
+  overflow-wrap: anywhere;
 }
 
 
@@ -1254,6 +1443,8 @@
   gap: 7px;
 
   flex: 0 0 auto;
+
+  min-width: 0;
 }
 
 
@@ -1263,6 +1454,8 @@
   padding: 0 13px;
 
   font-size: 10px;
+
+  white-space: nowrap;
 }
 
 
@@ -1322,13 +1515,19 @@
     flex-direction: column;
   }
 
+  .career-hero-main {
+    width: 100%;
+  }
+
   .career-hero-side {
     width: 100%;
 
     padding-top: 13px;
     padding-left: 0;
 
-    border-top: 1px solid rgba(30, 35, 55, 0.07);
+    border-top:
+      1px solid rgba(30, 35, 55, 0.07);
+
     border-left: 0;
   }
 
@@ -1352,11 +1551,18 @@
 
   .career-detail-page {
     padding-top: 4px;
+
     padding-bottom: 30px;
   }
 
 
+  /* -------------------------
+     Hero
+  ------------------------- */
+
   .career-hero {
+    width: 100%;
+
     padding: 17px;
 
     gap: 15px;
@@ -1369,6 +1575,8 @@
     align-items: flex-start;
 
     gap: 12px;
+
+    width: 100%;
   }
 
 
@@ -1382,6 +1590,13 @@
   }
 
 
+  .career-hero-content {
+    flex: 1 1 auto;
+
+    min-width: 0;
+  }
+
+
   .career-hero-content h1 {
     margin-top: 7px;
 
@@ -1391,6 +1606,8 @@
 
   .career-hero-content p {
     font-size: 10.5px;
+
+    line-height: 1.55;
   }
 
 
@@ -1402,6 +1619,10 @@
     margin-top: 12px;
   }
 
+
+  /* -------------------------
+     Section headings
+  ------------------------- */
 
   .section-heading {
     align-items: flex-start;
@@ -1417,15 +1638,27 @@
   }
 
 
+  /* -------------------------
+     Skills
+  ------------------------- */
+
   .skills-grid {
     grid-template-columns: 1fr;
   }
 
 
+  /* -------------------------
+     Responsibilities
+  ------------------------- */
+
   .responsibility-grid {
     grid-template-columns: 1fr;
   }
 
+
+  /* -------------------------
+     Roadmap
+  ------------------------- */
 
   .roadmap-grid {
     grid-template-columns: 1fr;
@@ -1448,10 +1681,18 @@
   }
 
 
+  /* -------------------------
+     Related careers
+  ------------------------- */
+
   .related-grid {
     grid-template-columns: 1fr;
   }
 
+
+  /* -------------------------
+     Industries
+  ------------------------- */
 
   .industry-heading {
     align-items: flex-start;
@@ -1462,26 +1703,100 @@
   }
 
 
+  /* =====================================================
+     IMPORTANT CTA MOBILE FIX
+     ===================================================== */
+
   .career-cta {
+    /*
+      This was the main issue.
+
+      Desktop = horizontal
+      Mobile  = vertical
+    */
+
+    width: 100%;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: stretch;
+
+    justify-content: flex-start;
+
+    gap: 16px;
+
     padding: 17px;
 
     border-radius: 16px;
   }
 
 
+  .cta-content {
+    width: 100%;
+
+    min-width: 0;
+
+    flex: none;
+  }
+
+
+  .cta-content h2 {
+    margin: 8px 0 6px;
+
+    font-size: 20px;
+
+    line-height: 1.18;
+  }
+
+
+  .cta-content p {
+    width: 100%;
+
+    max-width: none;
+
+    margin: 0;
+
+    font-size: 10.5px;
+
+    line-height: 1.55;
+
+    overflow-wrap: anywhere;
+  }
+
+
   .cta-actions {
     width: 100%;
 
+    display: flex;
+
     flex-direction: column;
+
+    align-items: stretch;
+
+    gap: 8px;
+
+    flex: none;
   }
 
 
   .cta-actions a {
     width: 100%;
+
+    min-height: 42px;
+
+    justify-content: center;
+
+    white-space: normal;
+
+    box-sizing: border-box;
   }
 
 
-  /* LOGIN DIALOG */
+  /* -------------------------
+     Login dialog
+  ------------------------- */
 
   .login-required-dialog {
     width: calc(100vw - 24px);
@@ -1536,22 +1851,100 @@
 
 /* =========================================================
    VERY SMALL MOBILE
-   ========================================================= */
+   400px and below
+========================================================= */
 
 @media (max-width: 400px) {
 
+  .career-detail-page {
+    padding-bottom: 24px;
+  }
+
+
+  .career-hero {
+    padding: 15px;
+
+    gap: 13px;
+  }
+
+
+  .career-hero-main {
+    gap: 10px;
+  }
+
+
+  .career-hero-icon {
+    width: 48px;
+    height: 48px;
+
+    flex-basis: 48px;
+
+    border-radius: 13px;
+
+    font-size: 22px;
+  }
+
+
   .career-hero-content h1 {
     font-size: 26px;
+
+    line-height: 1.06;
   }
+
+
+  .career-hero-content p {
+    font-size: 10px;
+
+    line-height: 1.5;
+  }
+
+
+  .career-cta {
+    gap: 14px;
+
+    padding: 15px;
+
+    border-radius: 15px;
+  }
+
+
+  .cta-content h2 {
+    font-size: 19px;
+
+    line-height: 1.18;
+  }
+
+
+  .cta-content p {
+    font-size: 10px;
+
+    line-height: 1.55;
+  }
+
+
+  .cta-actions {
+    gap: 7px;
+  }
+
+
+  .cta-actions a {
+    min-height: 42px;
+
+    font-size: 10.5px;
+  }
+
 
   .info-panel {
     padding: 14px;
   }
 
+
   .industry-panel {
     padding: 14px;
   }
 
+
+  /* Login dialog */
 
   .login-dialog-actions {
     flex-direction: column;
@@ -1563,6 +1956,189 @@
   .login-dialog-actions .gx-btn-glass,
   .login-dialog-actions .gx-btn-primary {
     width: 100%;
+  }
+
+}
+
+
+/* =========================================================
+   EXTREMELY SMALL DEVICES
+   350px and below
+========================================================= */
+
+@media (max-width: 350px) {
+
+  .career-hero {
+    padding: 14px;
+  }
+
+
+  .career-hero-main {
+    gap: 9px;
+  }
+
+
+  .career-hero-icon {
+    width: 44px;
+    height: 44px;
+
+    flex-basis: 44px;
+
+    border-radius: 12px;
+
+    font-size: 20px;
+  }
+
+
+  .career-hero-content h1 {
+    font-size: 24px;
+  }
+
+
+  .career-hero-content p {
+    font-size: 9.8px;
+  }
+
+
+  .career-cta {
+    padding: 14px;
+
+    gap: 13px;
+  }
+
+
+  .cta-content h2 {
+    font-size: 18px;
+  }
+
+
+  .cta-content p {
+    font-size: 9.8px;
+  }
+
+
+  .cta-actions a {
+    min-height: 40px;
+
+    font-size: 10px;
+  }
+
+}
+
+/* =========================================================
+   FINAL MOBILE CTA FIX
+   Force CTA content and buttons into normal vertical flow
+========================================================= */
+
+@media (max-width: 600px) {
+
+  .career-cta {
+    display: flex !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+    justify-content: flex-start !important;
+
+    width: 100% !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    gap: 16px !important;
+
+    overflow: visible !important;
+  }
+
+  .career-cta .cta-content {
+    display: block !important;
+
+    position: static !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    min-width: 0 !important;
+
+    flex: none !important;
+
+    overflow: visible !important;
+  }
+
+  .career-cta .cta-content h2 {
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin: 8px 0 6px !important;
+
+    white-space: normal !important;
+  }
+
+  .career-cta .cta-content p {
+    display: block !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    margin: 0 !important;
+
+    white-space: normal !important;
+
+    overflow: visible !important;
+
+    overflow-wrap: normal !important;
+
+    word-break: normal !important;
+  }
+
+  .career-cta .cta-actions {
+    display: flex !important;
+
+    position: static !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    min-width: 0 !important;
+
+    height: auto !important;
+    min-height: 0 !important;
+
+    flex: none !important;
+
+    flex-direction: column !important;
+
+    align-items: stretch !important;
+
+    justify-content: flex-start !important;
+
+    gap: 8px !important;
+
+    margin: 0 !important;
+  }
+
+  .career-cta .cta-actions a {
+    position: static !important;
+
+    display: flex !important;
+
+    width: 100% !important;
+    max-width: 100% !important;
+
+    flex: none !important;
+
+    min-height: 42px !important;
+
+    margin: 0 !important;
+
+    box-sizing: border-box !important;
+
+    align-items: center !important;
+    justify-content: center !important;
+
+    white-space: normal !important;
   }
 
 }

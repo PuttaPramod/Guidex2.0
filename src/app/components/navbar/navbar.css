@@ -1,6 +1,6 @@
 /* =========================================================
    GUIDEX 2.0 — NAVBAR
-   Glass / Responsive / Compact
+   Liquid Glass / Responsive / Compact
 ========================================================= */
 
 
@@ -24,6 +24,11 @@
 
   border: 0;
 
+  /*
+    IMPORTANT:
+    The navbar itself doesn't block the page.
+    Interactive children explicitly enable pointer events.
+  */
   pointer-events: none;
 }
 
@@ -33,6 +38,8 @@
 ========================================================= */
 
 .gx-navbar-inner {
+  position: relative;
+
   width: min(
     1416px,
     calc(100% - 48px)
@@ -50,19 +57,71 @@
 
   padding: 10px 12px 10px 17px;
 
-  border: 1px solid rgba(255, 255, 255, 0.80);
+  border: 1px solid rgba(255, 255, 255, 0.78);
 
   border-radius: 22px;
 
-  background: rgba(255, 255, 255, 0.72);
+  /*
+    Liquid glass surface
+  */
+  background:
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.78),
+      rgba(255, 255, 255, 0.52)
+    );
 
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter:
+    blur(28px)
+    saturate(180%);
+
+  -webkit-backdrop-filter:
+    blur(28px)
+    saturate(180%);
 
   box-shadow:
-    0 15px 45px rgba(35, 45, 80, 0.075);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.35),
+    0 18px 45px rgba(35, 45, 80, 0.075),
+    0 2px 8px rgba(35, 45, 80, 0.035);
 
+  /*
+    The inner navbar must remain clickable.
+  */
   pointer-events: auto;
+
+  overflow: hidden;
+}
+
+
+/*
+   Subtle liquid-glass highlight
+*/
+
+.gx-navbar-inner::before {
+  content: '';
+
+  position: absolute;
+
+  top: -70px;
+  left: 8%;
+
+  width: 55%;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.16) 45%,
+      transparent 75%
+    );
+
+  filter: blur(14px);
+
+  pointer-events: none;
 }
 
 
@@ -71,6 +130,9 @@
 ========================================================= */
 
 .gx-brand {
+  position: relative;
+  z-index: 2;
+
   display: inline-flex;
 
   align-items: center;
@@ -116,6 +178,17 @@
 
   box-shadow:
     0 8px 18px rgba(99, 91, 255, 0.20);
+
+  transition:
+    transform 180ms ease,
+    box-shadow 180ms ease;
+}
+
+.gx-brand:hover .gx-brand-icon {
+  transform: translateY(-1px);
+
+  box-shadow:
+    0 11px 23px rgba(99, 91, 255, 0.26);
 }
 
 .gx-brand-name {
@@ -136,6 +209,9 @@
 ========================================================= */
 
 .gx-nav-links {
+  position: relative;
+  z-index: 2;
+
   flex: 1;
 
   display: flex;
@@ -184,7 +260,7 @@
   color: var(--gx-text);
 
   background:
-    rgba(99, 91, 255, 0.045);
+    rgba(255, 255, 255, 0.45);
 }
 
 .gx-nav-link.active {
@@ -218,6 +294,9 @@
 ========================================================= */
 
 .gx-nav-actions {
+  position: relative;
+  z-index: 2;
+
   display: flex;
 
   align-items: center;
@@ -314,7 +393,7 @@
   border-radius: 12px;
 
   background:
-    rgba(255, 255, 255, 0.64);
+    rgba(255, 255, 255, 0.48);
 
   color: var(--gx-text);
 
@@ -338,7 +417,8 @@
 .gx-dashboard-button:hover {
   color: var(--gx-text);
 
-  background: white;
+  background:
+    rgba(255, 255, 255, 0.82);
 
   border-color:
     rgba(99, 91, 255, 0.13);
@@ -376,7 +456,7 @@
   border-radius: 12px;
 
   background:
-    rgba(99, 91, 255, 0.055);
+    rgba(255, 255, 255, 0.42);
 
   color: var(--gx-primary);
 
@@ -446,10 +526,15 @@
   border-radius: 14px;
 
   background:
-    rgba(255, 255, 255, 0.60);
+    rgba(255, 255, 255, 0.45);
 
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter:
+    blur(18px)
+    saturate(170%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(170%);
 }
 
 
@@ -559,7 +644,7 @@
   border-radius: 9px;
 
   background:
-    rgba(255, 255, 255, 0.70);
+    rgba(255, 255, 255, 0.55);
 
   color: var(--gx-text-secondary);
 
@@ -595,10 +680,12 @@
 
 /* =========================================================
    MOBILE TOGGLE
-   Hidden by default
 ========================================================= */
 
 .gx-mobile-toggle {
+  position: relative;
+  z-index: 3;
+
   display: none;
 
   width: 40px;
@@ -622,12 +709,37 @@
   border-radius: 11px;
 
   background:
-    rgba(255, 255, 255, 0.72);
+    rgba(255, 255, 255, 0.52);
+
+  backdrop-filter:
+    blur(15px)
+    saturate(160%);
+
+  -webkit-backdrop-filter:
+    blur(15px)
+    saturate(160%);
 
   cursor: pointer;
 
   appearance: none;
   -webkit-appearance: none;
+
+  transition:
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
+}
+
+.gx-mobile-toggle:hover {
+  background:
+    rgba(255, 255, 255, 0.78);
+
+  border-color:
+    rgba(99, 91, 255, 0.16);
+}
+
+.gx-mobile-toggle:active {
+  transform: scale(0.96);
 }
 
 .gx-mobile-toggle span {
@@ -671,10 +783,12 @@
 
 /* =========================================================
    MOBILE MENU
-   Hidden by default
 ========================================================= */
 
 .gx-mobile-menu {
+  position: relative;
+  z-index: 1001;
+
   display: none;
 
   width: min(
@@ -686,18 +800,72 @@
 
   padding: 10px;
 
-  border: 1px solid rgba(255, 255, 255, 0.82);
+  border: 1px solid rgba(255, 255, 255, 0.80);
 
   border-radius: 17px;
 
+  /*
+    Liquid glass
+  */
   background:
-    rgba(255, 255, 255, 0.88);
+    linear-gradient(
+      135deg,
+      rgba(255, 255, 255, 0.82),
+      rgba(255, 255, 255, 0.58)
+    );
 
-  backdrop-filter: blur(25px);
-  -webkit-backdrop-filter: blur(25px);
+  backdrop-filter:
+    blur(30px)
+    saturate(190%);
+
+  -webkit-backdrop-filter:
+    blur(30px)
+    saturate(190%);
 
   box-shadow:
-    0 18px 45px rgba(35, 45, 80, 0.10);
+    inset 0 1px 0 rgba(255, 255, 255, 0.95),
+    inset 0 -1px 0 rgba(255, 255, 255, 0.30),
+    0 20px 55px rgba(35, 45, 80, 0.12),
+    0 3px 12px rgba(35, 45, 80, 0.045);
+
+  /*
+    THIS FIXES THE MOBILE CLICK PROBLEM.
+    The parent navbar has pointer-events:none.
+  */
+  pointer-events: auto;
+
+  overflow: hidden;
+}
+
+
+/*
+   Glass highlight
+*/
+
+.gx-mobile-menu::before {
+  content: '';
+
+  position: absolute;
+
+  top: -70px;
+  left: 10%;
+
+  width: 70%;
+  height: 130px;
+
+  border-radius: 50%;
+
+  background:
+    radial-gradient(
+      ellipse,
+      rgba(255, 255, 255, 0.58) 0%,
+      rgba(255, 255, 255, 0.14) 45%,
+      transparent 75%
+    );
+
+  filter: blur(15px);
+
+  pointer-events: none;
 }
 
 
@@ -707,6 +875,8 @@
 
 .gx-mobile-menu.open {
   display: block;
+
+  pointer-events: auto;
 }
 
 
@@ -715,6 +885,9 @@
 ========================================================= */
 
 .gx-mobile-links {
+  position: relative;
+  z-index: 2;
+
   display: grid;
 
   grid-template-columns:
@@ -734,6 +907,8 @@
 
   padding: 0 12px;
 
+  border: 1px solid transparent;
+
   border-radius: 11px;
 
   color: var(--gx-text-secondary);
@@ -748,7 +923,9 @@
 
   transition:
     color 180ms ease,
-    background 180ms ease;
+    background 180ms ease,
+    border-color 180ms ease,
+    transform 180ms ease;
 }
 
 .gx-mobile-link > span {
@@ -768,7 +945,12 @@
   color: var(--gx-text);
 
   background:
-    rgba(99, 91, 255, 0.045);
+    rgba(255, 255, 255, 0.55);
+
+  border-color:
+    rgba(255, 255, 255, 0.70);
+
+  transform: translateY(-1px);
 }
 
 .gx-mobile-link.active {
@@ -776,6 +958,9 @@
 
   background:
     rgba(99, 91, 255, 0.075);
+
+  border-color:
+    rgba(99, 91, 255, 0.08);
 }
 
 
@@ -784,6 +969,9 @@
 ========================================================= */
 
 .gx-mobile-actions {
+  position: relative;
+  z-index: 2;
+
   display: grid;
 
   grid-template-columns:
@@ -830,6 +1018,9 @@
       var(--gx-primary),
       var(--gx-blue)
     );
+
+  box-shadow:
+    0 8px 20px rgba(99, 91, 255, 0.18);
 }
 
 .gx-mobile-quiz:hover {
@@ -842,11 +1033,20 @@
   border: 1px solid rgba(30, 35, 55, 0.07);
 
   background:
-    rgba(255, 255, 255, 0.68);
+    rgba(255, 255, 255, 0.52);
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
 }
 
 .gx-mobile-dashboard:hover {
   color: var(--gx-text);
+
+  background:
+    rgba(255, 255, 255, 0.80);
 }
 
 
@@ -869,7 +1069,7 @@
   border-radius: 11px;
 
   background:
-    rgba(99, 91, 255, 0.055);
+    rgba(255, 255, 255, 0.48);
 
   color: var(--gx-primary);
 
@@ -880,6 +1080,12 @@
   line-height: 1;
 
   text-decoration: none;
+
+  backdrop-filter:
+    blur(12px);
+
+  -webkit-backdrop-filter:
+    blur(12px);
 
   transition:
     color 180ms ease,
@@ -906,6 +1112,9 @@
 ========================================================= */
 
 .gx-mobile-user {
+  position: relative;
+  z-index: 2;
+
   display: flex;
 
   align-items: center;
@@ -922,10 +1131,15 @@
   border-radius: 12px;
 
   background:
-    rgba(255, 255, 255, 0.68);
+    rgba(255, 255, 255, 0.48);
 
-  backdrop-filter: blur(15px);
-  -webkit-backdrop-filter: blur(15px);
+  backdrop-filter:
+    blur(18px)
+    saturate(160%);
+
+  -webkit-backdrop-filter:
+    blur(18px)
+    saturate(160%);
 }
 
 
@@ -1032,7 +1246,7 @@
   border-radius: 9px;
 
   background:
-    rgba(217, 75, 98, 0.045);
+    rgba(255, 255, 255, 0.45);
 
   color: #d94b62;
 
@@ -1152,7 +1366,6 @@
 
 /* =========================================================
    DESKTOP FORCE
-   Prevent mobile menu from surviving viewport changes
 ========================================================= */
 
 @media (min-width: 768px) {
@@ -1178,6 +1391,12 @@
 
   .gx-navbar {
     padding: 8px 0;
+
+    /*
+      Keep wrapper transparent to page clicks,
+      but mobile menu explicitly restores pointer events.
+    */
+    pointer-events: none;
   }
 
 
@@ -1268,25 +1487,20 @@
     border-radius: 11px;
 
     background:
-      rgba(255, 255, 255, 0.72);
+      rgba(255, 255, 255, 0.52);
+
+    backdrop-filter:
+      blur(15px)
+      saturate(160%);
+
+    -webkit-backdrop-filter:
+      blur(15px)
+      saturate(160%);
 
     cursor: pointer;
 
     appearance: none;
     -webkit-appearance: none;
-  }
-
-  .gx-mobile-toggle span {
-    width: 17px;
-    height: 2px;
-
-    display: block !important;
-
-    flex: 0 0 2px;
-
-    border-radius: 999px;
-
-    background: var(--gx-text);
   }
 
 
@@ -1295,6 +1509,10 @@
   ------------------------- */
 
   .gx-mobile-menu {
+    position: relative;
+
+    z-index: 1001;
+
     width: calc(100% - 20px);
 
     margin: 7px auto 0;
@@ -1304,17 +1522,35 @@
     border-radius: 15px;
 
     background:
-      rgba(255, 255, 255, 0.90);
+      linear-gradient(
+        135deg,
+        rgba(255, 255, 255, 0.84),
+        rgba(255, 255, 255, 0.60)
+      );
 
-    backdrop-filter: blur(25px);
-    -webkit-backdrop-filter: blur(25px);
+    backdrop-filter:
+      blur(30px)
+      saturate(190%);
+
+    -webkit-backdrop-filter:
+      blur(30px)
+      saturate(190%);
 
     box-shadow:
-      0 18px 45px rgba(35, 45, 80, 0.10);
+      inset 0 1px 0 rgba(255, 255, 255, 0.95),
+      inset 0 -1px 0 rgba(255, 255, 255, 0.30),
+      0 20px 55px rgba(35, 45, 80, 0.12);
+
+    /*
+      Critical mobile fix
+    */
+    pointer-events: auto;
   }
 
   .gx-mobile-menu.open {
     display: block !important;
+
+    pointer-events: auto;
   }
 
 
@@ -1331,6 +1567,9 @@
   }
 
   .gx-mobile-link {
+    position: relative;
+    z-index: 3;
+
     min-height: 42px;
 
     display: flex;
@@ -1344,6 +1583,10 @@
     border-radius: 10px;
 
     font-size: 11px;
+
+    cursor: pointer;
+
+    pointer-events: auto;
   }
 
   .gx-mobile-link > span {
@@ -1375,6 +1618,9 @@
   .gx-mobile-quiz,
   .gx-mobile-dashboard,
   .gx-mobile-login {
+    position: relative;
+    z-index: 3;
+
     min-height: 42px;
 
     display: flex;
@@ -1387,6 +1633,10 @@
     border-radius: 10px;
 
     font-size: 10.5px;
+
+    cursor: pointer;
+
+    pointer-events: auto;
   }
 
 
@@ -1413,11 +1663,16 @@
   }
 
   .gx-mobile-logout {
+    position: relative;
+    z-index: 3;
+
     min-height: 36px;
 
     padding: 0 11px;
 
     font-size: 9.5px;
+
+    pointer-events: auto;
   }
 
 }
