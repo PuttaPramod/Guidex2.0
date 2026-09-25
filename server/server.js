@@ -31,16 +31,6 @@ const FRONTEND_URL =
    MIDDLEWARE
 ===================================================== */
 
-/*
- * Allow requests from the Angular frontend.
- *
- * Development:
- *   http://localhost:4200
- *
- * Production:
- *   FRONTEND_URL from environment variables.
- */
-
 app.use(
   cors({
     origin: FRONTEND_URL,
@@ -48,16 +38,13 @@ app.use(
   })
 );
 
-
 app.use(express.json());
-
 
 app.use(
   express.urlencoded({
     extended: true
   })
 );
-
 
 app.use(cookieParser());
 
@@ -130,20 +117,34 @@ const connectDatabase = async () => {
        EMAIL SERVICE CONNECTION
     ================================================= */
 
-    const mailConnected =
-      await verifyMailConnection();
+    try {
+
+      const mailConnected =
+        await verifyMailConnection();
 
 
-    if (!mailConnected) {
+      if (mailConnected) {
 
-      console.error(
-        '❌ Email service connection failed.'
+        console.log(
+          '✅ Email service connected successfully'
+        );
+
+      } else {
+
+        console.warn(
+          '⚠️ Email service is unavailable. Backend will continue running.'
+        );
+
+      }
+
+    } catch (mailError) {
+
+      console.warn(
+        '⚠️ Email service verification failed. Backend will continue running:',
+        mailError.message
       );
 
-      process.exit(1);
-
     }
-
 
   } catch (error) {
 
@@ -170,6 +171,7 @@ const startServer = async () => {
 
   app.listen(
     PORT,
+    '0.0.0.0',
     () => {
 
       console.log('');
@@ -195,15 +197,15 @@ const startServer = async () => {
       );
 
       console.log(
-        `❤️  Health: /api/health`
+        '❤️  Health: /api/health'
       );
 
       console.log(
-        `🔐 Auth: /api/auth`
+        '🔐 Auth: /api/auth'
       );
 
       console.log(
-        `👤 User Data: /api/user-data`
+        '👤 User Data: /api/user-data'
       );
 
       console.log(
@@ -211,7 +213,7 @@ const startServer = async () => {
       );
 
       console.log(
-        '📧 Email: Connected'
+        '📧 Email: SMTP configured'
       );
 
       console.log(
