@@ -59,10 +59,17 @@ export class Auth {
   |--------------------------------------------------------------------------
   | API
   |--------------------------------------------------------------------------
+  |
+  | Local development:
+  | http://localhost:5000/api/auth
+  |
+  | Production:
+  | https://guidex2-0.onrender.com/api/auth
+  |
   */
 
   private readonly apiUrl =
-    'http://localhost:5000/api/auth';
+    this.getApiUrl();
 
 
   /*
@@ -482,6 +489,44 @@ export class Auth {
       return null;
 
     }
+
+  }
+
+
+  /*
+  |--------------------------------------------------------------------------
+  | GET API URL
+  |--------------------------------------------------------------------------
+  */
+
+  private getApiUrl(): string {
+
+    if (
+      typeof window === 'undefined'
+    ) {
+
+      return 'http://localhost:5000/api/auth';
+
+    }
+
+
+    const hostname =
+      window.location.hostname;
+
+
+    const isLocalDevelopment =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1';
+
+
+    if (isLocalDevelopment) {
+
+      return 'http://localhost:5000/api/auth';
+
+    }
+
+
+    return 'https://guidex2-0.onrender.com/api/auth';
 
   }
 

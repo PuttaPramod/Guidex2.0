@@ -201,7 +201,7 @@ export class UserState {
   ======================================================= */
 
   private readonly apiUrl =
-    'http://localhost:5000/api/user-data';
+    this.getApiUrl();
 
 
   /* =======================================================
@@ -342,6 +342,7 @@ export class UserState {
      * Logged out:
      *     Clear in-memory user data.
      */
+
     if (this.browser) {
 
       effect(() => {
@@ -401,6 +402,7 @@ export class UserState {
          * Ignore the response if another user has already
          * become active.
          */
+
         if (
           currentVersion !==
           this.dataLoadVersion
@@ -435,6 +437,7 @@ export class UserState {
         /*
          * Ignore an old user's failed request.
          */
+
         if (
           currentVersion !==
           this.dataLoadVersion
@@ -447,6 +450,7 @@ export class UserState {
          * If the authentication session has expired,
          * Auth will handle authentication state separately.
          */
+
         if (
           error?.status === 401 ||
           error?.status === 403
@@ -553,6 +557,7 @@ export class UserState {
      * Never save application data without an authenticated
      * user.
      */
+
     if (!this.auth.isLoggedIn()) {
       return;
     }
@@ -562,6 +567,7 @@ export class UserState {
      * If a save is already running, request another save
      * after it finishes. This keeps the latest state safe.
      */
+
     if (this.saveInProgress) {
 
       this.saveQueued = true;
@@ -642,6 +648,7 @@ export class UserState {
          * If another change happened while the request
          * was running, save the latest state again.
          */
+
         if (this.saveQueued) {
 
           this.saveQueued = false;
@@ -1475,6 +1482,7 @@ export class UserState {
      * If a user is authenticated, persist the empty state
      * to that user's MongoDB document.
      */
+
     if (this.auth.isLoggedIn()) {
       this.save();
     }
@@ -1484,9 +1492,9 @@ export class UserState {
 
   /* =======================================================
      CLEAR IN-MEMORY SIGNALS
-     
+
      Used when the user logs out.
-     
+
      IMPORTANT:
      This does NOT delete MongoDB data.
      The user's data remains available when they log in again.
@@ -1515,6 +1523,48 @@ export class UserState {
     this.recentRoadmaps.set([]);
 
     this.roadmapProgress.set({});
+
+  }
+
+
+  /* =======================================================
+     GET API URL
+
+     Local development:
+       http://localhost:5000/api/user-data
+
+     Production:
+       https://guidex2-0.onrender.com/api/user-data
+  ======================================================= */
+
+  private getApiUrl(): string {
+
+    if (
+      typeof window === 'undefined'
+    ) {
+
+      return 'http://localhost:5000/api/user-data';
+
+    }
+
+
+    const hostname =
+      window.location.hostname;
+
+
+    const isLocalDevelopment =
+      hostname === 'localhost' ||
+      hostname === '127.0.0.1';
+
+
+    if (isLocalDevelopment) {
+
+      return 'http://localhost:5000/api/user-data';
+
+    }
+
+
+    return 'https://guidex2-0.onrender.com/api/user-data';
 
   }
 
