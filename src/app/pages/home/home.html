@@ -1,3 +1,4 @@
+
 <div class="home-page">
 
   <!-- ================= HERO ================= -->
@@ -32,16 +33,12 @@
 
           <div class="hero-actions">
 
-            <a
-              routerLink="/quiz"
-              class="gx-btn-primary">
+            <a routerLink="/quiz" class="gx-btn-primary">
               Take Smart Quiz
               <span>→</span>
             </a>
 
-            <a
-              routerLink="/careers"
-              class="gx-btn-glass">
+            <a routerLink="/careers" class="gx-btn-glass">
               Explore Careers
             </a>
 
@@ -49,8 +46,7 @@
 
         </div>
 
-
-        <!-- Compact Hero Card -->
+        <!-- Hero Card -->
 
         <div class="hero-card gx-glass">
 
@@ -71,9 +67,7 @@
 
             <div class="journey-item active">
 
-              <div class="journey-icon">
-                🧭
-              </div>
+              <div class="journey-icon">🧭</div>
 
               <div>
                 <strong>Discover</strong>
@@ -86,9 +80,7 @@
 
             <div class="journey-item">
 
-              <div class="journey-icon">
-                💼
-              </div>
+              <div class="journey-icon">💼</div>
 
               <div>
                 <strong>Explore</strong>
@@ -99,9 +91,7 @@
 
             <div class="journey-item">
 
-              <div class="journey-icon">
-                🎓
-              </div>
+              <div class="journey-icon">🎓</div>
 
               <div>
                 <strong>Plan</strong>
@@ -145,19 +135,13 @@
 
             <div class="quick-content">
 
-              <h3>
-                {{ action.title }}
-              </h3>
+              <h3>{{ action.title }}</h3>
 
-              <p>
-                {{ action.description }}
-              </p>
+              <p>{{ action.description }}</p>
 
             </div>
 
-            <span class="quick-arrow">
-              →
-            </span>
+            <span class="quick-arrow">→</span>
 
           </a>
 
@@ -179,25 +163,25 @@
       <div class="section-header">
 
         <div>
+
           <span class="gx-eyebrow">
             EDUCATION PATHS
           </span>
 
           <h2>
             Explore
-            <span class="gx-gradient-text">
-              streams
-            </span>
+            <span class="gx-gradient-text">streams</span>
           </h2>
 
           <p>
             Understand where each stream can take you.
           </p>
+
         </div>
 
-        <a
-          routerLink="/streams"
-          class="view-link">
+        <!-- View All navigates to streams listing -->
+
+        <a routerLink="/streams" class="view-link">
           View all →
         </a>
 
@@ -207,6 +191,8 @@
       <div class="stream-grid">
 
         @for (stream of streams; track stream.name) {
+
+          <!-- Individual Stream Details -->
 
           <a
             [routerLink]="stream.link"
@@ -218,19 +204,13 @@
 
             <div class="stream-content">
 
-              <h3>
-                {{ stream.name }}
-              </h3>
+              <h3>{{ stream.name }}</h3>
 
-              <p>
-                {{ stream.description }}
-              </p>
+              <p>{{ stream.description }}</p>
 
             </div>
 
-            <span class="card-arrow">
-              →
-            </span>
+            <span class="card-arrow">→</span>
 
           </a>
 
@@ -252,25 +232,25 @@
       <div class="section-header">
 
         <div>
+
           <span class="gx-eyebrow">
             CAREER EXPLORER
           </span>
 
           <h2>
             Popular
-            <span class="gx-gradient-text">
-              careers
-            </span>
+            <span class="gx-gradient-text">careers</span>
           </h2>
 
           <p>
             Discover what different careers involve and how to reach them.
           </p>
+
         </div>
 
-        <a
-          routerLink="/careers"
-          class="view-link">
+        <!-- Explore All navigates to careers listing -->
+
+        <a routerLink="/careers" class="view-link">
           Explore all →
         </a>
 
@@ -281,8 +261,10 @@
 
         @for (career of careers; track career.title) {
 
+          <!-- Individual Career Details -->
+
           <a
-            routerLink="/careers"
+            [routerLink]="career.link"
             class="career-card gx-card">
 
             <div class="career-top">
@@ -297,13 +279,9 @@
 
             </div>
 
-            <h3>
-              {{ career.title }}
-            </h3>
+            <h3>{{ career.title }}</h3>
 
-            <p>
-              {{ career.description }}
-            </p>
+            <p>{{ career.description }}</p>
 
             <span class="career-link">
               Explore career →
@@ -329,25 +307,25 @@
       <div class="section-header">
 
         <div>
+
           <span class="gx-eyebrow">
             ENTRANCE EXAMS
           </span>
 
           <h2>
             Know your
-            <span class="gx-gradient-text">
-              exams
-            </span>
+            <span class="gx-gradient-text">exams</span>
           </h2>
 
           <p>
             Explore important entrance exams and admission pathways.
           </p>
+
         </div>
 
-        <a
-          routerLink="/exams"
-          class="view-link">
+        <!-- View All navigates to exams listing -->
+
+        <a routerLink="/exams" class="view-link">
           View all →
         </a>
 
@@ -358,8 +336,10 @@
 
         @for (exam of exams; track exam.name) {
 
+          <!-- Individual Exam Details -->
+
           <a
-            routerLink="/exams"
+            [routerLink]="exam.link"
             class="exam-row">
 
             <div class="exam-icon">
@@ -367,8 +347,11 @@
             </div>
 
             <div class="exam-name">
+
               <strong>{{ exam.name }}</strong>
+
               <span>{{ exam.description }}</span>
+
             </div>
 
             <span class="exam-category">
@@ -416,9 +399,7 @@
 
         </div>
 
-        <a
-          routerLink="/quiz"
-          class="cta-button">
+        <a routerLink="/quiz" class="cta-button">
           Start Quiz →
         </a>
 

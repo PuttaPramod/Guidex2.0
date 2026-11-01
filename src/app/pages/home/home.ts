@@ -1,3 +1,4 @@
+
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
@@ -30,86 +31,102 @@ export class Home {
     }
   ];
 
-  streams = [
-    {
-      icon: '🔬',
-      name: 'Science',
-      description: 'Engineering, medicine & research',
-      link: '/streams'
-    },
-    {
-      icon: '📊',
-      name: 'Commerce',
-      description: 'Business, finance & accounting',
-      link: '/streams'
-    },
-    {
-      icon: '🎨',
-      name: 'Arts & Humanities',
-      description: 'Law, design, media & psychology',
-      link: '/streams'
-    },
-    {
-      icon: '🛠️',
-      name: 'Polytechnic & ITI',
-      description: 'Technical & skill-based careers',
-      link: '/streams'
-    }
-  ];
+  // Streams
+  
+streams = [
+  {
+    icon: '🔬',
+    name: 'Science',
+    description: 'Engineering, medicine & research',
+    link: '/streams/science'
+  },
+  {
+    icon: '📊',
+    name: 'Commerce',
+    description: 'Business, finance & accounting',
+    link: '/streams/commerce'
+  },
+  {
+    icon: '🎨',
+    name: 'Arts & Humanities',
+    description: 'Law, design, media & psychology',
+    link: '/streams/arts'
+  },
+  {
+    icon: '🛠️',
+    name: 'Polytechnic & ITI',
+    description: 'Technical & skill-based careers',
+    link: '/streams/polytechnic'
+  }
+];
 
+
+  // Popular Careers
   careers = [
     {
       icon: '💻',
       title: 'Software Developer',
       category: 'Technology',
-      description: 'Build software, websites and applications.'
+      description: 'Build software, websites and applications.',
+      link: '/careers/software-developer'
     },
     {
       icon: '🩺',
       title: 'Doctor',
       category: 'Healthcare',
-      description: 'Explore medical education and healthcare careers.'
+      description: 'Explore medical education and healthcare careers.',
+      link: '/careers/doctor'
     },
     {
       icon: '🎨',
       title: 'UI/UX Designer',
       category: 'Design',
-      description: 'Create useful and engaging digital experiences.'
+      description: 'Create useful and engaging digital experiences.',
+      link: '/careers/ui-ux-designer'
     },
     {
       icon: '⚖️',
       title: 'Lawyer',
       category: 'Law',
-      description: 'Explore legal education and professional pathways.'
+      description: 'Explore legal education and professional pathways.',
+      link: '/careers/lawyer'
     }
   ];
 
-  exams = [
-    {
-      name: 'JEE Main',
-      category: 'Engineering',
-      description: 'Engineering entrance'
-    },
-    {
-      name: 'NEET',
-      category: 'Medical',
-      description: 'Medical entrance'
-    },
-    {
-      name: 'CUET',
-      category: 'University',
-      description: 'University admissions'
-    },
-    {
-      name: 'AP EAPCET',
-      category: 'Engineering / Medical',
-      description: 'Andhra Pradesh entrance'
-    },
-    {
-      name: 'AP POLYCET',
-      category: 'Polytechnic',
-      description: 'Diploma entrance'
-    }
-  ];
+  // Entrance Exams
+  
+exams = [
+  {
+    name: 'JEE Main',
+    category: 'Engineering',
+    description: 'Engineering entrance',
+    link: '/exams/jee-main'
+  },
+  {
+    name: 'NEET',
+    category: 'Medical',
+    description: 'Medical entrance',
+    link: '/exams/neet-ug'
+  },
+  {
+    name: 'CUET',
+    category: 'University',
+    description: 'University admissions',
+    link: '/exams/cuet-ug'
+  },
+  {
+    name: 'AP EAPCET',
+    category: 'Engineering / Medical',
+    description: 'Andhra Pradesh entrance',
+    link: '/exams/ap-eapcet'
+  },
+  {
+    name: 'AP POLYCET',
+    category: 'Polytechnic',
+    description: 'Diploma entrance',
+    link: '/exams/ap-polycet'
+  }
+];
+
 
 }

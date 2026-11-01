@@ -1531,7 +1531,147 @@ export class ExamDetail implements OnInit {
         'Postgraduate aspirants',
         'Students targeting participating universities'
       ]
-    }
+    },
+
+
+    /* =====================================================
+       AP EAPCET
+       ===================================================== */
+
+    {
+      id: 'ap-eapcet',
+      name: 'Andhra Pradesh Engineering, Agriculture and Pharmacy Common Entrance Test',
+      shortName: 'AP EAPCET',
+      conductingBody: 'Jawaharlal Nehru Technological University Kakinada on behalf of APSCHE',
+      category: 'Engineering / Agriculture / Pharmacy',
+      level: 'State',
+      mode: 'Computer Based Test',
+      eligibility: 'Class 12 or equivalent with the required subjects; applicable Andhra Pradesh local/non-local and admission rules',
+      icon: '🎓',
+
+      description:
+        'AP EAPCET is a state-level entrance examination for admission to eligible undergraduate engineering, agriculture and pharmacy-related programs in Andhra Pradesh.',
+
+      purpose:
+        'The examination is used for admissions to participating professional courses in Andhra Pradesh, including engineering, agriculture, veterinary, horticulture and pharmacy-related programs as specified in the current admission notification.',
+
+      popularFor: [
+        'B.Tech',
+        'B.Pharmacy',
+        'Pharm.D',
+        'Agriculture and allied science programs',
+        'Veterinary and horticulture programs where applicable'
+      ],
+
+      subjects: [
+        'Mathematics (Engineering stream)',
+        'Biology (Agriculture and Pharmacy stream)',
+        'Physics',
+        'Chemistry'
+      ],
+
+      examPattern: [
+        'Computer-based examination',
+        'Separate Engineering and Agriculture/Pharmacy streams',
+        'Objective-type multiple-choice questions',
+        'The Engineering stream question paper has 160 questions: Mathematics, Physics and Chemistry',
+        'Check the current official instruction booklet for the stream-specific subject distribution and marking rules'
+      ],
+
+      preparationTips: [
+        'Study the prescribed Intermediate-level syllabus.',
+        'Prepare Physics and Chemistry concepts thoroughly.',
+        'For the Engineering stream, give regular practice to Mathematics.',
+        'For the Agriculture and Pharmacy stream, prepare Biology along with Physics and Chemistry.',
+        'Practice previous question papers and official mock tests.',
+        'Take timed computer-based mock examinations.'
+      ],
+
+      importantPoints: [
+        'The examination is conducted by JNTU Kakinada on behalf of APSCHE.',
+        'Choose the correct stream while applying.',
+        'Check the current official notification for eligibility and local/non-local rules.',
+        'Verify the latest syllabus, application dates and examination schedule.',
+        'Admission and counselling rules may differ by course.'
+      ],
+
+      suitableFor: [
+        'Andhra Pradesh students interested in engineering',
+        'Students targeting B.Tech programs',
+        'Students interested in agriculture and allied sciences',
+        'Students targeting pharmacy-related programs'
+      ]
+    },
+
+    /* =====================================================
+       AP POLYCET
+       ===================================================== */
+
+    {
+      id: 'ap-polycet',
+      name: 'Andhra Pradesh Polytechnic Common Entrance Test',
+      shortName: 'AP POLYCET',
+      conductingBody: 'State Board of Technical Education and Training, Andhra Pradesh',
+      category: 'Polytechnic',
+      level: 'State',
+      mode: 'Offline (OMR-based)',
+      eligibility: 'Passed or appeared for the SSC/Class 10 examination or an equivalent examination, subject to the current notification',
+      icon: '🛠️',
+
+      description:
+        'AP POLYCET is a state-level entrance examination for admission to diploma-level engineering and non-engineering programs offered by polytechnic institutions in Andhra Pradesh.',
+
+      purpose:
+        'The examination is conducted for candidates seeking admission to eligible diploma programs in government, aided and private polytechnic colleges in Andhra Pradesh.',
+
+      popularFor: [
+        'Diploma in Engineering',
+        'Diploma in Technology',
+        'Polytechnic programs',
+        'Technical diploma courses'
+      ],
+
+      subjects: [
+        'Mathematics',
+        'Physics',
+        'Chemistry'
+      ],
+
+      examPattern: [
+        'Offline pen-and-paper examination using an OMR answer sheet',
+        'One objective-type question paper',
+        '120 multiple-choice questions in total',
+        'Mathematics: 50 questions',
+        'Physics: 40 questions',
+        'Chemistry: 30 questions',
+        'Duration: 2 hours',
+        'Each question carries one mark; check the latest official brochure for the applicable marking rules'
+      ],
+
+      preparationTips: [
+        'Complete the prescribed Class 10 Mathematics syllabus.',
+        'Revise important Physics concepts and formulas.',
+        'Understand basic Chemistry concepts and reactions.',
+        'Practice OMR-style objective questions.',
+        'Solve previous AP POLYCET question papers.',
+        'Take timed practice tests to improve accuracy.'
+      ],
+
+      importantPoints: [
+        'The examination is conducted by SBTET Andhra Pradesh.',
+        'The syllabus is based on the prescribed SSC/Class 10 curriculum.',
+        'Check the current notification for eligibility and application dates.',
+        'Review the official information brochure before applying.',
+        'Admission is based on the applicable rank, counselling and seat-allotment rules.'
+      ],
+
+      suitableFor: [
+        'Students who have completed or are appearing for Class 10',
+        'Students interested in diploma-level technical education',
+        'Students planning to join polytechnic colleges',
+        'Students who want a diploma pathway before further technical education'
+      ]
+    },
 
   ];
 
